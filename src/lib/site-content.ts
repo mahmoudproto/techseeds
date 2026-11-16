@@ -14,9 +14,9 @@ export interface SiteContent {
   other: { label: string; href: string };
   nav: { href: string; label: string }[];
   header: { test: string; whatsapp: string; menu: string };
-  hero: { title: string; lead: string; cta: string; whatsapp: string; alt: string };
+  hero: { title: string; lead: string; cta: string; whatsapp: string; };
   stats: (Tinted & { value: string; label: string })[];
-  about: { eyebrow: string; title: string; text: string; alt: string; pillars: { icon: IconName; lines: [string, string] }[] };
+  about: { eyebrow: string; title: string; text: string;  pillars: { icon: IconName; lines: [string, string] }[] };
   programs: { eyebrow: string; title: string; text: string; items: (Tinted & { name: string; ages: string; note: string })[] };
   how: { eyebrow: string; title: string; sub: string; cta: string; steps: { n: string; title: string; text: string }[] };
   why: { eyebrow: string; title: string; items: (Tinted & { title: string; text: string })[] };
@@ -47,7 +47,6 @@ const ar: SiteContent = {
     lead: 'نساعد أطفالك على اكتشاف عالم التكنولوجيا من خلال تجربة تعليمية حضورية، عملية وتفاعلية، تنمّي مهاراتهم وطريقة تفكيرهم وتعدّهم لمستقبلهم الرقمي.',
     cta: 'ابدأ اختبار تحديد المستوى',
     whatsapp: 'تواصل معنا عبر واتساب',
-    alt: 'طفل يتعلم البرمجة على اللابتوب',
   },
   stats: [
     { icon: 'cap', tint: 'green', color: GREEN, value: '6 - 18', label: 'سنة' },
@@ -59,7 +58,6 @@ const ar: SiteContent = {
     eyebrow: 'About TechSeeds',
     title: 'من نحن؟',
     text: 'TechSeeds أكاديمية تكنولوجيا حضورية في الفيوم للأطفال والشباب من 6 إلى 18 سنة. بدأنا في 2025 من ملاحظة واحدة: أغلب الأطفال لا يتعلمون جيدًا في الكورسات الأونلاين، فاخترنا أن نعلّم وجهًا لوجه في مجموعات صغيرة. التكنولوجيا عندنا وسيلة، وعقل الطفل هو الهدف.',
-    alt: 'طالبة في أحد فصول الأكاديمية',
     pillars: [
       { icon: 'hands', lines: ['تعليم حضوري', 'عملي وتطبيقي'] },
       { icon: 'board', lines: ['مدرب ومساعد', 'في كل مجموعة'] },
@@ -111,7 +109,6 @@ const ar: SiteContent = {
       { name: 'وائل، ولي أمر', text: 'تجربة فوق الممتازة، ومبسوط جدًا إن ابني بقى يعرف المعلومات دي، وأثّرت في تركيزه ومذاكرته وتفاعله معانا في البيت.' },
       { name: 'حسام، ولي أمر', text: 'هو مبسوط جدًا وعنده إقبال على الكورس وبيكون سعيد وهو رايح. شكر خاص للمهندسة على بساطتها في التعامل وتحبيب ابني في الكورس، وإزاي اتعاملت مع سن صغير وبسّطتله ووصّلتله المعلومة.' },
       { name: 'ولية أمر', text: 'مبسوط جدًا جدًا وبيفهم طبعًا، وجاي متحمس عايز يعمل التاسك. هو ما شاء الله بيحب الكمبيوتر والتكنولوجيا الحديثة جدًا.' },
-      { name: 'ولي أمر', text: 'الحمد لله مبسوط جدًا، وبيلعب مع أخته لعبة جاسوس.' },
     ],
   },
   banner: {
@@ -147,7 +144,6 @@ const en: SiteContent = {
     lead: 'We help your children discover technology through in-person, hands-on classes that build their skills and the way they think, and prepare them for a digital future.',
     cta: 'Take the placement test',
     whatsapp: 'Message us on WhatsApp',
-    alt: 'A boy learning to code on a laptop',
   },
   stats: [
     { icon: 'cap', tint: 'green', color: GREEN, value: '6 - 18', label: 'years old' },
@@ -159,7 +155,6 @@ const en: SiteContent = {
     eyebrow: 'About TechSeeds',
     title: 'Who are we?',
     text: 'TechSeeds is an in-person technology academy in Fayoum for ages 6 to 18. We started in 2025 from one observation: most children do not learn well in online courses. So we teach face to face, in small groups. For us technology is the tool, and the child\'s mind is the goal.',
-    alt: 'A student in one of the academy classes',
     pillars: [
       { icon: 'hands', lines: ['In-person,', 'hands-on learning'] },
       { icon: 'board', lines: ['Instructor + assistant', 'in every group'] },
@@ -202,17 +197,9 @@ const en: SiteContent = {
   reviews: {
     eyebrow: 'What Parents Say',
     title: 'Parent reviews',
-    sub: 'Translated from Arabic. Your trust keeps us going.',
+    sub: 'In the parents\' own words. Your trust keeps us going.',
     hint: 'Swipe to read more',
-    items: [
-      { name: 'Menna Allah Kamal', text: 'A more than wonderful experience! My son was very happy with the course and made a really nice game. I noticed the change right away in his character and in how he values time and getting things done. On his own he set limits for Facebook and TikTok, spends more time finishing his tasks, helps us more at home, and is much calmer.' },
-      { name: 'Ebtehal Mostafa', text: 'The course completely changed how my son sees programming! He had no passion for it before, but now he is very interested and looks forward to every session. He also spends far less time on his phone. The academy team is respectful, cooperative and attentive to every detail.' },
-      { name: 'Nada Emad', text: 'Honestly, the way they deal with children is excellent, and the content suits the children\'s age very well.' },
-      { name: 'Wael, parent', text: 'An excellent experience. I am very happy my son now knows these things, and it has improved his focus, his studying and how he interacts with us at home.' },
-      { name: 'Hosam, parent', text: 'He is very happy, keen on the course, and glad every time he goes. Special thanks to the instructor for her easy manner, for making my son love the course, and for how she handled a young child and made things simple for him.' },
-      { name: 'A mother', text: 'He is very, very happy and he understands it all. He comes home excited to do the task. He really loves computers and modern technology.' },
-      { name: 'A parent', text: 'He is very happy, thank God, and he plays the spy game with his sister.' },
-    ],
+    items: [],
   },
   banner: {
     title: 'Ready to start your child\'s journey in technology?',

@@ -32,9 +32,28 @@ export default function Landing({ lang }: { lang: Lang }) {
               </a>
             </div>
           </div>
-          <div className="hero__photo">
-            <img src="/photos/hero.jpg" alt={t.hero.alt} width={578} height={316} />
+          <div className="hero__art" aria-hidden="true">
+          <span className="blob blob--blue" />
+          <span className="blob blob--green" />
+          <span className="dot dot--yellow" />
+          <span className="dot dot--blue" />
+          <span className="dot dot--green" />
+          <div className="art-card art-card--code">
+            <div className="code-window__bar"><i /><i /><i /></div>
+            <pre className="code-window" dir="ltr">{`when  🚩 clicked
+repeat 10
+   move 10 steps
+   say "Hello!"`}</pre>
+            <div className="art-tracks">
+              <span className="tint tint--blue"><Icon name="code" color="#3eaae5" /></span>
+              <span className="tint tint--yellow"><Icon name="game" color="#d99a00" /></span>
+              <span className="tint tint--green"><Icon name="ai" color="#2fa84f" /></span>
+              <span className="tint tint--mint"><Icon name="shield" color="#2fa84f" /></span>
+            </div>
           </div>
+          <span className="code-chip"><span>Python</span><span>Scratch</span><span>Unity</span><span>AI</span></span>
+          <span className="badge">&lt;/&gt;</span>
+        </div>
         </section>
       </div>
 
@@ -56,10 +75,6 @@ export default function Landing({ lang }: { lang: Lang }) {
 
         {/* About */}
         <section className="l-section about" id="about">
-          <div className="about__photo">
-            <span className="about__blob" aria-hidden="true" />
-            <img src="/photos/about.jpg" alt={t.about.alt} width={410} height={268} loading="lazy" />
-          </div>
           <div className="about__copy">
             <p className="eyebrow">{t.about.eyebrow}</p>
             <h2 className="h2">{t.about.title}</h2>
@@ -117,7 +132,6 @@ export default function Landing({ lang }: { lang: Lang }) {
                 {arrow}
               </Link>
             </div>
-            <img className="how__photo" src="/photos/how.jpg" alt="" width={225} height={188} loading="lazy" />
           </div>
         </section>
 
@@ -147,11 +161,10 @@ export default function Landing({ lang }: { lang: Lang }) {
               <h2 className="h2">{t.reviews.title}</h2>
               <p className="how__sub">{t.reviews.sub}</p>
             </div>
-            <img className="reviews-head__photo" src="/photos/future.jpg" alt="" width={277} height={187} loading="lazy" />
           </div>
           <div className="reviews" tabIndex={0} role="region" aria-label={t.reviews.title}>
-            {t.reviews.items.map((r) => (
-              <figure className="card review" key={r.name}>
+            {SITE.ar.reviews.items.map((r) => (
+              <figure className="card review" key={r.name} lang="ar" dir="rtl">
                 <blockquote>«{r.text}»</blockquote>
                 <figcaption>
                   <span className="review__avatar" aria-hidden="true">{r.name.charAt(0)}</span>
