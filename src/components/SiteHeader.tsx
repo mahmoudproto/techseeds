@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { WHATSAPP_NUMBER } from '@/lib/labels';
 import { SITE, type Lang } from '@/lib/site-content';
+import TopNav from './TopNav';
 
 /** The full logo (icon + name). It always sits on white, as the brand requires. */
 export function Logo({ boxed = false }: { boxed?: boolean }) {
@@ -21,13 +22,7 @@ export default function SiteHeader({ cta, lang }: { cta: 'test' | 'whatsapp'; la
           <Logo />
         </Link>
 
-        <nav className="topnav" aria-label={t.header.menu}>
-          {t.nav.map((item) => (
-            <Link key={item.href} href={item.href} className="topnav__link">
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <TopNav items={t.nav} label={t.header.menu} />
 
         <div className="header__actions">
           {/* A plain link so the browser loads the other language's page fully. */}

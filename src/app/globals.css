@@ -1218,3 +1218,31 @@ html[dir='ltr'] .h2 {
     padding: 0 5px;
   }
 }
+
+/* Header link for the section being read */
+
+.topnav__link {
+  position: relative;
+  padding: 6px 0 10px;
+  transition: color 0.15s ease;
+}
+
+.topnav__link::after {
+  content: '';
+  position: absolute;
+  inset-inline: 50%;
+  bottom: 0;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--green);
+  transition: inset-inline 0.2s ease;
+}
+
+.topnav__link--on {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.topnav__link--on::after {
+  inset-inline: calc(50% - 14px);
+}
