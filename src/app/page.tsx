@@ -1,16 +1,14 @@
+import Landing from '@/components/Landing';
 import SiteFooter from '@/components/SiteFooter';
 import SiteHeader from '@/components/SiteHeader';
-import TestFlow from '@/components/TestFlow';
-import { allPublicTests } from '@/lib/content';
+import './landing.css';
 
-export default function Page() {
-  // Only the answer-free version of the questions is passed to the browser.
-  const tests = allPublicTests();
+export default function HomePage() {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader cta="test" />
       <main className="main">
-        <TestFlow tests={tests} />
+        <Landing />
       </main>
       <SiteFooter />
     </>

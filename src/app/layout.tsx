@@ -8,9 +8,9 @@ import '@fontsource/poppins/700.css';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'اختبار تحديد المستوى المجاني | Tech Seeds Academy',
+  title: 'TechSeeds Academy | تعليم البرمجة والتكنولوجيا للأطفال والناشئين في الفيوم',
   description:
-    'اختبار قصير ومجاني يساعدنا على معرفة مستوى طفلك في التكنولوجيا والمسار الأنسب له في أكاديمية Tech Seeds.',
+    'أكاديمية حضورية في الفيوم لتعليم البرمجة وتطوير الألعاب والذكاء الاصطناعي والأمن السيبراني من 6 إلى 18 سنة، في مجموعات صغيرة مع مدرب ومساعد.',
   icons: { icon: '/logo-icon.svg' },
 };
 

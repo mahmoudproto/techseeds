@@ -127,7 +127,7 @@ input {
   max-width: 1160px;
   margin: 0 auto;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 16px;
@@ -143,12 +143,146 @@ input {
   color: #ffffff;
 }
 
+.footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+}
+
+.footer__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer__text {
+  color: #8c9eb2;
+  font-size: 13px;
+}
+
+.footer__social {
+  display: flex;
+  gap: 16px;
+}
+
 .footer__copy {
   max-width: 1160px;
   margin: 20px auto 0;
   text-align: center;
   color: #8c9eb2;
   font-size: 11px;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topnav {
+  display: none;
+  gap: 26px;
+}
+
+.topnav__link {
+  color: var(--body);
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.topnav__link:hover {
+  color: var(--green);
+}
+
+.menu {
+  position: relative;
+}
+
+.menu summary {
+  list-style: none;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 9px;
+  cursor: pointer;
+}
+
+.menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.menu summary span {
+  display: block;
+  width: 26px;
+  height: 2.5px;
+  border-radius: 2px;
+  background: var(--navy);
+}
+
+.menu summary span:last-child {
+  width: 18px;
+}
+
+.menu__panel {
+  position: absolute;
+  inset-inline-end: 0;
+  top: 52px;
+  min-width: 210px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.menu__link {
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.menu__link:hover {
+  background: var(--blue-panel);
+}
+
+@media (min-width: 1080px) {
+  .topnav {
+    display: flex;
+  }
+
+  .menu {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .logo img {
+    height: 40px;
+  }
+
+  .header .btn--small {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 /* ---------- Shared pieces ---------- */
