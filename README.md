@@ -1,4 +1,4 @@
-# Tech Seeds — اختبار تحديد المستوى
+# TechSeeds Academy
 
 A free placement test for Tech Seeds Academy. A child answers 10 or 15 questions, the parent leaves a name and WhatsApp number, and the site shows a short result with a button to book the free evaluation interview. Every result is saved to a Google Sheet.
 
