@@ -22,6 +22,9 @@ export interface SiteContent {
   why: { eyebrow: string; title: string; items: (Tinted & { title: string; text: string })[] };
   reviews: { eyebrow: string; title: string; sub: string; hint: string; items: { name: string; text: string }[] };
   banner: { title: string; text: string; cta: string };
+  next: { starts: string; seats: (n: number) => string; locale: string };
+  workshop: { eyebrow: string; title: string; text: string; points: string[] };
+  whatsappLabel: string;
   footer: { test: string; whatsapp: string; address: string; facebook: string; instagram: string; rights: string };
 }
 
@@ -116,6 +119,14 @@ const ar: SiteContent = {
     text: 'ابدأ باختبار تحديد المستوى المجاني، ويستغرق حوالي 10 دقائق.',
     cta: 'ابدأ الاختبار الآن',
   },
+  next: { starts: 'المجموعة القادمة تبدأ', seats: (n) => (n === 1 ? 'باقي مكان واحد' : n === 2 ? 'باقي مكانان' : n <= 10 ? `باقي ${n} أماكن` : `باقي ${n} مكانًا`), locale: 'ar-EG-u-nu-latn' },
+  workshop: {
+    eyebrow: 'Free Parents Workshop',
+    title: 'احجز ورشة أولياء الأمور المجانية',
+    text: 'كل يوم أحد في Hive Co-working Space بالفيوم. نشرح طريقتنا، وكيف سنساعد طفلك، ودوركم في البيت.',
+    points: ['مجانية تمامًا ومن غير أي التزام', 'تتعرف على المدربين والمكان', 'نجيب عن كل أسئلتك وجهًا لوجه'],
+  },
+  whatsappLabel: 'تواصل معنا على واتساب',
   footer: {
     test: 'اختبار تحديد المستوى',
     whatsapp: 'واتساب',
@@ -206,6 +217,14 @@ const en: SiteContent = {
     text: 'Begin with the free placement test. It takes about 10 minutes and is in Arabic.',
     cta: 'Start the test now',
   },
+  next: { starts: 'Next group starts', seats: (n) => (n === 1 ? '1 seat left' : `${n} seats left`), locale: 'en-GB' },
+  workshop: {
+    eyebrow: 'Free Parents Workshop',
+    title: 'Book the free parents\' workshop',
+    text: 'Every Sunday at Hive Co-working Space in Fayoum. We explain our method, how we will help your child, and your role at home.',
+    points: ['Completely free, with no commitment', 'Meet the instructors and see the place', 'Ask us anything, face to face'],
+  },
+  whatsappLabel: 'Message us on WhatsApp',
   footer: {
     test: 'Placement test',
     whatsapp: 'WhatsApp',

@@ -5,6 +5,7 @@ import '@fontsource/cairo/700.css';
 import '@fontsource/poppins/400.css';
 import '@fontsource/poppins/600.css';
 import '@fontsource/poppins/700.css';
+import Tracking from '@/components/Tracking';
 import '../globals.css';
 
 export const metadata: Metadata = {
@@ -23,7 +24,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" dir="ltr">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Tracking />
+      </body>
     </html>
   );
 }

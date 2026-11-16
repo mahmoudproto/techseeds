@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { WHATSAPP_NUMBER } from '@/lib/labels';
 import { SITE, type Lang } from '@/lib/site-content';
+import { NEXT_START_DATE, SEATS_LEFT } from '@/lib/site-config';
 import Icon from './LandingIcon';
+import WorkshopForm from './WorkshopForm';
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -9,6 +11,13 @@ export default function Landing({ lang }: { lang: Lang }) {
   const t = SITE[lang];
   const whatsapp = `https://wa.me/${WHATSAPP_NUMBER}`;
   const arrow = <span className="btn__arrow" aria-hidden="true">{t.arrow}</span>;
+
+  // The "next group" strip hides itself once the start day has passed or the group is full.
+  const start = new Date(`${NEXT_START_DATE}T23:59:59+02:00`);
+  const showNext = SEATS_LEFT > 0 && start.getTime() > Date.now();
+  const startLabel = new Intl.DateTimeFormat(t.next.locale, {
+    weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Africa/Cairo',
+  }).format(start);
 
   return (
     <>
@@ -20,6 +29,13 @@ export default function Landing({ lang }: { lang: Lang }) {
         <section className="landing hero">
           <div className="hero__copy">
             <p className="eyebrow">Growing Young Minds</p>
+            {showNext && (
+              <p className="next-group">
+                <span className="next-group__dot" aria-hidden="true" />
+                <span>{t.next.starts} <b>{startLabel}</b></span>
+                <span className="next-group__seats">{t.next.seats(SEATS_LEFT)}</span>
+              </p>
+            )}
             <h1 className="title">{t.hero.title}</h1>
             <p className="lead">{t.hero.lead}</p>
             <div className="hero__ctas">
@@ -150,6 +166,24 @@ repeat 10
                 <p>{w.text}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Parents' workshop booking */}
+        <section className="l-section" id="workshop">
+          <div className="workshop">
+            <div className="workshop__copy">
+              <p className="eyebrow">{t.workshop.eyebrow}</p>
+              <h2 className="h2">{t.workshop.title}</h2>
+              <span className="title__bar" />
+              <p className="lead">{t.workshop.text}</p>
+              <ul className="workshop__points">
+                {t.workshop.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </div>
+            <WorkshopForm lang={lang} />
           </div>
         </section>
 

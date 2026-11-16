@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import SiteFooter from '@/components/SiteFooter';
 import SiteHeader from '@/components/SiteHeader';
+import WhatsAppFloat from '@/components/WhatsAppFloat';
+import { SITE } from '@/lib/site-content';
 import TestFlow from '@/components/TestFlow';
 import { allPublicTests } from '@/lib/content';
 
@@ -20,6 +22,7 @@ export default function TestPage() {
         <TestFlow tests={tests} />
       </main>
       <SiteFooter lang="ar" />
+      <WhatsAppFloat label={SITE.ar.whatsappLabel} />
     </>
   );
 }

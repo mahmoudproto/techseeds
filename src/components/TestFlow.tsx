@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Answers, PublicResult, PublicTest, VersionId } from '@/lib/types';
+import { track } from '@/lib/track';
 import { versionForAge } from '@/lib/validate';
 import LeadForm from './LeadForm';
 import QuestionCard from './QuestionCard';
@@ -116,6 +117,7 @@ export default function TestFlow({ tests }: { tests: Record<VersionId, PublicTes
       setIndex(0);
       setStartedAt(Date.now());
       setStep('questions');
+      track('test_started', { version: v });
     },
     [tests],
   );
@@ -164,6 +166,7 @@ export default function TestFlow({ tests }: { tests: Record<VersionId, PublicTes
       }
       setParentName(parent);
       setResult(data);
+      track('test_completed', { version: data.version, track: data.top });
       writeSaved(null);
       setStep('result');
 
