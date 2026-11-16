@@ -5,7 +5,10 @@ export default function SiteFooter() {
   return (
     <footer className="footer">
       <div className="footer__inner">
-        <Logo dark />
+        <span className="footer__brand">
+          <Logo boxed />
+          <span className="footer__slogan">Growing Young Minds</span>
+        </span>
         <a
           className="footer__link"
           href={`https://wa.me/${WHATSAPP_NUMBER}`}

@@ -21,7 +21,7 @@ export default function Welcome({ onStart }: { onStart: (childName: string, age:
   return (
     <section className="welcome">
       <div className="welcome__copy">
-        <p className="eyebrow">Free Placement Test</p>
+        <p className="eyebrow">Growing Young Minds</p>
         <h1 className="title">اختبار تحديد المستوى المجاني</h1>
         <span className="title__bar" />
         <p className="lead">

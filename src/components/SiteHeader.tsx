@@ -1,16 +1,11 @@
 import { WHATSAPP_NUMBER } from '@/lib/labels';
 
-export function Logo({ dark = false }: { dark?: boolean }) {
+/** The full logo (icon + name). It always sits on white, as the brand requires. */
+export function Logo({ boxed = false }: { boxed?: boolean }) {
   return (
-    <span className={`logo${dark ? ' logo--dark' : ''}`}>
-      <span className="logo__mark">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo-icon.svg" alt="" width={18} height={32} />
-      </span>
-      <span className="logo__text">
-        <span className="logo__name">Tech Seeds</span>
-        {dark && <span className="logo__tagline">Code Today .. Build Tomorrow</span>}
-      </span>
+    <span className={`logo${boxed ? ' logo--boxed' : ''}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/logo-full.png" alt="TechSeeds Academy" width={294} height={110} />
     </span>
   );
 }

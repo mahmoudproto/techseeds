@@ -83,54 +83,39 @@ input {
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  direction: ltr;
-}
-
-.logo__mark {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: var(--green-tint);
-  display: grid;
-  place-items: center;
+  background: #ffffff;
   flex: none;
 }
 
-.logo__mark img {
+.logo img {
   display: block;
-  height: 32px;
+  height: 48px;
   width: auto;
 }
 
-.logo__text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
+.logo--boxed {
+  padding: 8px 14px;
+  border-radius: 14px;
 }
 
-.logo__name {
+.logo--boxed img {
+  height: 40px;
+}
+
+.footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  direction: ltr;
+}
+
+.footer__slogan {
   font-family: var(--font-en);
   font-weight: 700;
-  font-size: 19px;
-  color: var(--navy);
-  white-space: nowrap;
-}
-
-.logo__tagline {
-  font-family: var(--font-en);
-  font-size: 10px;
-  color: #c7d4e0;
-  margin-top: 3px;
-}
-
-.logo--dark .logo__mark {
-  background: #ffffff;
-}
-
-.logo--dark .logo__name {
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   color: #ffffff;
-  font-size: 17px;
 }
 
 .footer {
