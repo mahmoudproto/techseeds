@@ -15,11 +15,11 @@ export default function TestPage() {
   const tests = allPublicTests();
   return (
     <>
-      <SiteHeader cta="whatsapp" />
+      <SiteHeader cta="whatsapp" lang="ar" />
       <main className="main">
         <TestFlow tests={tests} />
       </main>
-      <SiteFooter />
+      <SiteFooter lang="ar" />
     </>
   );
 }

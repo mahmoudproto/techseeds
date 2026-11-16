@@ -5,7 +5,7 @@ import '@fontsource/cairo/700.css';
 import '@fontsource/poppins/400.css';
 import '@fontsource/poppins/600.css';
 import '@fontsource/poppins/700.css';
-import './globals.css';
+import '../globals.css';
 
 export const metadata: Metadata = {
   title: 'TechSeeds Academy | تعليم البرمجة والتكنولوجيا للأطفال والناشئين في الفيوم',

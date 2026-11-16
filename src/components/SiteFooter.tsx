@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { WHATSAPP_DISPLAY, WHATSAPP_NUMBER } from '@/lib/labels';
-import { Logo, NAV } from './SiteHeader';
+import { SITE, type Lang } from '@/lib/site-content';
+import { Logo } from './SiteHeader';
 
 const FACEBOOK = 'https://www.facebook.com/profile.php?id=61595067910231';
 const INSTAGRAM = 'https://www.instagram.com/tech_seedsacademy';
 
-export default function SiteFooter() {
+export default function SiteFooter({ lang }: { lang: Lang }) {
+  const t = SITE[lang];
   return (
     <footer className="footer" id="contact">
       <div className="footer__inner">
@@ -14,14 +16,14 @@ export default function SiteFooter() {
           <span className="footer__slogan">Growing Young Minds</span>
         </span>
 
-        <nav className="footer__nav" aria-label="روابط الموقع">
-          {NAV.slice(0, 5).map((item) => (
+        <nav className="footer__nav" aria-label={t.header.menu}>
+          {t.nav.slice(0, 5).map((item) => (
             <Link key={item.href} href={item.href} className="footer__link">
               {item.label}
             </Link>
           ))}
           <Link href="/test" className="footer__link">
-            اختبار تحديد المستوى
+            {t.footer.test}
           </Link>
         </nav>
 
@@ -32,20 +34,22 @@ export default function SiteFooter() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            واتساب <span dir="ltr">{WHATSAPP_DISPLAY}</span>
+            {t.footer.whatsapp} <span dir="ltr">{WHATSAPP_DISPLAY}</span>
           </a>
-          <span className="footer__text">Hive Co-working Space، شارع أحمد شوقي، الفيوم</span>
+          <span className="footer__text">{t.footer.address}</span>
           <span className="footer__social">
             <a className="footer__link" href={FACEBOOK} target="_blank" rel="noopener noreferrer">
-              فيسبوك
+              {t.footer.facebook}
             </a>
             <a className="footer__link" href={INSTAGRAM} target="_blank" rel="noopener noreferrer">
-              إنستجرام
+              {t.footer.instagram}
             </a>
           </span>
         </div>
       </div>
-      <p className="footer__copy">© جميع الحقوق محفوظة {new Date().getFullYear()} TechSeeds Academy</p>
+      <p className="footer__copy">
+        © {t.footer.rights} {new Date().getFullYear()} TechSeeds Academy
+      </p>
     </footer>
   );
 }

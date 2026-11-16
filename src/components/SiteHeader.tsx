@@ -1,14 +1,6 @@
 import Link from 'next/link';
 import { WHATSAPP_NUMBER } from '@/lib/labels';
-
-export const NAV = [
-  { href: '/#home', label: 'الرئيسية' },
-  { href: '/#about', label: 'عن الأكاديمية' },
-  { href: '/#programs', label: 'البرامج' },
-  { href: '/#why', label: 'لماذا نحن' },
-  { href: '/#reviews', label: 'آراء أولياء الأمور' },
-  { href: '/#contact', label: 'تواصل معنا' },
-];
+import { SITE, type Lang } from '@/lib/site-content';
 
 /** The full logo (icon + name). It always sits on white, as the brand requires. */
 export function Logo({ boxed = false }: { boxed?: boolean }) {
@@ -20,16 +12,17 @@ export function Logo({ boxed = false }: { boxed?: boolean }) {
   );
 }
 
-export default function SiteHeader({ cta }: { cta: 'test' | 'whatsapp' }) {
+export default function SiteHeader({ cta, lang }: { cta: 'test' | 'whatsapp'; lang: Lang }) {
+  const t = SITE[lang];
   return (
     <header className="header">
       <div className="header__inner">
-        <Link href="/" aria-label="TechSeeds Academy">
+        <Link href={t.home} aria-label="TechSeeds Academy">
           <Logo />
         </Link>
 
-        <nav className="topnav" aria-label="القائمة الرئيسية">
-          {NAV.map((item) => (
+        <nav className="topnav" aria-label={t.header.menu}>
+          {t.nav.map((item) => (
             <Link key={item.href} href={item.href} className="topnav__link">
               {item.label}
             </Link>
@@ -37,10 +30,15 @@ export default function SiteHeader({ cta }: { cta: 'test' | 'whatsapp' }) {
         </nav>
 
         <div className="header__actions">
+          {/* A plain link so the browser loads the other language's page fully. */}
+          <a className="lang" href={t.other.href} lang={lang === 'ar' ? 'en' : 'ar'}>
+            {t.other.label}
+          </a>
+
           {cta === 'test' ? (
             <Link className="btn btn--small" href="/test">
-              <span>اختبار مجاني</span>
-              <span className="btn__arrow" aria-hidden="true">←</span>
+              <span>{t.header.test}</span>
+              <span className="btn__arrow" aria-hidden="true">{t.arrow}</span>
             </Link>
           ) : (
             <a
@@ -49,19 +47,19 @@ export default function SiteHeader({ cta }: { cta: 'test' | 'whatsapp' }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span>تواصل معنا</span>
-              <span className="btn__arrow" aria-hidden="true">←</span>
+              <span>{t.header.whatsapp}</span>
+              <span className="btn__arrow" aria-hidden="true">{t.arrow}</span>
             </a>
           )}
 
           <details className="menu">
-            <summary aria-label="القائمة">
+            <summary aria-label={t.header.menu}>
               <span />
               <span />
               <span />
             </summary>
             <div className="menu__panel">
-              {NAV.map((item) => (
+              {t.nav.map((item) => (
                 <Link key={item.href} href={item.href} className="menu__link">
                   {item.label}
                 </Link>
