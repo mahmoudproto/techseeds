@@ -22,7 +22,7 @@ export default function TestPage() {
         <TestFlow tests={tests} />
       </main>
       <SiteFooter lang="ar" />
-      <WhatsAppFloat label={SITE.ar.whatsappLabel} />
+      <WhatsAppFloat label={SITE.ar.whatsappLabel} text={SITE.ar.whatsappText} />
     </>
   );
 }

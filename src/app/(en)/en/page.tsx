@@ -16,7 +16,7 @@ export default function HomePageEn() {
         <Landing lang="en" />
       </main>
       <SiteFooter lang="en" />
-      <WhatsAppFloat label={SITE.en.whatsappLabel} />
+      <WhatsAppFloat label={SITE.en.whatsappLabel} text={SITE.en.whatsappText} />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { WHATSAPP_NUMBER } from '@/lib/labels';
-import { SITE, type Lang } from '@/lib/site-content';
+import { SITE, whatsappLink, type Lang } from '@/lib/site-content';
 import TopNav from './TopNav';
 
 /** The full logo (icon + name). It always sits on white, as the brand requires. */
@@ -38,7 +38,7 @@ export default function SiteHeader({ cta, lang }: { cta: 'test' | 'whatsapp'; la
           ) : (
             <a
               className="btn btn--small"
-              href={`https://wa.me/${WHATSAPP_NUMBER}`}
+              href={whatsappLink(WHATSAPP_NUMBER, t.whatsappText)}
               target="_blank"
               rel="noopener noreferrer"
             >

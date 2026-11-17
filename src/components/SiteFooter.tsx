@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { WHATSAPP_DISPLAY, WHATSAPP_NUMBER } from '@/lib/labels';
-import { SITE, type Lang } from '@/lib/site-content';
+import { SITE, whatsappLink, type Lang } from '@/lib/site-content';
 import { Logo } from './SiteHeader';
 
 const FACEBOOK = 'https://www.facebook.com/profile.php?id=61595067910231';
@@ -13,7 +13,7 @@ export default function SiteFooter({ lang }: { lang: Lang }) {
       <div className="footer__inner">
         <span className="footer__brand">
           <Logo boxed />
-          <span className="footer__slogan">Growing Young Minds</span>
+          <span className="footer__slogan">{t.footer.slogan}</span>
         </span>
 
         <nav className="footer__nav" aria-label={t.header.menu}>
@@ -30,7 +30,7 @@ export default function SiteFooter({ lang }: { lang: Lang }) {
         <div className="footer__contact">
           <a
             className="footer__link"
-            href={`https://wa.me/${WHATSAPP_NUMBER}`}
+            href={whatsappLink(WHATSAPP_NUMBER, t.whatsappText)}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -49,6 +49,7 @@ export default function SiteFooter({ lang }: { lang: Lang }) {
       </div>
       <p className="footer__copy">
         © {t.footer.rights} {new Date().getFullYear()} TechSeeds Academy
+        <span className="footer__credit"> · {t.footer.photos}</span>
       </p>
     </footer>
   );

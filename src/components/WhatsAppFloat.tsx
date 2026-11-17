@@ -4,11 +4,11 @@ import { WHATSAPP_NUMBER } from '@/lib/labels';
 import { track } from '@/lib/track';
 
 /** A WhatsApp button that stays in the corner of every page. */
-export default function WhatsAppFloat({ label }: { label: string }) {
+export default function WhatsAppFloat({ label, text }: { label: string; text?: string }) {
   return (
     <a
       className="wa-float"
-      href={`https://wa.me/${WHATSAPP_NUMBER}`}
+      href={`https://wa.me/${WHATSAPP_NUMBER}${text ? `?text=${encodeURIComponent(text)}` : ''}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}

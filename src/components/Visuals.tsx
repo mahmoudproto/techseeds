@@ -151,7 +151,7 @@ function RobotGrid({
             textAnchor="middle"
             fontSize="24"
             fontWeight="700"
-            fontFamily="Cairo, sans-serif"
+            fontFamily="Readex Pro, sans-serif"
             fill="#122e4f"
           >
             {m.label}

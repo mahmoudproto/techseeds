@@ -1,15 +1,28 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import { WHATSAPP_NUMBER } from '@/lib/labels';
-import { SITE, type Lang } from '@/lib/site-content';
+import { MEDIA } from '@/lib/media';
+import { SITE, whatsappLink, type Lang } from '@/lib/site-content';
 import { NEXT_START_DATE, SEATS_LEFT } from '@/lib/site-config';
+import { AGE_BANDS, TRACKS } from '@/lib/tracks';
+import AgeTabs from './AgeTabs';
+import { DoodleArrow, Sparkle, Squiggle } from './Doodles';
 import Icon from './LandingIcon';
 import WorkshopForm from './WorkshopForm';
 
-/* eslint-disable @next/next/no-img-element */
+function Head({ kicker, title, text, center = false }: { kicker: string; title: string; text?: string; center?: boolean }) {
+  return (
+    <div className={`s-head${center ? ' s-head--center' : ''}`}>
+      <p className="kicker">{kicker}</p>
+      <h2 className="h2">{title}</h2>
+      {text && <p className="s-head__text">{text}</p>}
+    </div>
+  );
+}
 
 export default function Landing({ lang }: { lang: Lang }) {
   const t = SITE[lang];
-  const whatsapp = `https://wa.me/${WHATSAPP_NUMBER}`;
+  const whatsapp = whatsappLink(WHATSAPP_NUMBER, t.whatsappText);
   const arrow = <span className="btn__arrow" aria-hidden="true">{t.arrow}</span>;
 
   // The "next group" strip hides itself once the start day has passed or the group is full.
@@ -21,14 +34,10 @@ export default function Landing({ lang }: { lang: Lang }) {
 
   return (
     <>
-      {/* Hero */}
-      <div className="hero-band" id="home">
-        <span className="hero-band__shape hero-band__shape--blue" aria-hidden="true" />
-        <span className="hero-band__shape hero-band__shape--green" aria-hidden="true" />
-        <span className="hero-band__shape hero-band__shape--sun" aria-hidden="true" />
-        <section className="landing hero">
+      {/* 1. Hero: text first, photo on the other side, green and yellow shapes behind it */}
+      <section className="hero-band" id="home">
+        <div className="wrap hero">
           <div className="hero__copy">
-            <p className="eyebrow">Growing Young Minds</p>
             {showNext && (
               <p className="next-group">
                 <span className="next-group__dot" aria-hidden="true" />
@@ -36,147 +45,197 @@ export default function Landing({ lang }: { lang: Lang }) {
                 <span className="next-group__seats">{t.next.seats(SEATS_LEFT)}</span>
               </p>
             )}
-            <h1 className="title">{t.hero.title}</h1>
-            <p className="lead">{t.hero.lead}</p>
+            <h1 className="hero__title">
+              {t.hero.title}{' '}
+              <span className="hl">
+                {t.hero.highlight}
+                <Squiggle />
+              </span>
+            </h1>
+            <p className="hero__lead">{t.hero.lead}</p>
             <div className="hero__ctas">
-              <Link className="btn" href="/test">
+              <Link className="btn btn--big" href="/test">
                 <span>{t.hero.cta}</span>
                 {arrow}
               </Link>
-              <a className="hero__link" href={whatsapp} target="_blank" rel="noopener noreferrer">
-                {t.hero.whatsapp}
+              <a className="btn btn--wa" href={whatsapp} target="_blank" rel="noopener noreferrer">
+                <WaIcon />
+                <span>{t.hero.whatsapp}</span>
               </a>
             </div>
+            <p className="hero__note">
+              <DoodleArrow className="hero__doodle" />
+              {t.hero.note}
+            </p>
           </div>
-          <div className="hero__art" aria-hidden="true">
-          <span className="blob blob--blue" />
-          <span className="blob blob--green" />
-          <span className="dot dot--yellow" />
-          <span className="dot dot--blue" />
-          <span className="dot dot--green" />
-          <div className="art-card art-card--code">
-            <div className="code-window__bar"><i /><i /><i /></div>
-            <pre className="code-window" dir="ltr">{`when  🚩 clicked
-repeat 10
-   move 10 steps
-   say "Hello!"`}</pre>
-            <div className="art-tracks">
-              <span className="tint tint--blue"><Icon name="code" color="#3eaae5" /></span>
-              <span className="tint tint--yellow"><Icon name="game" color="#d99a00" /></span>
-              <span className="tint tint--green"><Icon name="ai" color="#2fa84f" /></span>
-              <span className="tint tint--mint"><Icon name="shield" color="#2fa84f" /></span>
-            </div>
+
+          <div className="hero__visual">
+            <span className="shape shape--green" aria-hidden="true" />
+            <span className="shape shape--yellow" aria-hidden="true" />
+            <Sparkle className="hero__sparkle" />
+            <img
+              className="hero__photo"
+              src={MEDIA.hero.src}
+              alt={MEDIA.hero.alt[lang]}
+              width={1400}
+              height={933}
+              fetchPriority="high"
+            />
           </div>
-          <span className="code-chip"><span>Python</span><span>Scratch</span><span>Unity</span><span>AI</span></span>
-          <span className="badge">&lt;/&gt;</span>
         </div>
-        </section>
+      </section>
+
+      {/* 2. Trust strip */}
+      <div className="wrap trust-wrap">
+        <ul className="trust">
+          {t.stats.map((s) => (
+            <li className="trust__item" key={s.value}>
+              <span className={`tint tint--${s.tint}`}><Icon name={s.icon} color={s.color} /></span>
+              <span className="trust__text">
+                <strong>{s.value}</strong>
+                <small>{s.label}</small>
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <div className="landing">
-        {/* Stats */}
-        <section className="l-section l-section--tight stats-wrap">
-          <div className="card stats">
-            {t.stats.map((s) => (
-              <div className="stat" key={s.value}>
-                <span className={`tint tint--${s.tint}`}><Icon name={s.icon} color={s.color} /></span>
-                <span className="stat__text">
-                  <strong>{s.value}</strong>
-                  <small>{s.label}</small>
-                </span>
-              </div>
-            ))}
+      {/* 3. Why us, with a word from the founder */}
+      <section className="section" id="why">
+        <div className="wrap">
+          <div className="why">
+            <div className="why__intro">
+              <Head kicker={t.why.kicker} title={t.why.title} text={t.why.text} />
+              <figure className="founder">
+                <Sparkle className="founder__sparkle" color="#2fa84f" />
+                <figcaption className="founder__label">{t.why.founder.title}</figcaption>
+                <blockquote>{t.why.founder.quote}</blockquote>
+                <p className="founder__name">{t.why.founder.name}</p>
+              </figure>
+            </div>
+            <div className="why__side">
+              <img className="why__photo" src={MEDIA.why.src} alt={MEDIA.why.alt[lang]} loading="lazy" width={900} height={1350} />
+              <ul className="why__list">
+                {t.why.items.map((w) => (
+                  <li className="why__card" key={w.title}>
+                    <span className={`tint tint--${w.tint}`}><Icon name={w.icon} color={w.color} /></span>
+                    <span>
+                      <strong>{w.title}</strong>
+                      <span>{w.text}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* About */}
-        <section className="l-section about" id="about">
-          <div className="about__copy">
-            <p className="eyebrow">{t.about.eyebrow}</p>
-            <h2 className="h2">{t.about.title}</h2>
-            <span className="title__bar" />
-            <p className="lead lead--wide">{t.about.text}</p>
-            <div className="pillars">
-              {t.about.pillars.map((p) => (
-                <div className="card pillar" key={p.lines[0]}>
-                  <Icon name={p.icon} size={30} color="#2fa84f" />
-                  <span>{p.lines[0]}<br />{p.lines[1]}</span>
+      {/* 4. Teaching team */}
+      <section className="section section--tint" id="team">
+        <div className="wrap team">
+          <div className="team__photo-wrap">
+            <img className="team__photo" src={MEDIA.team.src} alt={MEDIA.team.alt[lang]} loading="lazy" width={1200} height={800} />
+            <span className="sticker">{t.team.soon}</span>
+          </div>
+          <div>
+            <Head kicker={t.team.kicker} title={t.team.title} text={t.team.text} />
+            <div className="roles">
+              {t.team.roles.map((r, i) => (
+                <div className="role" key={r.title}>
+                  <span className={`role__badge role__badge--${i === 0 ? 'green' : 'yellow'}`} aria-hidden="true">
+                    <Icon name={i === 0 ? 'board' : 'hands'} color={i === 0 ? '#2fa84f' : '#d99a00'} />
+                  </span>
+                  <strong>{r.title}</strong>
+                  <p>{r.text}</p>
                 </div>
               ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Programs */}
-        <section className="l-section" id="programs">
-          <div className="section-head">
-            <p className="eyebrow">{t.programs.eyebrow}</p>
-            <h2 className="h2">{t.programs.title}</h2>
-            <span className="title__bar" />
-            <p className="lead lead--wide">{t.programs.text}</p>
-          </div>
-          <div className="programs">
-            {t.programs.items.map((p) => (
-              <div className={`program program--${p.tint}`} key={p.name}>
-                <span className="program__icon"><Icon name={p.icon} size={26} color={p.color} /></span>
-                <strong className="program__ar">{p.name}</strong>
-                <span className="program__ages">{p.ages}</span>
-                <span className="program__note">{p.note}</span>
-              </div>
-            ))}
-          </div>
-        </section>
+      {/* 5. Tracks by age */}
+      <section className="section" id="tracks">
+        <div className="wrap">
+          <Head kicker={t.tracks.kicker} title={t.tracks.title} text={t.tracks.text} center />
+          <AgeTabs lang={lang} />
 
-        {/* How it works */}
-        <section className="l-section">
-          <div className="how">
-            <div className="how__body">
-              <p className="eyebrow">{t.how.eyebrow}</p>
-              <h2 className="h2">{t.how.title}</h2>
-              <p className="how__sub">{t.how.sub}</p>
-              <ol className="steps">
-                {t.how.steps.map((s) => (
-                  <li className="step" key={s.n}>
-                    <span className="step__num">{s.n}</span>
-                    <strong>{s.title}</strong>
-                    <span>{s.text}</span>
-                  </li>
-                ))}
-              </ol>
-              <Link className="btn" href="/test">
-                <span>{t.how.cta}</span>
-                {arrow}
-              </Link>
+          <div className="age-table">
+            <h3 className="age-table__title">{t.tracks.tableTitle}</h3>
+            <div className="age-table__scroll" tabIndex={0} role="region" aria-label={t.tracks.tableTitle}>
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">{t.tracks.tableTrack}</th>
+                    {AGE_BANDS.map((b) => (
+                      <th scope="col" key={b.id}>{b.label[lang]}</th>
+                    ))}
+                    <th scope="col">{t.tracks.tableBuilds}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {TRACKS.map((tr) => (
+                    <tr key={tr.slug}>
+                      <th scope="row">
+                        <Link href={`${lang === 'ar' ? '' : '/en'}/tracks/${tr.slug}`}>{tr.name[lang]}</Link>
+                      </th>
+                      {AGE_BANDS.map((b) => {
+                        const level = tr.levels[b.id];
+                        return (
+                          <td key={b.id}>
+                            {level ? (
+                              <span className="tags tags--inline">
+                                {level.tools.map((tool) => (
+                                  <span className="tag" key={tool} dir="ltr">{tool}</span>
+                                ))}
+                              </span>
+                            ) : (
+                              <span className="age-table__none" aria-label={t.tracks.none}>—</span>
+                            )}
+                          </td>
+                        );
+                      })}
+                      <td>{tr.builds[lang]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Why us */}
-        <section className="l-section" id="why">
-          <div className="section-head">
-            <p className="eyebrow">{t.why.eyebrow}</p>
-            <h2 className="h2">{t.why.title}</h2>
-            <span className="title__bar" />
-          </div>
-          <div className="why">
-            {t.why.items.map((w) => (
-              <div className="card why__card" key={w.title}>
-                <span className={`tint tint--${w.tint}`}><Icon name={w.icon} color={w.color} /></span>
-                <strong>{w.title}</strong>
-                <p>{w.text}</p>
-              </div>
+      {/* 6. How it works */}
+      <section className="section section--tint">
+        <div className="wrap">
+          <Head kicker={t.how.kicker} title={t.how.title} text={t.how.sub} center />
+          <ol className="steps">
+            {t.how.steps.map((s) => (
+              <li className="step" key={s.n}>
+                <span className="step__num">{s.n}</span>
+                <strong>{s.title}</strong>
+                <span>{s.text}</span>
+              </li>
             ))}
+          </ol>
+          <div className="center">
+            <Link className="btn" href="/test">
+              <span>{t.how.cta}</span>
+              {arrow}
+            </Link>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Parents' workshop booking */}
-        <section className="l-section" id="workshop">
+      {/* 7. Parents' workshop booking, higher up than before */}
+      <section className="section" id="workshop">
+        <div className="wrap">
           <div className="workshop">
             <div className="workshop__copy">
-              <p className="eyebrow">{t.workshop.eyebrow}</p>
+              <p className="kicker">{t.workshop.kicker}</p>
               <h2 className="h2">{t.workshop.title}</h2>
-              <span className="title__bar" />
-              <p className="lead">{t.workshop.text}</p>
+              <p className="s-head__text">{t.workshop.text}</p>
               <ul className="workshop__points">
                 {t.workshop.points.map((point) => (
                   <li key={point}>{point}</li>
@@ -185,45 +244,161 @@ repeat 10
             </div>
             <WorkshopForm lang={lang} />
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Reviews */}
-        <section className="l-section" id="reviews">
-          <div className="reviews-head">
-            <div>
-              <p className="eyebrow">{t.reviews.eyebrow}</p>
-              <h2 className="h2">{t.reviews.title}</h2>
-              <p className="how__sub">{t.reviews.sub}</p>
-            </div>
+      {/* 8. Student projects */}
+      <section className="section section--tint" id="projects">
+        <div className="wrap">
+          <Head kicker={t.projects.kicker} title={t.projects.title} text={t.projects.text} center />
+          <div className="projects">
+            {t.projects.items.map((p) => (
+              <article className={`project project--${p.tint}`} key={p.title}>
+                <div className="project__screen" aria-hidden="true">
+                  <span className="project__bar"><i /><i /><i /></span>
+                  <ProjectArt tint={p.tint} />
+                </div>
+                <span className="project__track">{p.track}</span>
+                <h3 className="project__title">{p.title}</h3>
+                <p className="project__text">{p.text}</p>
+              </article>
+            ))}
           </div>
+          <p className="soon-note">{t.projects.note}</p>
+        </div>
+      </section>
+
+      {/* 9. Testimonials */}
+      <section className="section" id="reviews">
+        <div className="wrap">
+          <Head kicker={t.reviews.kicker} title={t.reviews.title} text={t.reviews.sub} />
           <div className="reviews" tabIndex={0} role="region" aria-label={t.reviews.title}>
             {SITE.ar.reviews.items.map((r) => (
-              <figure className="card review" key={r.name} lang="ar" dir="rtl">
-                <blockquote>«{r.text}»</blockquote>
+              <figure className="review" key={r.name} lang="ar" dir="rtl">
+                <span className="review__quote" aria-hidden="true">”</span>
+                <blockquote>{r.text}</blockquote>
                 <figcaption>
-                  <span className="review__avatar" aria-hidden="true">{r.name.charAt(0)}</span>
-                  {r.name}
+                  <strong>{r.name}</strong>
+                  {!r.name.startsWith('ولي') && <span>{SITE.ar.reviews.parent}</span>}
                 </figcaption>
               </figure>
             ))}
           </div>
           <p className="reviews__hint">{t.reviews.hint} {t.arrow}</p>
-        </section>
+        </div>
+      </section>
 
-        {/* CTA banner */}
-        <section className="l-section l-section--tight">
-          <div className="cta">
-            <div className="cta__copy">
-              <strong>{t.banner.title}</strong>
-              <span>{t.banner.text}</span>
-            </div>
-            <Link className="btn" href="/test">
-              <span>{t.banner.cta}</span>
-              {arrow}
-            </Link>
+      {/* 10. FAQ */}
+      <section className="section section--tint" id="faq">
+        <div className="wrap wrap--narrow">
+          <Head kicker={t.faq.kicker} title={t.faq.title} center />
+          <div className="faq">
+            {t.faq.items.map((item, i) => (
+              <details className="faq__item" key={item.q} open={i === 0}>
+                <summary>
+                  <span>{item.q}</span>
+                  <span className="faq__icon" aria-hidden="true" />
+                </summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+
+      {/* 11. Final call to action */}
+      <section className="section">
+        <div className="wrap">
+          <div className="final">
+            <img className="final__photo" src={MEDIA.finalCta.src} alt={MEDIA.finalCta.alt[lang]} loading="lazy" width={1400} height={878} />
+            <div className="final__copy">
+              <Sparkle className="final__sparkle" />
+              <h2 className="final__title">{t.final.title}</h2>
+              <p>{t.final.text}</p>
+              <div className="hero__ctas">
+                <Link className="btn btn--big" href="/test">
+                  <span>{t.final.cta}</span>
+                  {arrow}
+                </Link>
+                <a className="btn btn--ghost-light" href={whatsapp} target="_blank" rel="noopener noreferrer">
+                  {t.final.whatsapp}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
+  );
+}
+
+export function WaIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.4z" />
+      <path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.8-2-1-.8.8c-1-.5-1.7-1.2-2.2-2.2l.8-.8-1-2z" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+/** Small drawn "screens" standing in for project screenshots until real ones arrive. */
+function ProjectArt({ tint }: { tint: string }) {
+  if (tint === 'yellow') {
+    return (
+      <svg viewBox="0 0 200 110" className="project__art">
+        <rect width="200" height="110" fill="#122e4f" />
+        {[[20, 14], [60, 30], [150, 18], [175, 60], [35, 70], [110, 8]].map(([x, y]) => (
+          <circle key={`${x}-${y}`} cx={x} cy={y} r="1.6" fill="#ffffff" opacity="0.8" />
+        ))}
+        <circle cx="62" cy="34" r="11" fill="#8a96a6" />
+        <circle cx="146" cy="44" r="8" fill="#8a96a6" />
+        <rect x="98" y="40" width="3" height="22" rx="1.5" fill="#f8bc17" />
+        <path d="M100 66 l12 22 h-24 z" fill="#3eaae5" />
+        <g fill="#f08a7b"><circle cx="176" cy="96" r="4" /><circle cx="164" cy="96" r="4" /><circle cx="152" cy="96" r="4" /></g>
+      </svg>
+    );
+  }
+  if (tint === 'blue') {
+    return (
+      <svg viewBox="0 0 200 110" className="project__art">
+        <rect width="200" height="110" fill="#e6f2fc" />
+        <rect x="14" y="16" width="70" height="16" rx="6" fill="#f8bc17" />
+        <rect x="14" y="38" width="88" height="16" rx="6" fill="#3eaae5" />
+        <rect x="24" y="60" width="70" height="16" rx="6" fill="#3eaae5" opacity="0.7" />
+        <rect x="14" y="82" width="60" height="16" rx="6" fill="#2fa84f" />
+        <circle cx="150" cy="62" r="20" fill="#ffffff" stroke="#122e4f" strokeWidth="3" />
+        <circle cx="143" cy="58" r="3" fill="#122e4f" /><circle cx="157" cy="58" r="3" fill="#122e4f" />
+        <path d="M142 68 q8 7 16 0" stroke="#122e4f" strokeWidth="3" fill="none" strokeLinecap="round" />
+        <rect x="128" y="20" width="56" height="18" rx="9" fill="#ffffff" stroke="#122e4f" strokeWidth="2" />
+      </svg>
+    );
+  }
+  if (tint === 'mint') {
+    return (
+      <svg viewBox="0 0 200 110" className="project__art">
+        <rect width="200" height="110" fill="#edf7f3" />
+        <rect x="30" y="22" width="140" height="22" rx="8" fill="#ffffff" stroke="#122e4f" strokeWidth="2" />
+        {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+          <circle key={i} cx={46 + i * 13} cy="33" r="3.4" fill="#122e4f" />
+        ))}
+        <rect x="30" y="56" width="140" height="10" rx="5" fill="#d5dee8" />
+        <rect x="30" y="56" width="104" height="10" rx="5" fill="#2fa84f" />
+        <path d="M86 78 l10 10 18-20" stroke="#2fa84f" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 200 110" className="project__art">
+      <rect width="200" height="110" fill="#e9f7ee" />
+      <rect x="16" y="14" width="80" height="82" rx="8" fill="#ffffff" stroke="#122e4f" strokeWidth="2" />
+      <rect x="26" y="26" width="60" height="30" rx="4" fill="#f8bc17" opacity="0.8" />
+      <rect x="26" y="64" width="54" height="6" rx="3" fill="#d5dee8" />
+      <rect x="26" y="76" width="40" height="6" rx="3" fill="#d5dee8" />
+      <rect x="110" y="30" width="74" height="54" rx="10" fill="#2fa84f" />
+      <circle cx="132" cy="52" r="4" fill="#ffffff" /><circle cx="162" cy="52" r="4" fill="#ffffff" />
+      <rect x="134" y="64" width="26" height="5" rx="2.5" fill="#ffffff" />
+      <path d="M147 30 v-12" stroke="#2fa84f" strokeWidth="3" strokeLinecap="round" />
+      <circle cx="147" cy="16" r="4" fill="#f8bc17" />
+    </svg>
   );
 }
