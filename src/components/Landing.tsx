@@ -36,6 +36,9 @@ export default function Landing({ lang }: { lang: Lang }) {
     <>
       {/* 1. Hero: text first, photo on the other side, green and yellow shapes behind it */}
       <section className="hero-band" id="home">
+        <span className="bg-shape bg-shape--blue hero-band__blue" aria-hidden="true" />
+        <span className="bg-shape bg-shape--green hero-band__green" aria-hidden="true" />
+        <span className="bg-shape bg-shape--sun hero-band__sun" aria-hidden="true" />
         <div className="wrap hero">
           <div className="hero__copy">
             {showNext && (
@@ -72,13 +75,14 @@ export default function Landing({ lang }: { lang: Lang }) {
           <div className="hero__visual">
             <span className="shape shape--green" aria-hidden="true" />
             <span className="shape shape--yellow" aria-hidden="true" />
+            <span className="shape shape--blue-dot" aria-hidden="true" />
             <Sparkle className="hero__sparkle" />
             <img
               className="hero__photo"
               src={MEDIA.hero.src}
               alt={MEDIA.hero.alt[lang]}
-              width={1400}
-              height={933}
+              width={642}
+              height={464}
               fetchPriority="high"
             />
           </div>
@@ -114,6 +118,7 @@ export default function Landing({ lang }: { lang: Lang }) {
               </figure>
             </div>
             <div className="why__side">
+              <span className="bg-shape bg-shape--blue why__blob" aria-hidden="true" />
               <img className="why__photo" src={MEDIA.why.src} alt={MEDIA.why.alt[lang]} loading="lazy" width={900} height={1350} />
               <ul className="why__list">
                 {t.why.items.map((w) => (
@@ -132,9 +137,10 @@ export default function Landing({ lang }: { lang: Lang }) {
       </section>
 
       {/* 4. Teaching team */}
-      <section className="section section--tint" id="team">
+      <section className="section section--blue" id="team">
         <div className="wrap team">
           <div className="team__photo-wrap">
+            <span className="bg-shape bg-shape--green team__blob" aria-hidden="true" />
             <img className="team__photo" src={MEDIA.team.src} alt={MEDIA.team.alt[lang]} loading="lazy" width={1200} height={800} />
             <span className="sticker">{t.team.soon}</span>
           </div>
@@ -160,6 +166,31 @@ export default function Landing({ lang }: { lang: Lang }) {
         <div className="wrap">
           <Head kicker={t.tracks.kicker} title={t.tracks.title} text={t.tracks.text} center />
           <AgeTabs lang={lang} />
+
+          <div className="projects-block" id="projects">
+            <Head kicker={t.projects.kicker} title={t.projects.title} text={t.projects.text} center />
+            <div className="projects">
+              {t.projects.items.map((p) => {
+                const img = p.img ? MEDIA.projects[p.img] : null;
+                return (
+                  <article className={`project project--${p.tint}`} key={p.title}>
+                    <div className="project__screen">
+                      <span className="project__bar" aria-hidden="true"><i /><i /><i /></span>
+                      {img ? (
+                        <img className="project__art" src={img.src} alt={img.alt[lang]} loading="lazy" width={480} height={300} />
+                      ) : (
+                        <ProjectArt tint={p.tint} />
+                      )}
+                    </div>
+                    <span className="project__track">{p.track}</span>
+                    <h3 className="project__title">{p.title}</h3>
+                    <p className="project__text">{p.text}</p>
+                  </article>
+                );
+              })}
+            </div>
+            <p className="soon-note">{t.projects.note}</p>
+          </div>
 
           <div className="age-table">
             <h3 className="age-table__title">{t.tracks.tableTitle}</h3>
@@ -206,23 +237,27 @@ export default function Landing({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* 6. How it works */}
-      <section className="section section--tint">
+      {/* 6. How we start */}
+      <section className="section section--cream" id="how">
         <div className="wrap">
-          <Head kicker={t.how.kicker} title={t.how.title} text={t.how.sub} center />
+          <div className="s-head s-head--center">
+            <p className="kicker kicker--hand">{t.how.kicker}</p>
+            <h2 className="h2">{t.how.title}</h2>
+            <p className="s-head__text">{t.how.sub}</p>
+          </div>
           <ol className="steps">
-            {t.how.steps.map((s) => (
+            {t.how.steps.map((s, i) => (
               <li className="step" key={s.n}>
                 <span className="step__num">{s.n}</span>
                 <strong>{s.title}</strong>
-                <span>{s.text}</span>
+                <span className="step__text">{s.text}</span>
+                {i < t.how.steps.length - 1 && <StepArrow />}
               </li>
             ))}
           </ol>
           <div className="center">
-            <Link className="btn" href="/test">
-              <span>{t.how.cta}</span>
-              {arrow}
+            <Link className="btn btn--raised" href="/test">
+              {t.how.cta}
             </Link>
           </div>
         </div>
@@ -247,27 +282,6 @@ export default function Landing({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* 8. Student projects */}
-      <section className="section section--tint" id="projects">
-        <div className="wrap">
-          <Head kicker={t.projects.kicker} title={t.projects.title} text={t.projects.text} center />
-          <div className="projects">
-            {t.projects.items.map((p) => (
-              <article className={`project project--${p.tint}`} key={p.title}>
-                <div className="project__screen" aria-hidden="true">
-                  <span className="project__bar"><i /><i /><i /></span>
-                  <ProjectArt tint={p.tint} />
-                </div>
-                <span className="project__track">{p.track}</span>
-                <h3 className="project__title">{p.title}</h3>
-                <p className="project__text">{p.text}</p>
-              </article>
-            ))}
-          </div>
-          <p className="soon-note">{t.projects.note}</p>
-        </div>
-      </section>
-
       {/* 9. Testimonials */}
       <section className="section" id="reviews">
         <div className="wrap">
@@ -289,7 +303,7 @@ export default function Landing({ lang }: { lang: Lang }) {
       </section>
 
       {/* 10. FAQ */}
-      <section className="section section--tint" id="faq">
+      <section className="section section--green" id="faq">
         <div className="wrap wrap--narrow">
           <Head kicker={t.faq.kicker} title={t.faq.title} center />
           <div className="faq">
@@ -337,6 +351,16 @@ export function WaIcon() {
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.4z" />
       <path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.8-2-1-.8.8c-1-.5-1.7-1.2-2.2-2.2l.8-.8-1-2z" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+/** Dashed hand-drawn arrow between two steps (points to the next step in reading order). */
+function StepArrow() {
+  return (
+    <svg className="step__arrow" viewBox="0 0 60 30" aria-hidden="true">
+      <path d="M56 20 C 44 4, 22 2, 8 16" fill="none" stroke="#122e4f" strokeWidth="2" strokeLinecap="round" strokeDasharray="4 5" />
+      <path d="M4 9 L8 17 L16 14" fill="none" stroke="#122e4f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

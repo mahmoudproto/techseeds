@@ -32,7 +32,7 @@ export interface SiteContent {
   tracks: Head & { text: string; tabs: string; more: string; tableTitle: string; tableTrack: string; tableBuilds: string; none: string };
   how: Head & { sub: string; cta: string; steps: { n: string; title: string; text: string }[] };
   workshop: Head & { text: string; points: string[] };
-  projects: Head & { text: string; note: string; items: { track: string; title: string; text: string; tint: Tinted['tint'] }[] };
+  projects: Head & { text: string; note: string; items: { track: string; title: string; text: string; tint: Tinted['tint']; img?: 'spaceship' | 'ctf' }[] };
   reviews: Head & { sub: string; hint: string; parent: string; items: { name: string; text: string }[] };
   faq: Head & { items: { q: string; a: string }[] };
   final: { title: string; text: string; cta: string; whatsapp: string };
@@ -115,15 +115,15 @@ const ar: SiteContent = {
     none: 'غير متاح',
   },
   how: {
-    kicker: 'كيف نعمل؟',
-    title: 'رحلة واضحة من أول يوم',
-    sub: 'كل شهر 6 حصص، كل حصة 3 ساعات، وينتهي بمشروع يبنيه الطالب ويعرضه بنفسه.',
+    kicker: 'بسيطة وواضحة',
+    title: 'كيف نبدأ معًا؟',
+    sub: 'أربع خطوات من أول مكالمة حتى يعرض طفلك مشروعه.',
     cta: 'ابدأ بالخطوة الأولى',
     steps: [
-      { n: '1', title: 'اختبار تحديد المستوى', text: 'اختبار مجاني قصير، وللأطفال الأصغر مقابلة بسيطة.' },
-      { n: '2', title: 'اختيار المسار', text: 'نرشّح المسار المناسب لسن طفلك واهتماماته.' },
-      { n: '3', title: 'التعلّم بالمشاريع', text: 'الطفل يكتب ويجرب بنفسه، ويبني مشروعًا كل شهر.' },
-      { n: '4', title: 'المتابعة مع الأهل', text: 'تقارير منتظمة لتعرف ما تعلّمه طفلك وما يحتاجه.' },
+      { n: '1', title: 'اختبار المستوى', text: 'اختبار مجاني قصير، حوالي 10 دقائق.' },
+      { n: '2', title: 'اختيار المسار', text: 'نرشّح المسار الذي يناسب سنّه واهتماماته.' },
+      { n: '3', title: 'التعلّم بالتجربة', text: '6 حصص حضورية، كل حصة 3 ساعات.' },
+      { n: '4', title: 'المشروع والمتابعة', text: 'يعرض مشروعه بنفسه، وتصلكم ثلاثة تقارير.' },
     ],
   },
   workshop: {
@@ -138,9 +138,9 @@ const ar: SiteContent = {
     text: 'أمثلة لمشاريع يبنيها طلابنا بأيديهم ويعرضونها بأنفسهم.',
     note: 'صور مشاريع طلابنا الحقيقية قريبًا',
     items: [
-      { track: 'تطوير الألعاب', title: 'لعبة سفينة الفضاء', text: 'سفينة تتحرك في كل الاتجاهات وتطلق الليزر على الكويكبات، ولها ثلاث أرواح.', tint: 'yellow' },
+      { track: 'تطوير الألعاب', title: 'لعبة سفينة الفضاء', text: 'سفينة تتحرك في كل الاتجاهات وتطلق الليزر على الكويكبات، ولها ثلاث أرواح.', tint: 'yellow', img: 'spaceship' },
       { track: 'البرمجة', title: 'قصة تفاعلية', text: 'شخصيات تتحرك وتتكلم وتستجيب لاختيارات اللاعب.', tint: 'blue' },
-      { track: 'الأمن السيبراني', title: 'فاحص قوة كلمة السر', text: 'برنامج يقول لك إذا كانت كلمة السر قوية أم سهلة التخمين، ولماذا.', tint: 'mint' },
+      { track: 'الأمن السيبراني', title: 'تحدي أمن سيبراني (CTF)', text: 'يبحث الطالب عن الثغرة ويحل الألغاز حتى يصل إلى العلم، في معمل تدريب آمن.', tint: 'mint', img: 'ctf' },
       { track: 'الذكاء الاصطناعي', title: 'مشروع بأدوات الذكاء الاصطناعي', text: 'كتيّب أو عرض أو موقع بسيط يخطط له الطالب وينفذه بنفسه.', tint: 'green' },
     ],
   },
@@ -156,7 +156,7 @@ const ar: SiteContent = {
       { name: 'ندى عماد', text: 'الصراحة التعامل مع الأطفال ممتاز والمحتوى مناسب جدًا لسن الأطفال.' },
       { name: 'وائل', text: 'تجربة فوق الممتازة، ومبسوط جدًا إن ابني بقى يعرف المعلومات دي، وأثّرت في تركيزه ومذاكرته وتفاعله معانا في البيت.' },
       { name: 'حسام', text: 'هو مبسوط جدًا وعنده إقبال على الكورس وبيكون سعيد وهو رايح. شكر خاص للمهندسة على بساطتها في التعامل وتحبيب ابني في الكورس، وإزاي اتعاملت مع سن صغير وبسّطتله ووصّلتله المعلومة.' },
-      { name: 'ولية أمر', text: 'مبسوط جدًا جدًا وبيفهم طبعًا، وجاي متحمس عايز يعمل التاسك. هو ما شاء الله بيحب الكمبيوتر والتكنولوجيا الحديثة جدًا.' },
+      { name: 'منى', text: 'مبسوط جدًا جدًا وبيفهم طبعًا، وجاي متحمس عايز يعمل التاسك. هو ما شاء الله بيحب الكمبيوتر والتكنولوجيا الحديثة جدًا.' },
     ],
   },
   faq: {
@@ -278,15 +278,15 @@ const en: SiteContent = {
     none: 'Not offered',
   },
   how: {
-    kicker: 'How it works',
-    title: 'A clear journey from day one',
-    sub: 'Each month has 6 sessions of 3 hours and ends with a project the student builds and presents.',
+    kicker: 'Simple and clear',
+    title: 'How do we start together?',
+    sub: 'Four steps from the first call to your child presenting their project.',
     cta: 'Take the first step',
     steps: [
-      { n: '1', title: 'Placement test', text: 'A short free test; younger children have a quick chat instead.' },
-      { n: '2', title: 'Choose a track', text: 'We suggest the track that fits your child\'s age and interests.' },
-      { n: '3', title: 'Learn by building', text: 'Children type and try things themselves, and build a project every month.' },
-      { n: '4', title: 'Parents stay informed', text: 'Regular reports on what your child learned and needs.' },
+      { n: '1', title: 'Placement test', text: 'A short free test, about 10 minutes.' },
+      { n: '2', title: 'Choose a track', text: 'We suggest the track that fits their age and interests.' },
+      { n: '3', title: 'Learn by doing', text: '6 in-person sessions, 3 hours each.' },
+      { n: '4', title: 'Project and follow-up', text: 'They present their own project, and you get three reports.' },
     ],
   },
   workshop: {
@@ -301,9 +301,9 @@ const en: SiteContent = {
     text: 'Examples of projects our students build with their own hands and present themselves.',
     note: 'Photos of our students\' real projects coming soon',
     items: [
-      { track: 'Game Development', title: 'Spaceship game', text: 'A ship that flies in every direction, fires lasers at asteroids and has three lives.', tint: 'yellow' },
+      { track: 'Game Development', title: 'Spaceship game', text: 'A ship that flies in every direction, fires lasers at asteroids and has three lives.', tint: 'yellow', img: 'spaceship' },
       { track: 'Programming', title: 'Interactive story', text: 'Characters that move, talk and respond to the player\'s choices.', tint: 'blue' },
-      { track: 'Cybersecurity', title: 'Password strength checker', text: 'A program that tells you whether a password is strong or easy to guess, and why.', tint: 'mint' },
+      { track: 'Cybersecurity', title: 'Cybersecurity challenge (CTF)', text: 'Students find the weak spot and solve puzzles until they capture the flag, in a safe practice lab.', tint: 'mint', img: 'ctf' },
       { track: 'AI', title: 'An AI-powered project', text: 'A booklet, presentation or simple website the student plans and builds.', tint: 'green' },
     ],
   },

@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from 'next';
-import '@fontsource/readex-pro/400.css';
-import '@fontsource/readex-pro/500.css';
-import '@fontsource/readex-pro/600.css';
-import '@fontsource/rubik/500.css';
-import '@fontsource/rubik/600.css';
-import '@fontsource/rubik/700.css';
+import '@fontsource/cairo/400.css';
+import '@fontsource/cairo/600.css';
+import '@fontsource/cairo/700.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/700.css';
 import Tracking from '@/components/Tracking';
 import '../globals.css';
 
