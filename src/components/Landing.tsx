@@ -3,10 +3,11 @@ import Link from 'next/link';
 import { WHATSAPP_NUMBER } from '@/lib/labels';
 import { MEDIA } from '@/lib/media';
 import { SITE, whatsappLink, type Lang } from '@/lib/site-content';
-import { NEXT_START_DATE, SEATS_LEFT } from '@/lib/site-config';
+import { LOCATION, NEXT_START_DATE, SEATS_LEFT } from '@/lib/site-config';
 import { AGE_BANDS, TRACKS } from '@/lib/tracks';
 import AgeTabs from './AgeTabs';
 import { DoodleArrow, Sparkle, Squiggle } from './Doodles';
+import Reveal from './Reveal';
 import Icon from './LandingIcon';
 import WorkshopForm from './WorkshopForm';
 
@@ -34,6 +35,7 @@ export default function Landing({ lang }: { lang: Lang }) {
 
   return (
     <>
+      <Reveal />
       {/* 1. Hero: text first, photo on the other side, green and yellow shapes behind it */}
       <section className="hero-band" id="home">
         <span className="bg-shape bg-shape--blue hero-band__blue" aria-hidden="true" />
@@ -276,6 +278,26 @@ export default function Landing({ lang }: { lang: Lang }) {
                   <li key={point}>{point}</li>
                 ))}
               </ul>
+              <div className="map">
+                <iframe
+                  className="map__frame"
+                  title={t.workshop.mapTitle}
+                  src={`https://www.google.com/maps?q=${LOCATION.lat},${LOCATION.lng}&z=17&hl=${lang}&output=embed`}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <a className="map__open" href={LOCATION.mapsLink} target="_blank" rel="noopener noreferrer">
+                  {t.workshop.mapOpen}
+                </a>
+              </div>
+              <p className="address">
+                <span className="address__pin" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#d99a00" strokeWidth="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></svg>
+                </span>
+                <span>
+                  <span className="tag" dir="ltr">{t.workshop.place}</span> {t.workshop.address}
+                </span>
+              </p>
             </div>
             <WorkshopForm lang={lang} />
           </div>

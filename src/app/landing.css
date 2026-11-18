@@ -872,7 +872,7 @@ html[dir='rtl'] .hero__doodle {
   align-items: center;
   padding: 28px 20px;
   border-radius: var(--r-lg);
-  background: linear-gradient(135deg, #fff6dc 0%, #e9f7ee 100%);
+  background: linear-gradient(160deg, #e6f6ec 0%, #f3fbf6 100%);
 }
 
 .workshop .form {
@@ -1451,4 +1451,185 @@ select.input {
     grid-template-columns: 1fr 1fr;
     gap: 48px;
   }
+}
+
+/* Cards appear once, as they scroll into view (see Reveal.tsx) */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.6s ease var(--reveal-delay, 0ms),
+    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms);
+}
+
+.reveal--in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Workshop: map, address and the booking form */
+
+.map {
+  position: relative;
+  margin-top: 22px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #e9eef2;
+}
+
+.map__frame {
+  display: block;
+  width: 100%;
+  height: 220px;
+  border: 0;
+}
+
+.map__open {
+  position: absolute;
+  inset-inline-end: 10px;
+  bottom: 10px;
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  background: var(--navy);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.map__open:hover {
+  background: var(--green-dark);
+}
+
+.address {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 12px 0 0;
+  color: var(--body);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.address__pin {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--yellow-tint);
+  display: grid;
+  place-items: center;
+}
+
+.address .tag {
+  font-size: 12px;
+}
+
+.workshop__points li::before {
+  content: '✓';
+  top: 6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #ffffff;
+  font-size: 12px;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+}
+
+.ws-form__head {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+}
+
+.ws-form__head strong {
+  font-size: 21px;
+  color: var(--navy);
+}
+
+.ws-form__head span {
+  color: var(--body);
+  font-size: 14px;
+}
+
+.field__label small {
+  color: var(--body);
+  font-weight: 400;
+}
+
+.days {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.days__list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 8px 4px;
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--border);
+  background: #ffffff;
+  color: var(--navy);
+  font: inherit;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.day strong {
+  font-family: var(--font-en);
+  font-size: 19px;
+}
+
+.day__name,
+.day__month {
+  font-size: 12px;
+  color: var(--body);
+}
+
+.day:hover {
+  border-color: var(--green);
+}
+
+.day--on {
+  border-color: var(--green);
+  background: var(--green-tint);
+  color: var(--green-dark);
+}
+
+.day--on .day__name,
+.day--on .day__month {
+  color: var(--green-dark);
+}
+
+.day:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.ws-form__alt {
+  margin: 0;
+  text-align: center;
+  color: var(--body);
+  font-size: 13px;
+}
+
+.ws-form__alt a {
+  color: var(--navy);
+  font-weight: 700;
 }

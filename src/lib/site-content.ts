@@ -31,7 +31,7 @@ export interface SiteContent {
   team: Head & { text: string; roles: { title: string; text: string }[]; soon: string };
   tracks: Head & { text: string; tabs: string; more: string; tableTitle: string; tableTrack: string; tableBuilds: string; none: string };
   how: Head & { sub: string; cta: string; steps: { n: string; title: string; text: string }[] };
-  workshop: Head & { text: string; points: string[] };
+  workshop: Head & { text: string; points: string[]; place: string; address: string; mapTitle: string; mapOpen: string };
   projects: Head & { text: string; note: string; items: { track: string; title: string; text: string; tint: Tinted['tint']; img?: 'spaceship' | 'ctf' }[] };
   reviews: Head & { sub: string; hint: string; parent: string; items: { name: string; text: string }[] };
   faq: Head & { items: { q: string; a: string }[] };
@@ -127,10 +127,14 @@ const ar: SiteContent = {
     ],
   },
   workshop: {
-    kicker: 'ورشة الأهل المجانية',
-    title: 'تعال تعرّف علينا يوم الأحد',
-    text: 'كل يوم أحد في Hive Co-working Space بالفيوم. نشرح طريقتنا، وكيف سنساعد طفلك، ودوركم في البيت.',
-    points: ['مجانية تمامًا ومن غير أي التزام', 'تتعرف على المدربين والمكان', 'نجيب عن كل أسئلتك وجهًا لوجه'],
+    kicker: 'لأولياء الأمور فقط',
+    title: 'تعالوا نتعرّف يوم الأحد',
+    text: 'كل يوم أحد نستضيف ورشة مجانية للأهل: نشرح طريقتنا، وكيف سنساعد طفلك، ودوركم في البيت.',
+    points: ['مجانية تمامًا، ومن غير أي التزام', 'تتعرّفون على المدربين والمكان', 'نجيب عن كل أسئلتكم وجهًا لوجه'],
+    place: 'Hive Co-working Space',
+    address: 'شارع أحمد شوقي، الفيوم، أمام فيلا المحافظ، أعلى My Office للأثاث (تالت عمارة من محل Black Hawk للملابس)',
+    mapTitle: 'موقع Hive Co-working Space على خريطة جوجل',
+    mapOpen: 'افتح في خرائط جوجل',
   },
   projects: {
     kicker: 'مشاريع الطلاب',
@@ -290,10 +294,14 @@ const en: SiteContent = {
     ],
   },
   workshop: {
-    kicker: 'Free parents\' workshop',
+    kicker: 'For parents only',
     title: 'Come and meet us on Sunday',
-    text: 'Every Sunday at Hive Co-working Space in Fayoum. We explain our method, how we will help your child, and your role at home.',
+    text: 'Every Sunday we host a free workshop for parents: our method, how we will help your child, and your role at home.',
     points: ['Completely free, no commitment', 'Meet the instructors and see the place', 'Ask us anything, face to face'],
+    place: 'Hive Co-working Space',
+    address: 'Ahmed Shawky St., Fayoum, opposite the Governor\'s villa, above My Office furniture (third building from Black Hawk clothing)',
+    mapTitle: 'Hive Co-working Space on Google Maps',
+    mapOpen: 'Open in Google Maps',
   },
   projects: {
     kicker: 'Student projects',

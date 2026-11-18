@@ -6,6 +6,7 @@ import { SITE, whatsappLink, type Lang } from '@/lib/site-content';
 import { AGE_BANDS, TRACKS, type Track } from '@/lib/tracks';
 import { Squiggle } from './Doodles';
 import { WaIcon } from './Landing';
+import Reveal from './Reveal';
 
 /** One track's own page: what it is, what each age learns, and how a month runs. */
 export default function TrackPage({ track, lang }: { track: Track; lang: Lang }) {
@@ -18,6 +19,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
 
   return (
     <>
+      <Reveal />
       <section className={`track-hero track-hero--${track.color}`}>
         <div className="wrap track-hero__inner">
           <div>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { WHATSAPP_NUMBER } from '@/lib/labels';
 import { SITE, whatsappLink, type Lang } from '@/lib/site-content';
+import LogoLink from './LogoLink';
 import TopNav from './TopNav';
 
 /** The full logo (icon + name). It always sits on white, as the brand requires. */
@@ -18,9 +19,9 @@ export default function SiteHeader({ cta, lang }: { cta: 'test' | 'whatsapp'; la
   return (
     <header className="header">
       <div className="header__inner">
-        <Link href={t.home} aria-label="TechSeeds Academy">
+        <LogoLink home={t.home}>
           <Logo />
-        </Link>
+        </LogoLink>
 
         <TopNav items={t.nav} label={t.header.menu} />
 
