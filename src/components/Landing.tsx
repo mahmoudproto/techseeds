@@ -63,10 +63,6 @@ export default function Landing({ lang }: { lang: Lang }) {
                 <span>{t.hero.cta}</span>
                 {arrow}
               </Link>
-              <a className="btn btn--wa" href={whatsapp} target="_blank" rel="noopener noreferrer">
-                <WaIcon />
-                <span>{t.hero.whatsapp}</span>
-              </a>
             </div>
             <p className="hero__note">
               <DoodleArrow className="hero__doodle" />
@@ -89,22 +85,22 @@ export default function Landing({ lang }: { lang: Lang }) {
             />
           </div>
         </div>
-      </section>
 
-      {/* 2. Trust strip */}
-      <div className="wrap trust-wrap">
-        <ul className="trust">
-          {t.stats.map((s) => (
-            <li className="trust__item" key={s.value}>
-              <span className={`tint tint--${s.tint}`}><Icon name={s.icon} color={s.color} /></span>
-              <span className="trust__text">
-                <strong>{s.value}</strong>
-                <small>{s.label}</small>
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
+        {/* 2. Trust strip */}
+        <div className="wrap trust-wrap">
+          <ul className="trust">
+            {t.stats.map((s) => (
+              <li className="trust__item" key={s.value}>
+                <span className={`tint tint--${s.tint}`}><Icon name={s.icon} color={s.color} /></span>
+                <span className="trust__text">
+                  <strong>{s.value}</strong>
+                  <small>{s.label}</small>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       {/* 3. Why us, with a word from the founder */}
       <section className="section" id="why">

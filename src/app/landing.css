@@ -273,7 +273,7 @@
   gap: 36px;
   align-items: center;
   padding-top: 36px;
-  padding-bottom: 72px;
+  padding-bottom: 36px;
 }
 
 .hero__title {
@@ -417,7 +417,8 @@ html[dir='rtl'] .hero__doodle {
 
 .trust-wrap {
   position: relative;
-  margin-top: -40px;
+  z-index: 1;
+  padding-bottom: 44px;
 }
 
 .trust {
@@ -1386,7 +1387,7 @@ select.input {
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
     gap: 48px;
     padding-top: 56px;
-    padding-bottom: 96px;
+    padding-bottom: 48px;
   }
 
   .trust {
@@ -1397,7 +1398,7 @@ select.input {
   .why {
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
     gap: 48px;
-    align-items: start;
+    align-items: center;
   }
 
   .why__photo {
@@ -1434,8 +1435,8 @@ select.input {
   }
 
   .final__photo {
-    height: 100%;
-    min-height: 340px;
+    height: calc(100% - 28px);
+    min-height: 320px;
   }
 
   .final__copy {
@@ -1632,4 +1633,60 @@ select.input {
 .ws-form__alt a {
   color: var(--navy);
   font-weight: 700;
+}
+
+/* Photos of people get the same white frame as the hero photo */
+
+.why__photo,
+.team__photo,
+.final__photo {
+  border: 6px solid #ffffff;
+  box-shadow: 0 16px 36px rgba(18, 46, 79, 0.16);
+}
+
+.final__photo {
+  margin: 14px;
+  width: calc(100% - 28px);
+  border-radius: var(--r-lg);
+  box-shadow: none;
+}
+
+/* Phones: age tabs fit the screen; track and project cards scroll sideways */
+
+@media (max-width: 719px) {
+  .age-tabs__list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    gap: 4px;
+    padding: 4px;
+    overflow: visible;
+  }
+
+  .age-tab {
+    min-height: 48px;
+    padding: 6px 4px;
+    font-size: 13px;
+    line-height: 1.35;
+    white-space: normal;
+  }
+
+  .track-grid,
+  .projects {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-inline: -20px;
+    padding: 4px 20px 16px;
+    scroll-padding-inline: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--green) var(--border);
+  }
+
+  .track-card,
+  .project {
+    flex: 0 0 80%;
+    scroll-snap-align: start;
+  }
 }
