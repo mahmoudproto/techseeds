@@ -1013,6 +1013,7 @@ select.input {
   display: flex;
   gap: 16px;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   padding: 8px 4px 18px;
   margin: 0 -4px;
@@ -1179,6 +1180,7 @@ select.input {
 
 .final__title {
   margin: 0;
+  white-space: pre-line; /* the line break in the text is kept */
   font-size: clamp(24px, 4vw, 34px);
   line-height: 1.45;
 }
@@ -1676,6 +1678,7 @@ select.input {
     display: flex;
     gap: 14px;
     overflow-x: auto;
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     margin-inline: -20px;
     padding: 4px 20px 16px;

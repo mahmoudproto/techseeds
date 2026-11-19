@@ -6,7 +6,7 @@ import { SITE, whatsappLink, type Lang } from '@/lib/site-content';
 import { LOCATION, NEXT_START_DATE, SEATS_LEFT } from '@/lib/site-config';
 import { AGE_BANDS, TRACKS } from '@/lib/tracks';
 import AgeTabs from './AgeTabs';
-import { DoodleArrow, Sparkle, Squiggle } from './Doodles';
+import { Sparkle, Squiggle } from './Doodles';
 import Reveal from './Reveal';
 import Icon from './LandingIcon';
 import WorkshopForm from './WorkshopForm';
@@ -64,10 +64,7 @@ export default function Landing({ lang }: { lang: Lang }) {
                 {arrow}
               </Link>
             </div>
-            <p className="hero__note">
-              <DoodleArrow className="hero__doodle" />
-              {t.hero.note}
-            </p>
+            <p className="hero__note">{t.hero.note}</p>
           </div>
 
           <div className="hero__visual">
