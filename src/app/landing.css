@@ -1716,11 +1716,12 @@ select.input {
 }
 
 .stack {
-  --card-w: 180px;
+  /* Card size and fan follow Mahmoud's Figma layout (325px cards, 8deg tilt) */
+  --card-w: 250px;
   position: relative;
   width: 100%;
-  max-width: 520px;
-  height: calc(var(--card-w) * 1.55);
+  max-width: 540px;
+  height: calc(var(--card-w) * 1.3);
 }
 
 .stack__card {
@@ -1743,17 +1744,17 @@ select.input {
 .stack__card--slot1 { --rest: -4deg; }
 .stack__card--slot2 { --rest: 3deg; }
 
-/* open: a gentle fan (the example used up to 24deg; this stays under 9deg) */
+/* open: front card raised and tilted, one card out to the side, one peeking below */
 .stack--open .stack__card--slot0 {
-  transform: translate(-50%, -52%) rotate(-1deg);
+  transform: translate(-42%, -66.6%) rotate(8deg);
 }
 
 .stack--open .stack__card--slot1 {
-  transform: translate(-84%, -46%) rotate(-8deg);
+  transform: translate(-67.2%, -46.6%) rotate(-8deg);
 }
 
 .stack--open .stack__card--slot2 {
-  transform: translate(-16%, -46%) rotate(8deg);
+  transform: translate(-40.8%, -36.8%) rotate(8deg);
 }
 
 .stack__inner {
@@ -1799,7 +1800,7 @@ select.input {
   display: block;
   overflow: hidden;
   border-radius: var(--r-md);
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 3 / 2;
   background: #eef3f7;
 }
 
@@ -1873,7 +1874,7 @@ html[dir='rtl'] .instructor {
 
 @media (min-width: 720px) {
   .stack {
-    --card-w: 220px;
+    --card-w: 325px;
   }
 
   .track-visual {
