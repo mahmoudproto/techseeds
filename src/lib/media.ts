@@ -67,6 +67,29 @@ export const MEDIA = {
       alt: { ar: 'درع حماية وقفل ولابتوب', en: 'A security shield, padlocks and a laptop' },
     },
   },
+  // Real photos of hands and objects for the track page cards (no particular child).
+  trackPhotos: {
+    programming: {
+      src: pexels(5474295, 700),
+      alt: { ar: 'يدان تكتبان كودًا على لابتوب', en: 'Hands writing code on a laptop' },
+      credit: 'Pexels',
+    },
+    gamedev: {
+      src: pexels(8762884, 700),
+      alt: { ar: 'يدان تمسكان ذراع تحكم في لعبة', en: 'Hands holding a game controller' },
+      credit: 'Kevin Malik / Pexels',
+    },
+    ai: {
+      src: pexels(8566458, 700),
+      alt: { ar: 'روبوت صغير على لوحة مفاتيح لابتوب', en: 'A small robot on a laptop keyboard' },
+      credit: 'Kindel Media / Pexels',
+    },
+    cyber: {
+      src: pexels(211151, 700),
+      alt: { ar: 'علامة تحذير صغيرة على لوحة مفاتيح', en: 'A small warning cone on a keyboard' },
+      credit: 'Fernando Arcos / Pexels',
+    },
+  },
   projects: {
     spaceship: {
       src: local('project-spaceship'),

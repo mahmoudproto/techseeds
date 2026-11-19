@@ -40,6 +40,7 @@ export interface SiteContent {
   trackPage: {
     back: string; ages: string; tools: string; builds: string; projects: string; projectsNote: string;
     how: string; howItems: string[]; cta: string; ctaText: string; test: string; whatsapp: string; notTaught: string;
+    instructor: string; instructorSoon: string; cards: string;
   };
   whatsappLabel: string;
   /** Pre-filled message when a parent opens WhatsApp from the site. */
@@ -203,6 +204,9 @@ const ar: SiteContent = {
     test: 'ابدأ الاختبار المجاني',
     whatsapp: 'اسألنا على واتساب',
     notTaught: 'هذا المسار يبدأ من سن 10 سنوات.',
+    instructor: 'مدرّب المسار',
+    instructorSoon: 'الصورة والاسم قريبًا',
+    cards: 'صور من المسار، اضغط على أي صورة لتظهر في المقدمة',
   },
   whatsappLabel: 'تواصل معنا على واتساب',
   whatsappText: 'أهلًا تك سيدز، عايز أعرف تفاصيل أكتر عن الكورسات.',
@@ -363,6 +367,9 @@ const en: SiteContent = {
     test: 'Start the free test',
     whatsapp: 'Ask us on WhatsApp',
     notTaught: 'This track starts from age 10.',
+    instructor: 'Track instructor',
+    instructorSoon: 'Photo and name coming soon',
+    cards: 'Pictures from this track; click one to bring it to the front',
   },
   whatsappLabel: 'Message us on WhatsApp',
   whatsappText: 'Hello TechSeeds, I would like to know more about your courses.',

@@ -1690,3 +1690,204 @@ select.input {
     scroll-snap-align: start;
   }
 }
+
+/* Track page: three overlapping cards + the track instructor */
+
+.track-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 360px;
+  padding-bottom: 40px;
+}
+
+.track-visual__blue {
+  width: 300px;
+  height: 240px;
+  inset-inline-end: 4%;
+  top: 0;
+}
+
+.track-visual__green {
+  width: 220px;
+  height: 200px;
+  inset-inline-start: 6%;
+  bottom: 10px;
+}
+
+.stack {
+  --card-w: 180px;
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  height: calc(var(--card-w) * 1.55);
+}
+
+.stack__card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--card-w);
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  /* closed: a neat pile, each card slightly turned */
+  transform: translate(-50%, -50%) rotate(var(--rest, 0deg));
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.stack__card--slot0 { --rest: -1deg; cursor: default; }
+.stack__card--slot1 { --rest: -4deg; }
+.stack__card--slot2 { --rest: 3deg; }
+
+/* open: a gentle fan (the example used up to 24deg; this stays under 9deg) */
+.stack--open .stack__card--slot0 {
+  transform: translate(-50%, -52%) rotate(-1deg);
+}
+
+.stack--open .stack__card--slot1 {
+  transform: translate(-84%, -46%) rotate(-8deg);
+}
+
+.stack--open .stack__card--slot2 {
+  transform: translate(-16%, -46%) rotate(8deg);
+}
+
+.stack__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 8px 12px;
+  border-radius: var(--r-lg);
+  background: #ffffff;
+  box-shadow: 0 14px 30px rgba(18, 46, 79, 0.16);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stack__card--slot0 .stack__inner {
+  box-shadow: 0 20px 40px rgba(18, 46, 79, 0.22);
+}
+
+.stack__card:not(.stack__card--slot0):hover .stack__inner {
+  transform: translateY(-6px);
+}
+
+.stack__card:focus-visible {
+  outline: none;
+}
+
+.stack__card:focus-visible .stack__inner {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* the card you click lifts a little as it comes to the front */
+.stack__card--lift .stack__inner {
+  animation: stack-lift 0.5s ease;
+}
+
+@keyframes stack-lift {
+  0% { transform: none; }
+  40% { transform: translateY(-14px) scale(1.04); }
+  100% { transform: none; }
+}
+
+.stack__media {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  aspect-ratio: 1 / 1;
+  background: #eef3f7;
+}
+
+.stack__media img,
+.stack__media svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stack__label {
+  padding-inline: 4px;
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.instructor {
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px 10px 10px;
+  border-radius: var(--r-pill);
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(18, 46, 79, 0.16);
+}
+
+html[dir='rtl'] .instructor {
+  padding: 10px 10px 10px 18px;
+}
+
+.instructor__photo {
+  flex: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 0 0 2px var(--green-tint);
+  object-fit: cover;
+}
+
+.instructor__photo--empty {
+  display: grid;
+  place-items: center;
+  background: #eef3f7;
+}
+
+.instructor__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+}
+
+.instructor__text small {
+  color: var(--green-dark);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.instructor__text strong {
+  color: var(--navy);
+  font-size: 15px;
+}
+
+@media (min-width: 720px) {
+  .stack {
+    --card-w: 220px;
+  }
+
+  .track-visual {
+    min-height: 440px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack__card,
+  .stack__inner {
+    transition: none;
+  }
+
+  .stack__card--lift .stack__inner {
+    animation: none;
+  }
+}

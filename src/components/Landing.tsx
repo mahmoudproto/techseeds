@@ -384,7 +384,7 @@ function StepArrow() {
 }
 
 /** Small drawn "screens" standing in for project screenshots until real ones arrive. */
-function ProjectArt({ tint }: { tint: string }) {
+export function ProjectArt({ tint }: { tint: string }) {
   if (tint === 'yellow') {
     return (
       <svg viewBox="0 0 200 110" className="project__art">

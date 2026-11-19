@@ -23,6 +23,18 @@ export interface TrackLevel {
   text: L;
 }
 
+/** One of the three overlapping cards at the top of a track page. */
+export type TrackCard =
+  | { kind: 'art'; label: L } // the track illustration
+  | { kind: 'photo'; label: L } // a real photo (media.ts trackPhotos)
+  | { kind: 'project'; label: L; project?: 'spaceship' | 'ctf'; tint: 'blue' | 'green' | 'yellow' | 'mint' };
+
+export interface Instructor {
+  name: L;
+  /** e.g. '/media/instructor-gamedev.webp' */
+  photo: string;
+}
+
 export interface Track {
   slug: TrackSlug;
   name: L;
@@ -37,6 +49,10 @@ export interface Track {
   levels: Partial<Record<AgeBand, TrackLevel>>;
   /** Example projects, shown on the track page. */
   projects: L[];
+  /** The three overlapping cards on the track page, front card first. */
+  cards: [TrackCard, TrackCard, TrackCard];
+  /** Leave out until there is a real photo; a placeholder shows instead. */
+  instructor?: Instructor;
 }
 
 export const TRACKS: Track[] = [
@@ -55,6 +71,11 @@ export const TRACKS: Track[] = [
       middle: { tools: ['Python'], text: { ar: 'أول لغة برمجة حقيقية: المتغيرات والشروط والتكرار والدوال في برامج صغيرة مفيدة.', en: 'A first real language: variables, conditions, loops and functions in small, useful programs.' } },
       teen: { tools: ['JavaScript'], text: { ar: 'برمجة تطبيقات ومواقع تفاعلية، والتفكير في بناء مشروع كامل من البداية للنهاية.', en: 'Interactive apps and web pages, and planning a full project from start to finish.' } },
     },
+    cards: [
+      { kind: 'art', label: { ar: 'من البلوكات إلى الكود', en: 'From blocks to code' } },
+      { kind: 'photo', label: { ar: 'برمجة حقيقية بأيديهم', en: 'Real coding, hands on' } },
+      { kind: 'project', label: { ar: 'مشروع: قصة تفاعلية', en: 'Project: an interactive story' }, tint: 'blue' },
+    ],
     projects: [
       { ar: 'قصة أو لعبة تفاعلية بالبلوكات', en: 'An interactive story or game in blocks' },
       { ar: 'آلة حاسبة أو اختبار قصير بلغة Python', en: 'A calculator or short quiz in Python' },
@@ -75,6 +96,11 @@ export const TRACKS: Track[] = [
       middle: { tools: ['GameMaker'], text: { ar: 'بناء لعبة كاملة بالبلوكات المرئية: الحركة والتصادم والنقاط والأرواح، ثم العشوائية وزيادة الصعوبة.', en: 'A full game with visual code blocks: movement, collisions, score and lives, then randomness and rising difficulty.' } },
       teen: { tools: ['Unity'], text: { ar: 'تطوير ألعاب بمحرك احترافي، وبناء مشاهد وشخصيات وتجربة لعب متكاملة.', en: 'Games in a professional engine, with scenes, characters and a complete play experience.' } },
     },
+    cards: [
+      { kind: 'project', label: { ar: 'مشروع: لعبة سفينة الفضاء', en: 'Project: the spaceship game' }, project: 'spaceship', tint: 'yellow' },
+      { kind: 'art', label: { ar: 'من لاعب إلى صانع ألعاب', en: 'From player to game maker' } },
+      { kind: 'photo', label: { ar: 'يجرب لعبته بنفسه', en: 'Playtesting their own game' } },
+    ],
     projects: [
       { ar: 'لعبة سفينة فضاء تطلق الليزر على الكويكبات', en: 'A spaceship game that shoots lasers at asteroids' },
       { ar: 'قوة خاصة (Power-up) يصممها كل طالب للعبته', en: 'A power-up each student designs for their game' },
@@ -96,6 +122,11 @@ export const TRACKS: Track[] = [
       middle: { tools: ['AI'], text: { ar: 'أدوات AI لمهام حقيقية: كتابة وصور وعروض وتنظيم الأفكار.', en: 'AI tools for real tasks: writing, images, presentations and organising ideas.' } },
       teen: { tools: ['AI'], text: { ar: 'مشاريع AI متقدمة: خطط ومواقع ومشاريع كاملة يديرها الطالب بنفسه.', en: 'Advanced AI projects: plans, websites and full projects the student leads.' } },
     },
+    cards: [
+      { kind: 'art', label: { ar: 'الذكاء الاصطناعي أداة', en: 'AI is a tool' } },
+      { kind: 'photo', label: { ar: 'يستخدمه صح وبأمان', en: 'Used well and safely' } },
+      { kind: 'project', label: { ar: 'مشروع بأدوات AI', en: 'A project with AI tools' }, tint: 'green' },
+    ],
     projects: [
       { ar: 'كتيّب أو عرض تقديمي معمول بأدوات AI', en: 'A booklet or presentation made with AI tools' },
       { ar: 'خطة مشروع كاملة', en: 'A complete project plan' },
@@ -116,6 +147,11 @@ export const TRACKS: Track[] = [
       middle: { tools: ['Google Interland', 'CyberChef', 'Scratch'], text: { ar: 'الأمان على الإنترنت، وكلمات السر القوية، وأساسيات التشفير بطريقة عملية وممتعة.', en: 'Online safety, strong passwords and the basics of encryption, hands-on and fun.' } },
       teen: { tools: ['Python', 'Linux', 'Wireshark', 'TryHackMe', 'picoCTF'], text: { ar: 'أدوات أمان بلغة Python، وأساسيات الشبكات ولينكس، وتحديات CTF في معامل تدريب آمنة.', en: 'Security tools in Python, networking and Linux basics, and CTF challenges in safe labs.' } },
     },
+    cards: [
+      { kind: 'project', label: { ar: 'مشروع: تحدي CTF', en: 'Project: a CTF challenge' }, project: 'ctf', tint: 'mint' },
+      { kind: 'art', label: { ar: 'يحمي نفسه وأجهزته', en: 'Protecting themselves and their devices' } },
+      { kind: 'photo', label: { ar: 'أدوات أمان حقيقية', en: 'Real security tools' } },
+    ],
     projects: [
       { ar: 'تطبيق تشفير للرسائل', en: 'A message encryption app' },
       { ar: 'فاحص قوة كلمة السر', en: 'A password strength checker' },

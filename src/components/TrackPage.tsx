@@ -5,7 +5,9 @@ import { MEDIA } from '@/lib/media';
 import { SITE, whatsappLink, type Lang } from '@/lib/site-content';
 import { AGE_BANDS, TRACKS, type Track } from '@/lib/tracks';
 import { Squiggle } from './Doodles';
-import { WaIcon } from './Landing';
+import { ProjectArt, WaIcon } from './Landing';
+import ScrollToTop from './ScrollToTop';
+import TrackCards, { type StackCard } from './TrackCards';
 import Reveal from './Reveal';
 
 /** One track's own page: what it is, what each age learns, and how a month runs. */
@@ -13,12 +15,28 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
   const t = SITE[lang];
   const p = t.trackPage;
   const base = lang === 'ar' ? '' : '/en';
-  const photo = MEDIA.tracks[track.slug];
+  const cards: StackCard[] = track.cards.map((c, i) => {
+    const key = `${track.slug}-${i}`;
+    if (c.kind === 'art') {
+      const m = MEDIA.tracks[track.slug];
+      return { key, label: c.label[lang], img: { src: m.src, alt: m.alt[lang] } };
+    }
+    if (c.kind === 'photo') {
+      const m = MEDIA.trackPhotos[track.slug];
+      return { key, label: c.label[lang], img: { src: m.src, alt: m.alt[lang] } };
+    }
+    if (c.project) {
+      const m = MEDIA.projects[c.project];
+      return { key, label: c.label[lang], img: { src: m.src, alt: m.alt[lang] } };
+    }
+    return { key, label: c.label[lang], art: <ProjectArt tint={c.tint} /> };
+  });
   const whatsapp = whatsappLink(WHATSAPP_NUMBER, `${t.whatsappText} (${track.name[lang]})`);
   const others = TRACKS.filter((tr) => tr.slug !== track.slug);
 
   return (
     <>
+      <ScrollToTop key={track.slug} />
       <Reveal />
       <section className={`track-hero track-hero--${track.color}`}>
         <div className="wrap track-hero__inner">
@@ -39,7 +57,24 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
               ))}
             </p>
           </div>
-          <img className="track-hero__photo" src={photo.src} alt={photo.alt[lang]} width={900} height={600} />
+          <div className="track-visual">
+            <span className="bg-shape bg-shape--blue track-visual__blue" aria-hidden="true" />
+            <span className="bg-shape bg-shape--green track-visual__green" aria-hidden="true" />
+            <TrackCards key={track.slug} cards={cards} label={p.cards} />
+            <div className="instructor">
+              {track.instructor ? (
+                <img className="instructor__photo" src={track.instructor.photo} alt="" width={72} height={72} />
+              ) : (
+                <span className="instructor__photo instructor__photo--empty" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="34" height="34" fill="#8fa3b7"><circle cx="12" cy="8.5" r="4.2" /><path d="M3.8 21c.8-4.4 4.2-6.6 8.2-6.6s7.4 2.2 8.2 6.6z" /></svg>
+                </span>
+              )}
+              <span className="instructor__text">
+                <small>{p.instructor}</small>
+                <strong>{track.instructor ? track.instructor.name[lang] : p.instructorSoon}</strong>
+              </span>
+            </div>
+          </div>
         </div>
       </section>
 
