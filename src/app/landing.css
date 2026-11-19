@@ -1698,7 +1698,7 @@ select.input {
   display: grid;
   place-items: center;
   min-height: 360px;
-  padding-bottom: 40px;
+  padding-bottom: 104px; /* room for the instructor badge under the cards */
 }
 
 .track-visual__blue {
@@ -1822,9 +1822,12 @@ select.input {
 }
 
 .instructor {
+  /* centred under the cards, as in the Figma design */
   position: absolute;
-  inset-inline-start: 0;
+  left: 50%;
   bottom: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
   z-index: 5;
   display: flex;
   align-items: center;
