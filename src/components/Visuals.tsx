@@ -40,11 +40,8 @@ function Dots({ n, perRow = 3, dot = 12 }: { n: number; perRow?: number; dot?: n
 }
 
 function Unknown() {
-  return (
-    <span className="unknown" aria-label="الناقص">
-      ؟
-    </span>
-  );
+  // The mark itself comes from CSS so it shows ؟ in Arabic and ? in English.
+  return <span className="unknown" aria-label="?" />;
 }
 
 function Icon({ name }: { name: IconName }) {

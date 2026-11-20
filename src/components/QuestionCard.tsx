@@ -1,15 +1,11 @@
 'use client';
 
-import type { PublicOption, PublicQuestion } from '@/lib/types';
+import { TEST_TEXT } from '@/lib/test-text';
+import type { PublicOption, PublicQuestion, TestLang } from '@/lib/types';
 import { OptionPicture, QuestionPicture } from './Visuals';
 
-const SECTIONS: Record<PublicQuestion['section'], { en: string; ar: string }> = {
-  thinking: { en: 'Thinking', ar: 'التفكير' },
-  tech: { en: 'Technology', ar: 'التكنولوجيا' },
-  interest: { en: 'Interests', ar: 'اهتماماتك' },
-};
-
 interface Props {
+  lang: TestLang;
   question: PublicQuestion;
   /** Option ids in the order to show them. */
   order: string[];
@@ -22,6 +18,7 @@ interface Props {
 }
 
 export default function QuestionCard({
+  lang,
   question,
   order,
   value,
@@ -31,7 +28,10 @@ export default function QuestionCard({
   onBack,
   onNext,
 }: Props) {
-  const section = SECTIONS[question.section];
+  const tt = TEST_TEXT[lang];
+  const t = tt.question;
+  const section = t.sections[question.section];
+  const [countA, countN, countB] = t.count(index + 1, total);
   const options = order
     .map((id) => question.options.find((o) => o.id === id))
     .filter((o): o is PublicOption => Boolean(o));
@@ -56,10 +56,10 @@ export default function QuestionCard({
         <div className="progress__meta">
           <span className="progress__section">
             <span className="eyebrow eyebrow--inline">{section.en}</span>
-            <strong>{section.ar}</strong>
+            <strong>{section.label}</strong>
           </span>
           <span className="progress__count">
-            سؤال <b>{index + 1}</b> من <b>{total}</b>
+            {countA} <b>{countN}</b> {countB}
           </span>
         </div>
         <div
@@ -80,12 +80,21 @@ export default function QuestionCard({
             {question.expr}
           </p>
         )}
+        {question.program && (
+          <div className="program">
+            {question.program.map((line, i) => (
+              <div key={i} className={line.startsWith('  ') ? 'program__line program__line--in' : 'program__line'}>
+                {line.trim()}
+              </div>
+            ))}
+          </div>
+        )}
         {question.visual && (
           <div className="question__visual">
             <QuestionPicture visual={question.visual} />
           </div>
         )}
-        {question.multi && <p className="hint">اختر كل ما ينطبق</p>}
+        {question.multi && <p className="hint">{t.multi}</p>}
 
         <div className={`options${compact ? ' options--grid' : ''}`}>
           {options.map((option) => {
@@ -117,11 +126,11 @@ export default function QuestionCard({
 
       <div className="nav">
         <button className="btn btn--ghost" type="button" onClick={onBack}>
-          السابق
+          {t.back}
         </button>
         <button className="btn" type="button" onClick={onNext} disabled={!answered}>
-          <span>{isLast ? 'إنهاء الاختبار' : 'التالي'}</span>
-          <span className="btn__arrow" aria-hidden="true">←</span>
+          <span>{isLast ? t.finish : t.next}</span>
+          <span className="btn__arrow" aria-hidden="true">{tt.arrow}</span>
         </button>
       </div>
     </section>

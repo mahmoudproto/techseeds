@@ -9,6 +9,8 @@ export interface SubmissionInput {
   phone: string;
   durationSec: number;
   answers: Answers;
+  laptop: 'yes' | 'no';
+  lang: 'ar' | 'en';
 }
 
 export const SHEET_HEADERS = [
@@ -27,6 +29,8 @@ export const SHEET_HEADERS = [
   'الميل التاني',
   'الوقت بالدقايق',
   'كل الإجابات',
+  'لابتوب',
+  'لغة الاختبار',
 ];
 
 /** Stops a spreadsheet from running text as a formula. */
@@ -90,6 +94,8 @@ export function buildRow(
     result.second ? TRACK_LABEL[result.second] + (result.tie ? ' (متساويين)' : '') : '',
     String(minutes),
     guardCell(answersText(test, input.answers)),
+    input.laptop === 'yes' ? 'أيوه' : 'لأ',
+    input.lang === 'en' ? 'English' : 'عربي',
   ];
 }
 

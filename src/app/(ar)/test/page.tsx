@@ -14,12 +14,12 @@ export const metadata: Metadata = {
 
 export default function TestPage() {
   // Only the answer-free version of the questions is passed to the browser.
-  const tests = allPublicTests();
+  const tests = allPublicTests('ar');
   return (
     <>
-      <SiteHeader cta="whatsapp" lang="ar" />
+      <SiteHeader cta="whatsapp" lang="ar" otherHref="/en/test" />
       <main className="main">
-        <TestFlow tests={tests} />
+        <TestFlow tests={tests} lang="ar" />
       </main>
       <SiteFooter lang="ar" />
       <WhatsAppFloat label={SITE.ar.whatsappLabel} />

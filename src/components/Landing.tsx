@@ -39,7 +39,7 @@ export default function Landing({ lang }: { lang: Lang }) {
             <h1 className="title">{t.hero.title}</h1>
             <p className="lead">{t.hero.lead}</p>
             <div className="hero__ctas">
-              <Link className="btn" href="/test">
+              <Link className="btn" href={lang === 'en' ? '/en/test' : '/test'}>
                 <span>{t.hero.cta}</span>
                 {arrow}
               </Link>
@@ -143,7 +143,7 @@ repeat 10
                   </li>
                 ))}
               </ol>
-              <Link className="btn" href="/test">
+              <Link className="btn" href={lang === 'en' ? '/en/test' : '/test'}>
                 <span>{t.how.cta}</span>
                 {arrow}
               </Link>
@@ -217,7 +217,7 @@ repeat 10
               <strong>{t.banner.title}</strong>
               <span>{t.banner.text}</span>
             </div>
-            <Link className="btn" href="/test">
+            <Link className="btn" href={lang === 'en' ? '/en/test' : '/test'}>
               <span>{t.banner.cta}</span>
               {arrow}
             </Link>

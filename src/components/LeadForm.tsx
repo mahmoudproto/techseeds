@@ -1,19 +1,27 @@
 'use client';
 
 import { useState } from 'react';
+import { TEST_TEXT } from '@/lib/test-text';
+import type { TestLang } from '@/lib/types';
 import { normalizePhone } from '@/lib/validate';
 
+export type Laptop = 'yes' | 'no';
+
 interface Props {
+  lang: TestLang;
   childName: string;
   submitting: boolean;
   serverError: string;
   onBack: () => void;
-  onSubmit: (parentName: string, phone: string, website: string) => void;
+  onSubmit: (parentName: string, phone: string, laptop: Laptop, website: string) => void;
 }
 
-export default function LeadForm({ childName, submitting, serverError, onBack, onSubmit }: Props) {
+export default function LeadForm({ lang, childName, submitting, serverError, onBack, onSubmit }: Props) {
+  const t = TEST_TEXT[lang].lead;
+  const arrow = TEST_TEXT[lang].arrow;
   const [parentName, setParentName] = useState('');
   const [phone, setPhone] = useState('');
+  const [laptop, setLaptop] = useState<Laptop | null>(null);
   const [website, setWebsite] = useState('');
   const [error, setError] = useState('');
 
@@ -21,23 +29,24 @@ export default function LeadForm({ childName, submitting, serverError, onBack, o
     event.preventDefault();
     if (submitting) return;
     const name = parentName.replace(/\s+/g, ' ').trim();
-    if (name.length < 2) return setError('اكتب اسم ولي الأمر.');
+    if (name.length < 2) return setError(t.errParent);
     const normalized = normalizePhone(phone);
-    if (!normalized) return setError('اكتب رقم واتساب مصري صحيح، مثل 01012345678.');
+    if (!normalized) return setError(t.errPhone);
+    if (!laptop) return setError(t.errLaptop);
     setError('');
-    onSubmit(name, normalized, website);
+    onSubmit(name, normalized, laptop, website);
   }
 
   return (
     <section className="lead-step">
       <p className="eyebrow">Almost There</p>
-      <h1 className="title title--small">النتيجة جاهزة!</h1>
+      <h1 className="title title--small">{t.title}</h1>
       <span className="title__bar" />
-      <p className="lead">اكتب بياناتك لعرض نتيجة {childName}.</p>
+      <p className="lead">{t.text(childName)}</p>
 
       <form className="card form" onSubmit={submit} noValidate>
         <label className="field">
-          <span className="field__label">اسم ولي الأمر</span>
+          <span className="field__label">{t.parent}</span>
           <input
             className="input"
             type="text"
@@ -49,7 +58,7 @@ export default function LeadForm({ childName, submitting, serverError, onBack, o
         </label>
 
         <label className="field">
-          <span className="field__label">رقم واتساب</span>
+          <span className="field__label">{t.phone}</span>
           <input
             className="input input--ltr"
             type="tel"
@@ -63,6 +72,23 @@ export default function LeadForm({ childName, submitting, serverError, onBack, o
           />
         </label>
 
+        <fieldset className="field">
+          <legend className="field__label">{t.laptop}</legend>
+          <div className="yesno">
+            {(['yes', 'no'] as Laptop[]).map((v) => (
+              <button
+                key={v}
+                type="button"
+                className={`age${laptop === v ? ' age--on' : ''}`}
+                aria-pressed={laptop === v}
+                onClick={() => setLaptop(v)}
+              >
+                {v === 'yes' ? t.yes : t.no}
+              </button>
+            ))}
+          </div>
+        </fieldset>
+
         {/* Hidden from people; only bots fill it in. */}
         <label className="hp" aria-hidden="true">
           Website
@@ -75,7 +101,7 @@ export default function LeadForm({ childName, submitting, serverError, onBack, o
           />
         </label>
 
-        <p className="privacy">بياناتكم هتُستخدم للتواصل معاكم من أكاديمية تك سيدز بس.</p>
+        <p className="privacy">{t.privacy}</p>
 
         {(error || serverError) && (
           <p className="error" role="alert">
@@ -84,15 +110,15 @@ export default function LeadForm({ childName, submitting, serverError, onBack, o
         )}
 
         <button className="btn btn--block" type="submit" disabled={submitting}>
-          <span>{submitting ? 'جارٍ تجهيز النتيجة…' : 'اعرض النتيجة'}</span>
+          <span>{submitting ? t.sending : t.submit}</span>
           {!submitting && (
-            <span className="btn__arrow" aria-hidden="true">←</span>
+            <span className="btn__arrow" aria-hidden="true">{arrow}</span>
           )}
         </button>
       </form>
 
       <button className="link" type="button" onClick={onBack} disabled={submitting}>
-        الرجوع للأسئلة
+        {t.back}
       </button>
     </section>
   );

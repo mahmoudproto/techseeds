@@ -1272,3 +1272,77 @@ html[dir='ltr'] .h2 {
   outline: 3px solid var(--blue);
   outline-offset: 3px;
 }
+
+@media (max-width: 719px) {
+  .footer__contact {
+    width: 100%;
+  }
+
+  .footer__social {
+    justify-content: flex-end;
+  }
+}
+
+/* Arabic phones: logo on the right, slogan after it */
+@media (max-width: 719px) {
+  html[dir='rtl'] .footer__brand {
+    direction: rtl;
+  }
+/* A short program inside a question; follows the page direction */
+
+.program {
+  margin: 0 0 18px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: var(--blue-panel);
+  border-inline-start: 4px solid var(--green);
+  color: var(--navy);
+  font-weight: 600;
+  font-size: clamp(16px, 4.2vw, 19px);
+  line-height: 1.9;
+  text-align: start;
+}
+
+.program__line--in {
+  padding-inline-start: 28px;
+}
+
+/* The missing-piece mark: ؟ in Arabic, ? in English */
+.unknown::after {
+  content: '؟';
+}
+
+html[dir='ltr'] .unknown::after {
+  content: '?';
+}
+
+/* Checkbox row (parent confirmation) */
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.7;
+  cursor: pointer;
+}
+
+.check input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  accent-color: var(--green);
+}
+
+/* Yes / No choice */
+.yesno {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.yesno .age {
+  font-family: inherit;
+}

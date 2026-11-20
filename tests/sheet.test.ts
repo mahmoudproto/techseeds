@@ -16,7 +16,7 @@ describe('buildRow', () => {
   const answers = allFirstOptions();
   const result = score(B, answers) as ScoreResult;
   const row = buildRow(
-    { childName: '=HYPERLINK("x")', age: 11, version: 'B', parentName: 'منة', phone: '01129877798', durationSec: 425, answers },
+    { childName: '=HYPERLINK("x")', age: 11, version: 'B', parentName: 'منة', phone: '01129877798', durationSec: 425, answers, laptop: 'yes', lang: 'en' },
     B,
     result,
     new Date('2026-11-16T08:30:00Z'),
@@ -43,6 +43,11 @@ describe('buildRow', () => {
     expect(guardCell('@x')).toBe("'@x");
     expect(guardCell('-1')).toBe("'-1");
     expect(guardCell('عمر')).toBe('عمر');
+  });
+
+  it('adds the laptop answer and the test language at the end', () => {
+    expect(row[15]).toBe('أيوه');
+    expect(row[16]).toBe('English');
   });
 
   it('lists every answer with a mark for graded questions', () => {
