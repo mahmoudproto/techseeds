@@ -299,6 +299,23 @@
   gap: 12px;
 }
 
+.hero__title .hl {
+  white-space: normal;
+}
+
+/* The test button and the line under it, centred on each other */
+.hero__cta-group {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+}
+
+.hero__cta-group .hero__note {
+  justify-content: center;
+  text-align: center;
+}
+
 .hero__note {
   display: flex;
   align-items: flex-end;
@@ -912,7 +929,17 @@ html[dir='rtl'] .hero__doodle {
 }
 
 select.input {
-  appearance: auto;
+  appearance: none;
+  -webkit-appearance: none;
+  padding-inline-end: 48px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23122e4f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 14px;
+  background-position: left 18px center;
+}
+
+html[dir='ltr'] select.input {
+  background-position: right 18px center;
 }
 
 /* 8. Projects, under the track cards */
@@ -995,7 +1022,15 @@ select.input {
   line-height: 1.8;
 }
 
-/* 9. Testimonials */
+/* 9. Testimonials: sized so part of the next review always peeks in */
+
+@media (min-width: 640px) {
+  .reviews .review { flex-basis: calc((100% - 16px) / 2.3); }
+}
+
+@media (min-width: 1024px) {
+  .reviews .review { flex-basis: calc((100% - 32px) / 3.3); }
+}
 
 .reviews {
   display: flex;
@@ -1011,7 +1046,7 @@ select.input {
 
 .review {
   position: relative;
-  flex: 0 0 min(84vw, 340px);
+  flex: 0 0 82%;
   scroll-snap-align: start;
   margin: 0;
   padding: 26px 22px 20px;
@@ -1725,6 +1760,11 @@ select.input {
     white-space: normal;
   }
 
+}
+
+/* Up to tablet size, track and project cards scroll sideways, and the next card
+   always shows at the edge so it's clear there are more. */
+@media (max-width: 959px) {
   .track-grid,
   .projects {
     display: flex;
@@ -1743,6 +1783,13 @@ select.input {
   .project {
     flex: 0 0 80%;
     scroll-snap-align: start;
+  }
+}
+
+@media (min-width: 720px) and (max-width: 959px) {
+  .track-card,
+  .project {
+    flex-basis: calc((100% - 40px - 14px) / 2.3);
   }
 }
 

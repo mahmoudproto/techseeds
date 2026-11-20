@@ -226,7 +226,7 @@ const ar: SiteContent = {
     facebook: 'فيسبوك',
     instagram: 'إنستجرام',
     rights: 'جميع الحقوق محفوظة',
-    slogan: 'تنمية العقول الشابة',
+    slogan: 'ننمي عقول المستقبل',
     photos: 'بعض الصور مؤقتة من Pexels',
   },
 };

@@ -1325,3 +1325,10 @@ html[dir='ltr'] .h2 {
     justify-content: flex-end;
   }
 }
+
+/* Arabic phones: logo on the right, slogan after it */
+@media (max-width: 719px) {
+  html[dir='rtl'] .footer__brand {
+    direction: rtl;
+  }
+}

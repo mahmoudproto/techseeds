@@ -57,13 +57,13 @@ export default function Landing({ lang }: { lang: Lang }) {
               </span>
             </h1>
             <p className="hero__lead">{t.hero.lead}</p>
-            <div className="hero__ctas">
+            <div className="hero__cta-group">
               <Link className="btn btn--big" href="/test">
                 <span>{t.hero.cta}</span>
                 {arrow}
               </Link>
+              <p className="hero__note">{t.hero.note}</p>
             </div>
-            <p className="hero__note">{t.hero.note}</p>
           </div>
 
           <div className="hero__visual">

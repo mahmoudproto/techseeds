@@ -36,6 +36,7 @@ export default function TrackCards({ cards, text, dir }: { cards: StackCard[]; t
   const [shown, setShown] = useState(false);
   const box = useRef<HTMLDivElement>(null);
   const closeBtn = useRef<HTMLButtonElement>(null);
+  const zoomCard = useRef<HTMLElement>(null);
 
   // The cards fan out from a neat pile the first time they come into view.
   useEffect(() => {
@@ -64,8 +65,16 @@ export default function TrackCards({ cards, text, dir }: { cards: StackCard[]; t
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false);
     };
+    // A tap anywhere outside the enlarged card closes it, not only on the dark area.
+    const onDown = (e: PointerEvent) => {
+      if (!zoomCard.current?.contains(e.target as Node)) setOpen(false);
+    };
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    document.addEventListener('pointerdown', onDown);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.removeEventListener('pointerdown', onDown);
+    };
   }, [open]);
 
   const go = (step: number) => {
@@ -137,8 +146,8 @@ export default function TrackCards({ cards, text, dir }: { cards: StackCard[]; t
 
       {open && (
         <div className="stack-zoom" role="dialog" aria-modal="true" aria-label={current.label}>
-          <div className="stack-zoom__backdrop" onClick={() => setOpen(false)} />
-          <figure className="stack-zoom__card">
+          <div className="stack-zoom__backdrop" />
+          <figure className="stack-zoom__card" ref={zoomCard}>
             <span className="stack__media">
               {current.img ? <img src={current.img.src} alt={current.img.alt} /> : current.art}
             </span>

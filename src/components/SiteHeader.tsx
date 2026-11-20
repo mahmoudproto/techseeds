@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { WHATSAPP_NUMBER } from '@/lib/labels';
 import { SITE, whatsappLink, type Lang } from '@/lib/site-content';
 import LogoLink from './LogoLink';
+import MobileMenu from './MobileMenu';
 import TopNav from './TopNav';
 
 /** The full logo (icon + name). It always sits on white, as the brand requires. */
@@ -48,20 +49,7 @@ export default function SiteHeader({ cta, lang }: { cta: 'test' | 'whatsapp'; la
             </a>
           )}
 
-          <details className="menu">
-            <summary aria-label={t.header.menu}>
-              <span />
-              <span />
-              <span />
-            </summary>
-            <div className="menu__panel">
-              {t.nav.map((item) => (
-                <Link key={item.href} href={item.href} className="menu__link">
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </details>
+          <MobileMenu items={t.nav} label={t.header.menu} />
         </div>
       </div>
     </header>
