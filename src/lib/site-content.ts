@@ -67,8 +67,8 @@ const ar: SiteContent = {
   ],
   header: { test: 'اختبار مجاني', whatsapp: 'تواصل معنا', menu: 'القائمة' },
   hero: {
-    title: 'مش بس بنعلّم البرمجة...',
-    highlight: 'بنعلّم طفلك يصنع بالتكنولوجيا!',
+    title: 'مش بس بنعلّم\nال AI والبرمجة...',
+    highlight: 'بنعلّم طفلك\nينتج ويبدع بيهم',
     lead: 'في تك سيدز، طفلك بيتعلم البرمجة والتكنولوجيا خطوة بخطوة، وسط مجموعة صغيرة، ومعاه مدرّب ومساعد يتابعوه. والأهم إنه في نهاية كل شهر بيطلع بمشروع عمله بنفسه ويقدر يشرحه ويعرضه.',
     cta: 'احجز اختبار تحديد المستوى المجاني',
     whatsapp: 'كلّمنا على واتساب',
@@ -245,8 +245,8 @@ const en: SiteContent = {
   ],
   header: { test: 'Free test', whatsapp: 'Contact us', menu: 'Menu' },
   hero: {
-    title: 'We don\'t just teach coding...',
-    highlight: 'we teach your child to make things with technology!',
+    title: 'We don\'t just teach\nAI and coding...',
+    highlight: 'we teach your child\nto create with them',
     lead: 'At TechSeeds your child learns coding and technology step by step, in a small group, with an instructor and an assistant following their progress. Best of all, every month ends with a project they built themselves and can explain and present.',
     cta: 'Book the free placement test',
     whatsapp: 'Message us on WhatsApp',

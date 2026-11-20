@@ -49,12 +49,23 @@ export default function Landing({ lang }: { lang: Lang }) {
                 <span className="next-group__seats">{t.next.seats(SEATS_LEFT)}</span>
               </p>
             )}
+            {/* Each \n in the text is a line break; the yellow line sits under the last line only. */}
             <h1 className="hero__title">
-              {t.hero.title}{' '}
-              <span className="hl">
-                {t.hero.highlight}
-                <Squiggle />
-              </span>
+              {t.hero.title.split('\n').map((line) => (
+                <span className="hero__line" key={line}>{line}</span>
+              ))}
+              {t.hero.highlight.split('\n').map((line, i, all) =>
+                i < all.length - 1 ? (
+                  <span className="hero__line hero__line--green" key={line}>{line}</span>
+                ) : (
+                  <span className="hero__line" key={line}>
+                    <span className="hl">
+                      {line}
+                      <Squiggle />
+                    </span>
+                  </span>
+                ),
+              )}
             </h1>
             <p className="hero__lead">{t.hero.lead}</p>
             <div className="hero__cta-group">

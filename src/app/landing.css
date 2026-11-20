@@ -299,7 +299,17 @@
   gap: 12px;
 }
 
+.hero__line {
+  display: block;
+}
+
+.hero__line--green {
+  color: var(--green);
+}
+
+/* the yellow line is exactly as wide as the last line of the headline */
 .hero__title .hl {
+  display: inline-block;
   white-space: normal;
 }
 
