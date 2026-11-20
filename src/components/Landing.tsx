@@ -4,7 +4,6 @@ import { WHATSAPP_NUMBER } from '@/lib/labels';
 import { MEDIA } from '@/lib/media';
 import { SITE, whatsappLink, type Lang } from '@/lib/site-content';
 import { LOCATION, NEXT_START_DATE, SEATS_LEFT } from '@/lib/site-config';
-import { AGE_BANDS, TRACKS } from '@/lib/tracks';
 import AgeTabs from './AgeTabs';
 import { Sparkle, Squiggle } from './Doodles';
 import Reveal from './Reveal';
@@ -99,35 +98,32 @@ export default function Landing({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* 3. Why us, with a word from the founder */}
+      {/* 3. Why us: message and photo side by side, then three equal points in one row */}
       <section className="section" id="why">
         <div className="wrap">
           <div className="why">
             <div className="why__intro">
               <Head kicker={t.why.kicker} title={t.why.title} text={t.why.text} />
               <figure className="founder">
-                <Sparkle className="founder__sparkle" color="#2fa84f" />
                 <figcaption className="founder__label">{t.why.founder.title}</figcaption>
                 <blockquote>{t.why.founder.quote}</blockquote>
-                <p className="founder__name">{t.why.founder.name}</p>
+                {t.why.founder.name && <p className="founder__name">{t.why.founder.name}</p>}
               </figure>
             </div>
             <div className="why__side">
               <span className="bg-shape bg-shape--blue why__blob" aria-hidden="true" />
-              <img className="why__photo" src={MEDIA.why.src} alt={MEDIA.why.alt[lang]} loading="lazy" width={900} height={1350} />
-              <ul className="why__list">
-                {t.why.items.map((w) => (
-                  <li className="why__card" key={w.title}>
-                    <span className={`tint tint--${w.tint}`}><Icon name={w.icon} color={w.color} /></span>
-                    <span>
-                      <strong>{w.title}</strong>
-                      <span>{w.text}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              <img className="why__photo" src={MEDIA.why.src} alt={MEDIA.why.alt[lang]} loading="lazy" width={940} height={692} />
             </div>
           </div>
+          <ul className="why__list">
+            {t.why.items.map((w) => (
+              <li className="why__card" key={w.title}>
+                <span className={`tint tint--${w.tint}`}><Icon name={w.icon} color={w.color} /></span>
+                <strong>{w.title}</strong>
+                <span>{w.text}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -187,48 +183,6 @@ export default function Landing({ lang }: { lang: Lang }) {
             <p className="soon-note">{t.projects.note}</p>
           </div>
 
-          <div className="age-table">
-            <h3 className="age-table__title">{t.tracks.tableTitle}</h3>
-            <div className="age-table__scroll" tabIndex={0} role="region" aria-label={t.tracks.tableTitle}>
-              <table>
-                <thead>
-                  <tr>
-                    <th scope="col">{t.tracks.tableTrack}</th>
-                    {AGE_BANDS.map((b) => (
-                      <th scope="col" key={b.id}>{b.label[lang]}</th>
-                    ))}
-                    <th scope="col">{t.tracks.tableBuilds}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {TRACKS.map((tr) => (
-                    <tr key={tr.slug}>
-                      <th scope="row">
-                        <Link href={`${lang === 'ar' ? '' : '/en'}/tracks/${tr.slug}`}>{tr.name[lang]}</Link>
-                      </th>
-                      {AGE_BANDS.map((b) => {
-                        const level = tr.levels[b.id];
-                        return (
-                          <td key={b.id}>
-                            {level ? (
-                              <span className="tags tags--inline">
-                                {level.tools.map((tool) => (
-                                  <span className="tag" key={tool} dir="ltr">{tool}</span>
-                                ))}
-                              </span>
-                            ) : (
-                              <span className="age-table__none" aria-label={t.tracks.none}>—</span>
-                            )}
-                          </td>
-                        );
-                      })}
-                      <td>{tr.builds[lang]}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -268,7 +222,10 @@ export default function Landing({ lang }: { lang: Lang }) {
               <p className="s-head__text">{t.workshop.text}</p>
               <ul className="workshop__points">
                 {t.workshop.points.map((point) => (
-                  <li key={point}>{point}</li>
+                  <li key={point.title}>
+                    <strong>{point.title}</strong>
+                    <span>{point.text}</span>
+                  </li>
                 ))}
               </ul>
               <div className="map">

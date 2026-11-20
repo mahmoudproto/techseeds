@@ -67,20 +67,19 @@ export default function AgeTabs({ lang }: { lang: Lang }) {
           const level = tr.levels[band]!;
           const photo = MEDIA.tracks[tr.slug];
           return (
-            <article className={`track-card track-card--${tr.color}`} key={tr.slug}>
+            <article className={`track-card track-card--${tr.slug}`} key={tr.slug}>
               <div className="track-card__media">
-                <img src={photo.src} alt={photo.alt[lang]} loading="lazy" width={900} height={600} />
+                <img src={photo.src} alt={photo.alt[lang]} loading="lazy" width={732} height={555} />
               </div>
               <div className="track-card__body">
                 <h3 className="track-card__name">{tr.name[lang]}</h3>
                 <p className="track-card__text">{level.text[lang]}</p>
-                <ul className="tags" aria-label={t.trackPage.tools}>
-                  {level.tools.map((tool) => (
-                    <li className="tag" key={tool} dir="ltr">{tool}</li>
-                  ))}
-                </ul>
+                <p className="track-card__tools">
+                  <span className="track-card__tools-label">{t.tracks.tools}:</span>{' '}
+                  <span dir="ltr">{level.tools.join(' · ')}</span>
+                </p>
                 <Link className="track-card__more" href={`${base}/tracks/${tr.slug}`}>
-                  {t.tracks.more} <span aria-hidden="true">{t.arrow}</span>
+                  {t.tracks.more}
                 </Link>
               </div>
             </article>

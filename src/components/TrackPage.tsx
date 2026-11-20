@@ -60,7 +60,12 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
           <div className="track-visual">
             <span className="bg-shape bg-shape--blue track-visual__blue" aria-hidden="true" />
             <span className="bg-shape bg-shape--green track-visual__green" aria-hidden="true" />
-            <TrackCards key={track.slug} cards={cards} label={p.cards} />
+            <TrackCards
+              key={track.slug}
+              cards={cards}
+              dir={lang === 'ar' ? 'rtl' : 'ltr'}
+              text={{ label: p.cards, open: p.open, prev: p.prev, next: p.next, close: p.close, card: p.hint }}
+            />
             <div className="instructor">
               {track.instructor ? (
                 <img className="instructor__photo" src={track.instructor.photo} alt="" width={72} height={72} />
@@ -149,12 +154,20 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
             </div>
           </div>
 
-          <nav className="other-tracks" aria-label={t.tracks.kicker}>
-            {others.map((tr) => (
-              <Link key={tr.slug} className={`other-track other-track--${tr.color}`} href={`${base}/tracks/${tr.slug}`}>
-                {tr.name[lang]} <span aria-hidden="true">{t.arrow}</span>
-              </Link>
-            ))}
+          <nav className="other-tracks" aria-labelledby="other-tracks-title">
+            <h2 className="other-tracks__title" id="other-tracks-title">{p.others}</h2>
+            <div className="other-tracks__list">
+              {others.map((tr) => {
+                const pic = MEDIA.tracks[tr.slug];
+                return (
+                  <Link key={tr.slug} className={`other-track other-track--${tr.slug}`} href={`${base}/tracks/${tr.slug}`}>
+                    <img className="other-track__pic" src={pic.src} alt="" width={64} height={64} loading="lazy" />
+                    <span className="other-track__name">{tr.name[lang]}</span>
+                    <span className="other-track__arrow" aria-hidden="true">{t.arrow}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </nav>
         </div>
       </section>

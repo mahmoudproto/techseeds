@@ -31,12 +31,13 @@ export const MEDIA = {
     src: local('hero-class'),
     alt: { ar: 'مدرّبة تك سيدز تشرح لثلاثة طلاب أمام لابتوب', en: 'A TechSeeds instructor helping three students at a laptop' },
   },
-  // Still stock: no TechSeeds images for these yet.
+  // Drawn TechSeeds-style class scene from Shirien's redesign (cropped from her mock-up
+  // until the full-size file arrives). Replace with a real class photo when there is one.
   why: {
-    src: pexels(10638115, 900),
-    alt: { ar: 'فصل فيه طلاب يتعلمون على أجهزة الكمبيوتر', en: 'A class of students learning on computers' },
-    credit: 'Ron Lach / Pexels',
+    src: local('why-class'),
+    alt: { ar: 'مدرّب يساعد أطفالًا في تيشيرتات تك سيدز أمام اللابتوب', en: 'An instructor helping children in TechSeeds T-shirts at their laptops' },
   },
+  // Still stock: no TechSeeds images for these yet.
   team: {
     src: pexels(5212695, 1200),
     alt: { ar: 'مدرّب يتابع طلابه وهم يعملون على مشروعهم', en: 'An instructor guiding students through their project' },
@@ -47,24 +48,24 @@ export const MEDIA = {
     alt: { ar: 'طلاب ومعلمتهم يصفقون احتفالًا في الفصل', en: 'Students and their teacher clapping to celebrate in class' },
     credit: 'Max Fischer / Pexels',
   },
-  // Track art shows objects, not a particular child. The illustrated versions with a
-  // child (track-programming-3d, track-ai-3d) are in /public/media if you prefer them.
+  // One 3D style for all four tracks (Shirien's redesign): objects and characters,
+  // not a particular child. The older flat pictures are still in /public/media.
   tracks: {
     programming: {
-      src: local('track-programming'),
-      alt: { ar: 'بلوكات برمجة ملونة', en: 'Colourful coding blocks' },
+      src: local('track-programming-v2'),
+      alt: { ar: 'ثعبان بايثون مبتسم ملفوف حول بلوكات برمجة', en: 'A smiling Python snake wrapped around coding blocks' },
     },
     gamedev: {
-      src: local('track-gamedev'),
-      alt: { ar: 'لابتوب عليه لعبة فضاء وبجانبه ذراع تحكم وصاروخ', en: 'A laptop showing a space game, with a controller and a rocket' },
+      src: local('track-gamedev-v2'),
+      alt: { ar: 'شاشة لعبة فضاء يخرج منها صاروخ نحو كويكب', en: 'A rocket flying out of a space-game screen towards an asteroid' },
     },
     ai: {
-      src: local('track-ai'),
-      alt: { ar: 'روبوت مبتسم', en: 'A smiling robot' },
+      src: local('track-ai-v2'),
+      alt: { ar: 'روبوت بنفسجي صغير يمسك تابلت وفوقه لمبة', en: 'A small purple robot holding a tablet under a light bulb' },
     },
     cyber: {
-      src: local('track-cyber'),
-      alt: { ar: 'درع حماية وقفل ولابتوب', en: 'A security shield, padlocks and a laptop' },
+      src: local('track-cyber-v2'),
+      alt: { ar: 'درع أمان عليه قفل', en: 'A security shield with a padlock' },
     },
   },
   // Real photos of hands and objects for the track page cards (no particular child).

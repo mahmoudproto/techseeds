@@ -68,7 +68,7 @@ export const TRACKS: Track[] = [
     color: 'blue',
     levels: {
       young: { tools: ['mBlock'], text: { ar: 'البرمجة بالبلوكات: الأوامر والتكرار والشروط من خلال قصص وألعاب بسيطة.', en: 'Block coding: commands, loops and conditions through simple stories and games.' } },
-      middle: { tools: ['Python'], text: { ar: 'أول لغة برمجة حقيقية: المتغيرات والشروط والتكرار والدوال في برامج صغيرة مفيدة.', en: 'A first real language: variables, conditions, loops and functions in small, useful programs.' } },
+      middle: { tools: ['Python'], text: { ar: 'أول لغة برمجة حقيقية: المتغيرات والشروط والتكرار والدوال من خلال برامج صغيرة مفيدة.', en: 'A first real language: variables, conditions, loops and functions in small, useful programs.' } },
       teen: { tools: ['JavaScript'], text: { ar: 'برمجة تطبيقات ومواقع تفاعلية، والتفكير في بناء مشروع كامل من البداية للنهاية.', en: 'Interactive apps and web pages, and planning a full project from start to finish.' } },
     },
     cards: [
@@ -93,8 +93,8 @@ export const TRACKS: Track[] = [
     builds: { ar: 'ألعابه الخاصة', en: 'Their own games' },
     color: 'yellow',
     levels: {
-      middle: { tools: ['GameMaker'], text: { ar: 'بناء لعبة كاملة بالبلوكات المرئية: الحركة والتصادم والنقاط والأرواح، ثم العشوائية وزيادة الصعوبة.', en: 'A full game with visual code blocks: movement, collisions, score and lives, then randomness and rising difficulty.' } },
-      teen: { tools: ['Unity'], text: { ar: 'تطوير ألعاب بمحرك احترافي، وبناء مشاهد وشخصيات وتجربة لعب متكاملة.', en: 'Games in a professional engine, with scenes, characters and a complete play experience.' } },
+      middle: { tools: ['GameMaker'], text: { ar: 'بناء لعبة باستخدام البلوكات المرئية، مع الحركة والتصادم والنقاط والأرواح، ثم إضافة العشوائية وزيادة الصعوبة.', en: 'A full game with visual code blocks: movement, collisions, score and lives, then randomness and rising difficulty.' } },
+      teen: { tools: ['Unity'], text: { ar: 'تطوير ألعاب باستخدام محرك احترافي، وبناء مشاهد وشخصيات وتجربة لعب متكاملة.', en: 'Games in a professional engine, with scenes, characters and a complete play experience.' } },
     },
     cards: [
       { kind: 'project', label: { ar: 'مشروع: لعبة سفينة الفضاء', en: 'Project: the spaceship game' }, project: 'spaceship', tint: 'yellow' },
@@ -119,8 +119,8 @@ export const TRACKS: Track[] = [
     color: 'green',
     levels: {
       young: { tools: ['AI'], text: { ar: 'أول تعارف مع الذكاء الاصطناعي بطريقة بسيطة وآمنة ومناسبة للسن.', en: 'A first, simple and safe introduction to AI, suited to their age.' } },
-      middle: { tools: ['AI'], text: { ar: 'أدوات AI لمهام حقيقية: كتابة وصور وعروض وتنظيم الأفكار.', en: 'AI tools for real tasks: writing, images, presentations and organising ideas.' } },
-      teen: { tools: ['AI'], text: { ar: 'مشاريع AI متقدمة: خطط ومواقع ومشاريع كاملة يديرها الطالب بنفسه.', en: 'Advanced AI projects: plans, websites and full projects the student leads.' } },
+      middle: { tools: ['AI'], text: { ar: 'استخدام أدوات AI في مهام حقيقية زي الكتابة وإنشاء الصور والعروض وتنظيم الأفكار.', en: 'AI tools for real tasks: writing, images, presentations and organising ideas.' } },
+      teen: { tools: ['AI'], text: { ar: 'مشاريع AI متقدمة: تخطيط مواقع ومشاريع كاملة ينفذها الطالب بنفسه بمساعدة أدوات الذكاء الاصطناعي.', en: 'Advanced AI projects: plans, websites and full projects the student leads.' } },
     },
     cards: [
       { kind: 'art', label: { ar: 'الذكاء الاصطناعي أداة', en: 'AI is a tool' } },
@@ -144,8 +144,8 @@ export const TRACKS: Track[] = [
     builds: { ar: 'أدوات أمان وتحديات CTF', en: 'Security tools and CTF challenges' },
     color: 'mint',
     levels: {
-      middle: { tools: ['Google Interland', 'CyberChef', 'Scratch'], text: { ar: 'الأمان على الإنترنت، وكلمات السر القوية، وأساسيات التشفير بطريقة عملية وممتعة.', en: 'Online safety, strong passwords and the basics of encryption, hands-on and fun.' } },
-      teen: { tools: ['Python', 'Linux', 'Wireshark', 'TryHackMe', 'picoCTF'], text: { ar: 'أدوات أمان بلغة Python، وأساسيات الشبكات ولينكس، وتحديات CTF في معامل تدريب آمنة.', en: 'Security tools in Python, networking and Linux basics, and CTF challenges in safe labs.' } },
+      middle: { tools: ['Google Interland', 'CyberChef', 'Scratch'], text: { ar: 'التعرّف على الأمان على الإنترنت، وحماية الحسابات، وكلمات السر القوية، وأساسيات التشفير بطريقة عملية.', en: 'Online safety, strong passwords and the basics of encryption, hands-on and fun.' } },
+      teen: { tools: ['Python', 'Linux', 'Wireshark', 'TryHackMe', 'picoCTF'], text: { ar: 'أدوات أمان باستخدام Python، وأساسيات الشبكات وLinux، وتحديات CTF في معامل تدريب آمنة.', en: 'Security tools in Python, networking and Linux basics, and CTF challenges in safe labs.' } },
     },
     cards: [
       { kind: 'project', label: { ar: 'مشروع: تحدي CTF', en: 'Project: a CTF challenge' }, project: 'ctf', tint: 'mint' },

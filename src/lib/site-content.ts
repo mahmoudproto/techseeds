@@ -27,17 +27,18 @@ export interface SiteContent {
   header: { test: string; whatsapp: string; menu: string };
   hero: { title: string; highlight: string; lead: string; cta: string; whatsapp: string; note: string };
   stats: (Tinted & { value: string; label: string })[];
-  why: Head & { text: string; items: (Tinted & { title: string; text: string })[]; founder: { title: string; quote: string; name: string } };
+  why: Head & { text: string; items: (Tinted & { title: string; text: string })[]; founder: { title: string; quote: string; name?: string } };
   team: Head & { text: string; roles: { title: string; text: string }[]; soon: string };
-  tracks: Head & { text: string; tabs: string; more: string; tableTitle: string; tableTrack: string; tableBuilds: string; none: string };
+  tracks: Head & { text: string; tabs: string; more: string; tools: string };
   how: Head & { sub: string; cta: string; steps: { n: string; title: string; text: string }[] };
-  workshop: Head & { text: string; points: string[]; place: string; address: string; mapTitle: string; mapOpen: string };
+  workshop: Head & { text: string; points: { title: string; text: string }[]; place: string; address: string; mapTitle: string; mapOpen: string };
   projects: Head & { text: string; note: string; items: { track: string; title: string; text: string; tint: Tinted['tint']; img?: 'spaceship' | 'ctf' }[] };
   reviews: Head & { sub: string; hint: string; parent: string; items: { name: string; text: string }[] };
   faq: Head & { items: { q: string; a: string }[] };
   final: { title: string; text: string; cta: string; whatsapp: string };
   next: { starts: string; seats: (n: number) => string; locale: string };
   trackPage: {
+    others: string; open: string; prev: string; next: string; close: string; hint: string;
     back: string; ages: string; tools: string; builds: string; projects: string; projectsNote: string;
     how: string; howItems: string[]; cta: string; ctaText: string; test: string; whatsapp: string; notTaught: string;
     instructor: string; instructorSoon: string; cards: string;
@@ -57,81 +58,81 @@ const ar: SiteContent = {
   home: '/',
   other: { label: 'English', href: '/en' },
   nav: [
-    { href: '/#why', label: 'لماذا نحن' },
+    { href: '/#why', label: 'لماذا نحن؟' },
     { href: '/#tracks', label: 'المسارات' },
     { href: '/#workshop', label: 'ورشة الأهل' },
     { href: '/#reviews', label: 'آراء الأهل' },
-    { href: '/#faq', label: 'أسئلة شائعة' },
+    { href: '/#faq', label: 'الأسئلة الشائعة' },
     { href: '/#contact', label: 'تواصل معنا' },
   ],
   header: { test: 'اختبار مجاني', whatsapp: 'تواصل معنا', menu: 'القائمة' },
   hero: {
-    title: 'برمجة وتكنولوجيا لأطفالك،',
-    highlight: 'وجهًا لوجه في الفيوم',
-    lead: 'مجموعات صغيرة من 6 إلى 12 طالبًا، مع مدرب ومساعد، ومشروع يبنيه طفلك بنفسه كل شهر.',
+    title: 'مش بس بنعلّم البرمجة...',
+    highlight: 'بنعلّم طفلك يصنع بالتكنولوجيا!',
+    lead: 'في تك سيدز، طفلك بيتعلم البرمجة والتكنولوجيا خطوة بخطوة، وسط مجموعة صغيرة، ومعاه مدرّب ومساعد يتابعوه. والأهم إنه في نهاية كل شهر بيطلع بمشروع عمله بنفسه ويقدر يشرحه ويعرضه.',
     cta: 'احجز اختبار تحديد المستوى المجاني',
     whatsapp: 'كلّمنا على واتساب',
     note: 'الاختبار مجاني ويستغرق حوالي 10 دقائق',
   },
   stats: [
-    { icon: 'cap', tint: 'green', color: GREEN, value: 'من 6 إلى 18', label: 'سنة، مقسّمين حسب السن' },
-    { icon: 'layers', tint: 'blue', color: BLUE, value: '4 مسارات', label: 'برمجة، ألعاب، ذكاء اصطناعي، أمن سيبراني' },
-    { icon: 'users', tint: 'yellow', color: AMBER, value: '6 إلى 12 طالبًا', label: 'في المجموعة الواحدة' },
-    { icon: 'pair', tint: 'green', color: GREEN, value: 'مدرب ومساعد', label: 'مع كل مجموعة' },
+    { icon: 'cap', tint: 'green', color: GREEN, value: 'من 6 إلى 18 سنة', label: 'بمجموعات مقسّمة حسب السن' },
+    { icon: 'layers', tint: 'blue', color: BLUE, value: '4 مسارات', label: 'البرمجة، تطوير الألعاب، الذكاء الاصطناعي، والأمن السيبراني' },
+    { icon: 'users', tint: 'yellow', color: AMBER, value: 'من 6 إلى 12 طالبًا', label: 'في المجموعة' },
+    { icon: 'pair', tint: 'green', color: GREEN, value: 'مدرّب ومساعد', label: 'مع كل مجموعة' },
   ],
   why: {
     kicker: 'لماذا تك سيدز؟',
-    title: 'لأن كل طفل يستحق أن يتعلّم، مش الأسرع بس',
-    text: 'نعلّم وجهًا لوجه في مجموعات صغيرة، فالمدرب يرى كل طفل: متى فهم، ومتى تاه، ومتى يتردد أن يسأل. التكنولوجيا عندنا وسيلة، وعقل الطفل هو الهدف.',
+    title: 'كل طفل يستحق فرصة يفهم ويتعلّم',
+    text: 'مش بنقيس نجاحنا بسرعة الطفل في الحل؛ بنقيسه بقد إيه فهم، وجرّب، واتعلم من أخطائه. في الكلاس، المدرّب بيقدر يتابع كل طفل: إمتى فهم الفكرة، وإمتى محتاج شرح تاني، وإمتى متردد يسأل. عشان كده بنشتغل في مجموعات صغيرة، علشان كل طفل ياخد فرصته في التعلّم والمشاركة.',
     items: [
-      { icon: 'report', tint: 'blue', color: BLUE, title: 'تقارير متابعة للأهل', text: 'ثلاثة تقارير كل شهر توضح ما تعلّمه طفلك وما يحتاج فيه إلى دعم.' },
-      { icon: 'parents', tint: 'yellow', color: AMBER, title: 'ورشة مجانية للأهل', text: 'كل يوم أحد نشرح طريقتنا ودوركم في البيت. نحن شركاء، لا مجرد مقدمي خدمة.' },
-      { icon: 'guarantee', tint: 'green', color: GREEN, title: 'ضمان استرداد قيمة الشهر', text: 'إذا حضر طفلك 5 حصص على الأقل من 6 ولم يُكمل مشروع الشهر، نرد لكم قيمة هذا الشهر.' },
+      { icon: 'report', tint: 'blue', color: BLUE, title: 'متابعة حقيقية للأهل', text: 'خلال كل شهر، بتوصلكم 3 تقارير متابعة بعد الحصة التانية والرابعة والسادسة. التقارير بتوضح طفلك اتعلم إيه، وإيه اللي محتاج يشتغل عليه أو ياخد فيه دعم.' },
+      { icon: 'parents', tint: 'yellow', color: AMBER, title: 'ورشة مجانية للأهل', text: 'كل يوم أحد بنستضيف ورشة مجانية في ⁨Hive Co‑working Space⁩. بنشرح فيها طريقة التعليم عندنا، وإزاي بنساعد طفلك، وإيه دوركم في البيت. إحنا شركاء في رحلة تعلّمه.' },
+      { icon: 'guarantee', tint: 'green', color: GREEN, title: 'ضمان استرداد قيمة الشهر', text: 'لو طفلك حضر 5 حصص على الأقل من أصل 6، وما قدرش يكمّل مشروع الشهر، تقدروا تطلبوا استرداد قيمة الشهر. لازم يتقدّم الطلب خلال 7 أيام من آخر حصة.' },
     ],
     founder: {
-      title: 'كلمة من المؤسس',
-      quote: 'بدأت تك سيدز في 2025 لأني لاحظت أن أغلب الأطفال في الكورسات الأونلاين لا يتعلمون بجد. الشاطر يكمل، والباقي يتأخر من غير ما حد ياخد باله. هنا نعلّم كل طفل، ونفرح معه بأول مشروع يبنيه بنفسه.',
-      name: 'محمود، مؤسس تك سيدز',
+      title: 'رحلتنا وهدفنا',
+      quote: 'بدأنا تك سيدز في 2025 بعد ما لاحظنا إن بعض الأطفال في كورسات البرمجة الأونلاين ممكن يتأخروا من غير ما حد ياخد باله، بسبب زحمة المجموعات أو ضعف التواصل أو صعوبة متابعة كل طفل. المدرّب محتاج يشوف الطفل وهو بيتعلم، ويعرف إمتى فهم وإمتى محتاج مساعدة. عشان كده اخترنا التعليم وجهًا لوجه، في مجموعات صغيرة، بحيث كل طفل ياخد فرصته ويبني أول مشروع بإيده.',
     },
   },
   team: {
     kicker: 'فريق التدريس',
-    title: 'اثنان مع كل مجموعة، فلا يبقى طفل تائهًا',
-    text: 'نفس فريق المدربين يبقى مع المجموعة طوال الشهر، ويعرف كل طفل باسمه وطريقة تفكيره.',
+    title: 'مدرّب ومساعد مع كل مجموعة',
+    text: 'نفس فريق التدريس بيتابع المجموعة طوال الشهر، وده بيساعده يعرف الأطفال وطريقة تعلّم كل واحد فيهم.',
     roles: [
-      { title: 'المدرب', text: 'يشرح الفكرة ويسأل الأسئلة، والطفل هو الذي يكتب ويصل إلى الحل بنفسه.' },
-      { title: 'المساعد', text: 'يمر على الأطفال واحدًا واحدًا، فمن يحتاج مساعدة يجدها في وقتها.' },
+      { title: 'المدرّب', text: 'بيشرح الفكرة، ويسأل أسئلة تساعد الطفل يفكر ويوصل للحل بنفسه. الطفل هو اللي بيكتب ويجرّب.' },
+      { title: 'المساعد', text: 'بيتابع الأطفال واحد واحد، وبيتدخل وقت ما حد يحتاج مساعدة، علشان محدش يفضل واقف أو محتار.' },
     ],
     soon: 'صور وأسماء فريقنا قريبًا',
   },
   tracks: {
     kicker: 'المسارات حسب السن',
-    title: 'كل سن له مساره ومستواه',
-    text: 'طفل عنده 6 سنين لا يدرس مع طالب عنده 18 سنة. اختر سن طفلك لترى المسارات المناسبة له.',
+    title: 'كل سن له مساراته ومحتوى مناسب ليه',
+    text: 'اختاروا الفئة العمرية لطفلكم علشان تتعرفوا على المسارات المناسبة ليه. كل مجموعة بتتعلم بمحتوى وأدوات تناسب مرحلتها.',
     tabs: 'اختر سن طفلك',
     more: 'اعرف أكثر عن المسار',
-    tableTitle: 'أي مسار يناسب أي سن؟',
-    tableTrack: 'المسار',
-    tableBuilds: 'الطالب يبني',
-    none: 'غير متاح',
+    tools: 'الأدوات',
   },
   how: {
     kicker: 'بسيطة وواضحة',
     title: 'كيف نبدأ معًا؟',
-    sub: 'أربع خطوات من أول مكالمة حتى يعرض طفلك مشروعه.',
+    sub: 'من أول اختبار تحديد المستوى لحد ما طفلك يعرض مشروعه.',
     cta: 'ابدأ بالخطوة الأولى',
     steps: [
-      { n: '1', title: 'اختبار المستوى', text: 'اختبار مجاني قصير، حوالي 10 دقائق.' },
-      { n: '2', title: 'اختيار المسار', text: 'نرشّح المسار الذي يناسب سنّه واهتماماته.' },
-      { n: '3', title: 'التعلّم بالتجربة', text: '6 حصص حضورية، كل حصة 3 ساعات.' },
-      { n: '4', title: 'المشروع والمتابعة', text: 'يعرض مشروعه بنفسه، وتصلكم ثلاثة تقارير.' },
+      { n: '1', title: 'اختبار تحديد المستوى', text: 'اختبار مجاني قصير، مدته حوالي 10 دقائق. وللأطفال الأصغر سنًا، ممكن نعمل مقابلة قصيرة.' },
+      { n: '2', title: 'اختيار المسار', text: 'بنرشّح المسار والمستوى المناسبين لسن الطفل واهتماماته ونتيجة الاختبار.' },
+      { n: '3', title: 'التعلّم بالتجربة', text: '6 حصص حضورية في الشهر، مدة كل حصة 3 ساعات، يومي الجمعة والسبت.' },
+      { n: '4', title: 'المشروع والمتابعة', text: 'الطفل بيعرض المشروع اللي بناه بنفسه، وبتوصلكم 3 تقارير متابعة خلال الشهر.' },
     ],
   },
   workshop: {
     kicker: 'لأولياء الأمور فقط',
     title: 'تعالوا نتعرّف يوم الأحد',
-    text: 'كل يوم أحد نستضيف ورشة مجانية للأهل: نشرح طريقتنا، وكيف سنساعد طفلك، ودوركم في البيت.',
-    points: ['مجانية تمامًا، ومن غير أي التزام', 'تتعرّفون على المدربين والمكان', 'نجيب عن كل أسئلتكم وجهًا لوجه'],
+    text: 'كل يوم أحد بنستضيف ورشة مجانية لأولياء الأمور في ⁨Hive Co‑working Space⁩.',
+    points: [
+      { title: 'مجانية ومن غير التزام', text: 'اتعرفوا على طريقة التعليم عندنا قبل ما تقرروا تبدأوا.' },
+      { title: 'اتعرفوا على المكان والمدرّبين', text: 'شوفوا مكان الدراسة وقابلوا فريق التدريس.' },
+      { title: 'اسألوا عن كل اللي يهمكم', text: 'نتكلم عن المسارات، وطريقة المتابعة، ودور الأهل في البيت.' },
+    ],
     place: 'Hive Co-working Space',
     address: 'شارع أحمد شوقي، الفيوم، أمام فيلا المحافظ، أعلى My Office للأثاث (تالت عمارة من محل Black Hawk للملابس)',
     mapTitle: 'موقع Hive Co-working Space على خريطة جوجل',
@@ -139,20 +140,20 @@ const ar: SiteContent = {
   },
   projects: {
     kicker: 'مشاريع الطلاب',
-    title: 'كل شهر ينتهي بمشروع حقيقي',
-    text: 'أمثلة لمشاريع يبنيها طلابنا بأيديهم ويعرضونها بأنفسهم.',
+    title: 'كل شهر بينتهي بمشروع الطالب بيعمله بأيده',
+    text: 'دي أمثلة للمشروعات اللي ممكن الطالب يبنيها ويعرضها بنفسه خلال رحلته التعليمية.',
     note: 'صور مشاريع طلابنا الحقيقية قريبًا',
     items: [
-      { track: 'تطوير الألعاب', title: 'لعبة سفينة الفضاء', text: 'سفينة تتحرك في كل الاتجاهات وتطلق الليزر على الكويكبات، ولها ثلاث أرواح.', tint: 'yellow', img: 'spaceship' },
-      { track: 'البرمجة', title: 'قصة تفاعلية', text: 'شخصيات تتحرك وتتكلم وتستجيب لاختيارات اللاعب.', tint: 'blue' },
-      { track: 'الأمن السيبراني', title: 'تحدي أمن سيبراني (CTF)', text: 'يبحث الطالب عن الثغرة ويحل الألغاز حتى يصل إلى العلم، في معمل تدريب آمن.', tint: 'mint', img: 'ctf' },
-      { track: 'الذكاء الاصطناعي', title: 'مشروع بأدوات الذكاء الاصطناعي', text: 'كتيّب أو عرض أو موقع بسيط يخطط له الطالب وينفذه بنفسه.', tint: 'green' },
+      { track: 'تطوير الألعاب', title: 'لعبة سفينة الفضاء', text: 'سفينة بتتحرك في كل الاتجاهات، وبتطلق الليزر على الكويكبات، ومعاها 3 أرواح.', tint: 'yellow', img: 'spaceship' },
+      { track: 'البرمجة', title: 'قصة تفاعلية', text: 'شخصيات بتتحرك وبتتكلم وبتستجيب لاختيارات اللاعب، بحيث كل اختيار يغيّر مجرى القصة.', tint: 'blue' },
+      { track: 'الأمن السيبراني', title: 'تحدي أمن سيبراني (CTF)', text: 'الطالب بيدوّر على ثغرة، وبيحل ألغاز لحد ما يوصل للعلم، داخل معمل تدريب آمن.', tint: 'mint', img: 'ctf' },
+      { track: 'الذكاء الاصطناعي', title: 'مشروع بأدوات الذكاء الاصطناعي', text: 'كتيّب أو عرض تقديمي أو موقع بسيط، الطالب بيخطط له وينفذه باستخدام أدوات AI.', tint: 'green' },
     ],
   },
   reviews: {
     kicker: 'آراء أولياء الأمور',
     title: 'بكلمات الأهل أنفسهم',
-    sub: 'ثقتكم هي دافعنا للاستمرار',
+    sub: 'ثقتكم ودعمكم بتساعدنا نطوّر ونكمّل.',
     hint: 'اسحب لقراءة المزيد',
     parent: 'ولي أمر',
     items: [
@@ -166,25 +167,33 @@ const ar: SiteContent = {
   },
   faq: {
     kicker: 'أسئلة شائعة',
-    title: 'كل اللي محتاج تعرفه قبل ما تبدأ',
+    title: 'كل اللي محتاجين تعرفوه قبل ما تبدأوا',
     items: [
-      { q: 'كيف أسجّل طفلي؟', a: 'ابدأ باختبار تحديد المستوى المجاني على الموقع (وللأطفال الأصغر مقابلة قصيرة)، وبعدها نتواصل معك على واتساب لنرشّح المسار والمجموعة المناسبة.' },
-      { q: 'هل يدرس طفل عنده 6 سنين مع طالب عنده 18 سنة؟', a: 'لا. كل مسار مقسّم حسب السن إلى ثلاث فئات: من 6 إلى 9، ومن 10 إلى 13، ومن 14 إلى 18، وكل فئة لها محتواها وأدواتها.' },
-      { q: 'كم حصة في الشهر، وأين ومتى؟', a: 'كل شهر 6 حصص، مدة الحصة 3 ساعات، أيام الجمعة والسبت في Hive Co-working Space بالفيوم.' },
-      { q: 'كم عدد الطلاب في المجموعة؟', a: 'من 6 إلى 12 طالبًا فقط، ومع كل مجموعة مدرب ومساعد.' },
-      { q: 'ما هي ورشة الأهل؟', a: 'لقاء مجاني كل يوم أحد نشرح فيه طريقتنا ودوركم في البيت، وتتعرفون على المدربين والمكان. يمكنك حجزها من هذه الصفحة.' },
-      { q: 'هل يحصل الطالب على شهادة؟', a: 'نعم، يحصل الطالب على شهادة إتمام بعد كل شهر يُكمل فيه مشروعه.' },
-      { q: 'ماذا لو لم يستفد طفلي؟', a: 'إذا حضر طفلك 5 حصص على الأقل من 6 ولم يُكمل مشروع الشهر، نرد لكم قيمة هذا الشهر. يُقدَّم الطلب خلال 7 أيام من آخر حصة.' },
+      { q: 'إزاي أسجّل طفلي؟', a: 'ابدأوا باختبار تحديد المستوى المجاني على الموقع. الاختبار حوالي 10 دقائق، وللأطفال الأصغر ممكن نعمل مقابلة قصيرة. بعد كده نتواصل معاكم على واتساب ونرشّح المسار والمجموعة المناسبة.' },
+      { q: 'هل طفل عنده 6 سنين بيدرس مع طالب عنده 18 سنة؟', a: 'لأ. المجموعات متقسمة حسب السن: من 6 إلى 9 سنين، ومن 10 إلى 13 سنة، ومن 14 إلى 18 سنة، وكل فئة ليها محتوى وأدوات مناسبة.' },
+      { q: 'كام حصة في الشهر؟', a: '6 حصص في الشهر، مدة كل حصة 3 ساعات، بإجمالي 18 ساعة في الشهر.' },
+      { q: 'الدراسة فين وإمتى؟', a: 'يومي الجمعة والسبت في ⁨Hive Co‑working Space⁩، شارع أحمد شوقي، الفيوم.' },
+      { q: 'كام طالب في المجموعة؟', a: 'من 6 إلى 12 طالبًا، ومع كل مجموعة مدرّب ومساعد.' },
+      { q: 'إيه هي ورشة الأهل؟', a: 'لقاء مجاني كل يوم أحد بنشرح فيه طريقة التعليم ودوركم في البيت، وبتتعرفوا على المكان والمدرّبين. تقدروا تحجزوها من نفس الصفحة.' },
+      { q: 'هل لازم الطفل يكون عنده خبرة سابقة؟', a: 'لأ. اختبار تحديد المستوى المجاني بيساعدنا نعرف نقطة البداية المناسبة للطفل ونرشّح له المستوى الأقرب.' },
+      { q: 'هل الطالب بياخد شهادة؟', a: 'أيوه، الطالب بيحصل على شهادة إتمام بعد كل شهر يكمّل فيه المشروع.' },
+      { q: 'إيه اللي بيحصل لو طفلي ما كمّلش المشروع؟', a: 'لو حضر 5 حصص على الأقل من أصل 6 وما قدرش يكمّل مشروع الشهر، تقدروا تطلبوا استرداد قيمة الشهر. لازم الطلب يتقدّم خلال 7 أيام من آخر حصة.' },
     ],
   },
   final: {
     title: 'جاهز يبدأ طفلك\nأول مشروع ليه؟',
-    text: 'ابدأ باختبار تحديد المستوى المجاني، ونحن نساعدك تختار المسار المناسب.',
-    cta: 'احجز الآن',
-    whatsapp: 'اسألنا على واتساب',
+    text: 'ابدأوا باختبار تحديد المستوى المجاني، وإحنا هنساعدكم تختاروا المسار المناسب لطفلكم.',
+    cta: 'احجزوا الآن',
+    whatsapp: 'اسألونا على واتساب',
   },
   next: { starts: 'المجموعة القادمة تبدأ', seats: (n) => (n === 1 ? 'باقي مكان واحد' : n === 2 ? 'باقي مكانان' : n <= 10 ? `باقي ${n} أماكن` : `باقي ${n} مكانًا`), locale: 'ar-EG-u-nu-latn' },
   trackPage: {
+    others: 'أو اختار مسار تاني',
+    open: 'اضغط على البطاقة لتكبيرها',
+    prev: 'السابق',
+    next: 'التالي',
+    close: 'إغلاق',
+    hint: 'البطاقة',
     back: 'كل المسارات',
     ages: 'حسب السن',
     tools: 'الأدوات',
@@ -194,7 +203,7 @@ const ar: SiteContent = {
     how: 'كيف يمشي الشهر؟',
     howItems: [
       '6 حصص في الشهر، مدة الحصة 3 ساعات',
-      'أيام الجمعة والسبت في Hive Co-working Space بالفيوم',
+      'أيام الجمعة والسبت في ⁨Hive Co‑working Space⁩ بالفيوم',
       'مجموعة من 6 إلى 12 طالبًا، مع مدرب ومساعد',
       'الشهر ينتهي بمشروع يبنيه الطالب ويعرضه بنفسه، وشهادة إتمام',
       'ثلاثة تقارير متابعة لولي الأمر كل شهر',
@@ -209,7 +218,7 @@ const ar: SiteContent = {
     cards: 'صور من المسار، اضغط على أي صورة لتظهر في المقدمة',
   },
   whatsappLabel: 'تواصل معنا على واتساب',
-  whatsappText: 'أهلًا تك سيدز، عايز أعرف تفاصيل أكتر عن الكورسات.',
+  whatsappText: 'عايز أعرف تفاصيل أكتر عن الكورسات.',
   footer: {
     test: 'اختبار تحديد المستوى',
     whatsapp: 'واتساب',
@@ -227,7 +236,7 @@ const en: SiteContent = {
   home: '/en',
   other: { label: 'العربية', href: '/' },
   nav: [
-    { href: '/en#why', label: 'Why us' },
+    { href: '/en#why', label: 'Why us?' },
     { href: '/en#tracks', label: 'Tracks' },
     { href: '/en#workshop', label: 'Parents workshop' },
     { href: '/en#reviews', label: 'Reviews' },
@@ -236,9 +245,9 @@ const en: SiteContent = {
   ],
   header: { test: 'Free test', whatsapp: 'Contact us', menu: 'Menu' },
   hero: {
-    title: 'Coding and technology for your kids,',
-    highlight: 'face to face in Fayoum',
-    lead: 'Small groups of 6 to 12, an instructor and an assistant, and a project your child builds every month.',
+    title: 'We don\'t just teach coding...',
+    highlight: 'we teach your child to make things with technology!',
+    lead: 'At TechSeeds your child learns coding and technology step by step, in a small group, with an instructor and an assistant following their progress. Best of all, every month ends with a project they built themselves and can explain and present.',
     cta: 'Book the free placement test',
     whatsapp: 'Message us on WhatsApp',
     note: 'The test is free and takes about 10 minutes (in Arabic)',
@@ -251,22 +260,21 @@ const en: SiteContent = {
   ],
   why: {
     kicker: 'Why TechSeeds?',
-    title: 'Because every child deserves to learn, not just the fastest',
-    text: 'We teach face to face in small groups, so the instructor sees every child: when they get it, when they are lost, and when they are too shy to ask. Technology is the tool; the child\'s mind is the goal.',
+    title: 'Every child deserves a chance to understand and learn',
+    text: 'We don\'t measure success by how fast a child solves a problem, but by how much they understood, tried and learned from their mistakes. In class the instructor follows every child: when they get the idea, when they need it explained again, and when they are too shy to ask. That is why we work in small groups, so every child gets their turn to learn and take part.',
     items: [
-      { icon: 'report', tint: 'blue', color: BLUE, title: 'Progress reports for parents', text: 'Three reports every month show what your child learned and where they need support.' },
+      { icon: 'report', tint: 'blue', color: BLUE, title: 'Real follow-up for parents', text: 'Each month you get 3 progress reports, after the second, fourth and sixth sessions, showing what your child learned and what they need to work on or get support with.' },
       { icon: 'parents', tint: 'yellow', color: AMBER, title: 'A free parents\' workshop', text: 'Every Sunday we explain our method and your role at home. We are partners, not just a service.' },
-      { icon: 'guarantee', tint: 'green', color: GREEN, title: 'Money back for the month', text: 'If your child attends at least 5 of 6 sessions and does not finish the month\'s project, we refund that month.' },
+      { icon: 'guarantee', tint: 'green', color: GREEN, title: 'Money back for the month', text: 'If your child attends at least 5 of 6 sessions and cannot finish the month\'s project, you can ask for that month\'s fee back, within 7 days of the last session.' },
     ],
     founder: {
-      title: 'A word from the founder',
-      quote: 'I started TechSeeds in 2025 because most children in online courses were not really learning. The quickest kept up and the rest fell behind without anyone noticing. Here we teach every child, and celebrate the first project they build on their own.',
-      name: 'Mahmoud, founder of TechSeeds',
+      title: 'Our story and our aim',
+      quote: 'We started TechSeeds in 2025 after noticing that some children in online coding courses fall behind without anyone noticing, because of crowded groups, weak communication or how hard it is to follow each child. An instructor needs to see a child learning, to know when they understood and when they need help. So we chose face-to-face teaching in small groups, where every child gets their turn and builds their first project with their own hands.',
     },
   },
   team: {
     kicker: 'Our teaching team',
-    title: 'Two adults in every class, so no child gets lost',
+    title: 'An instructor and an assistant with every group',
     text: 'The same team stays with the group all month and knows every child by name and by how they think.',
     roles: [
       { title: 'The instructor', text: 'Explains the idea and asks questions; the child does the typing and reaches the answer.' },
@@ -276,14 +284,11 @@ const en: SiteContent = {
   },
   tracks: {
     kicker: 'Tracks by age',
-    title: 'Every age has its own track and level',
-    text: 'A 6-year-old never sits in the same class as an 18-year-old. Choose your child\'s age to see their tracks.',
+    title: 'Every age has its own tracks and content',
+    text: 'Choose your child\'s age group to see the tracks that suit them. Each group learns with content and tools made for its stage.',
     tabs: 'Choose your child\'s age',
     more: 'Learn more about this track',
-    tableTitle: 'Which track fits which age?',
-    tableTrack: 'Track',
-    tableBuilds: 'Students build',
-    none: 'Not offered',
+    tools: 'Tools',
   },
   how: {
     kicker: 'Simple and clear',
@@ -301,7 +306,11 @@ const en: SiteContent = {
     kicker: 'For parents only',
     title: 'Come and meet us on Sunday',
     text: 'Every Sunday we host a free workshop for parents: our method, how we will help your child, and your role at home.',
-    points: ['Completely free, no commitment', 'Meet the instructors and see the place', 'Ask us anything, face to face'],
+    points: [
+      { title: 'Free, no commitment', text: 'See how we teach before you decide to start.' },
+      { title: 'Meet the team and the place', text: 'See where classes happen and meet the teaching team.' },
+      { title: 'Ask about anything', text: 'We talk about the tracks, how we follow up, and the parents\' role at home.' },
+    ],
     place: 'Hive Co-working Space',
     address: 'Ahmed Shawky St., Fayoum, opposite the Governor\'s villa, above My Office furniture (third building from Black Hawk clothing)',
     mapTitle: 'Hive Co-working Space on Google Maps',
@@ -309,7 +318,7 @@ const en: SiteContent = {
   },
   projects: {
     kicker: 'Student projects',
-    title: 'Every month ends with a real project',
+    title: 'Every month ends with a project the student builds by hand',
     text: 'Examples of projects our students build with their own hands and present themselves.',
     note: 'Photos of our students\' real projects coming soon',
     items: [
@@ -333,9 +342,11 @@ const en: SiteContent = {
     items: [
       { q: 'How do I sign my child up?', a: 'Start with the free placement test on this site (younger children have a short chat instead). We then message you on WhatsApp with the right track and group.' },
       { q: 'Does a 6-year-old study with an 18-year-old?', a: 'No. Every track is split into three age groups: 6 to 9, 10 to 13 and 14 to 18, each with its own content and tools.' },
-      { q: 'How many sessions, and when and where?', a: '6 sessions a month, 3 hours each, on Fridays and Saturdays at Hive Co-working Space in Fayoum.' },
+      { q: 'How many sessions a month?', a: '6 sessions a month, 3 hours each: 18 hours a month.' },
+      { q: 'Where and when are classes?', a: 'Fridays and Saturdays at Hive Co-working Space, Ahmed Shawky St., Fayoum.' },
       { q: 'How big are the groups?', a: '6 to 12 students only, with an instructor and an assistant in every group.' },
       { q: 'What is the parents\' workshop?', a: 'A free meeting every Sunday where we explain our method and your role at home, and you meet the team. You can book it on this page.' },
+      { q: 'Does my child need any experience?', a: 'No. The free placement test shows us the right starting point and the closest level for your child.' },
       { q: 'Do students get a certificate?', a: 'Yes, a completion certificate after every month in which they finish their project.' },
       { q: 'What if my child does not benefit?', a: 'If your child attends at least 5 of 6 sessions and does not finish the month\'s project, we refund that month. Ask within 7 days of the last session.' },
     ],
@@ -348,6 +359,12 @@ const en: SiteContent = {
   },
   next: { starts: 'Next group starts', seats: (n) => (n === 1 ? '1 seat left' : `${n} seats left`), locale: 'en-GB' },
   trackPage: {
+    others: 'Or choose another track',
+    open: 'Tap a card to enlarge it',
+    prev: 'Previous',
+    next: 'Next',
+    close: 'Close',
+    hint: 'Card',
     back: 'All tracks',
     ages: 'By age',
     tools: 'Tools',
@@ -372,7 +389,7 @@ const en: SiteContent = {
     cards: 'Pictures from this track; click one to bring it to the front',
   },
   whatsappLabel: 'Message us on WhatsApp',
-  whatsappText: 'Hello TechSeeds, I would like to know more about your courses.',
+  whatsappText: 'I would like to know more about your courses.',
   footer: {
     test: 'Placement test',
     whatsapp: 'WhatsApp',

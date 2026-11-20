@@ -12,28 +12,43 @@ export interface StackCard {
   art?: ReactNode;
 }
 
-/**
- * Three overlapping cards for a track. They fan out gently the first time they
- * come into view; clicking a card brings it to the front with a small lift.
- */
-export default function TrackCards({ cards, label }: { cards: StackCard[]; label: string }) {
-  // order[0] is the front card, order[1] and order[2] sit behind it on either side.
-  const [order, setOrder] = useState(() => cards.map((_, i) => i));
-  const [open, setOpen] = useState(false);
-  const [lifted, setLifted] = useState<number | null>(null);
-  const box = useRef<HTMLDivElement>(null);
+export interface StackText {
+  /** Name of the group, for screen readers. */
+  label: string;
+  /** "Tap a card to enlarge it" */
+  open: string;
+  prev: string;
+  next: string;
+  close: string;
+  /** "Card" (followed by its number) */
+  card: string;
+}
 
+/**
+ * "Design 1" from the Track Hero Visual options: three stacked cards, one in front
+ * and one tilted out on each side, with arrows and dots under them.
+ * Clicking a side card brings it to the front; clicking the front card enlarges it.
+ */
+export default function TrackCards({ cards, text, dir }: { cards: StackCard[]; text: StackText; dir: 'rtl' | 'ltr' }) {
+  const n = cards.length;
+  const [front, setFront] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [shown, setShown] = useState(false);
+  const box = useRef<HTMLDivElement>(null);
+  const closeBtn = useRef<HTMLButtonElement>(null);
+
+  // The cards fan out from a neat pile the first time they come into view.
   useEffect(() => {
     const el = box.current;
     if (!el) return;
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setOpen(true);
+      setShown(true);
       return;
     }
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTimeout(() => setOpen(true), 150);
+          setTimeout(() => setShown(true), 150);
           io.disconnect();
         }
       },
@@ -43,36 +58,106 @@ export default function TrackCards({ cards, label }: { cards: StackCard[]; label
     return () => io.disconnect();
   }, []);
 
-  function bringToFront(index: number) {
-    if (order[0] === index) return;
-    setOrder((prev) => [index, ...prev.filter((i) => i !== index)]);
-    setLifted(index);
-    window.setTimeout(() => setLifted((cur) => (cur === index ? null : cur)), 500);
-  }
+  useEffect(() => {
+    if (!open) return;
+    closeBtn.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
+  const go = (step: number) => {
+    setOpen(false);
+    setFront((f) => (f + step + n) % n);
+  };
+  const num = (i: number) => (dir === 'rtl' ? ['١', '٢', '٣', '٤', '٥'][i] ?? String(i + 1) : String(i + 1));
+  const current = cards[front];
 
   return (
-    <div ref={box} className={`stack${open ? ' stack--open' : ''}`} role="group" aria-label={label}>
-      {cards.map((card, i) => {
-        const slot = order.indexOf(i);
-        return (
-          <button
-            key={card.key}
-            type="button"
-            className={`stack__card stack__card--slot${slot}${lifted === i ? ' stack__card--lift' : ''}`}
-            style={{ zIndex: 3 - slot }}
-            onClick={() => bringToFront(i)}
-            aria-pressed={slot === 0}
-            aria-label={card.label}
-          >
-            <span className="stack__inner">
+    <div className="stack-wrap">
+      <div ref={box} className={`stack${shown ? ' stack--shown' : ''}`} role="group" aria-label={text.label}>
+        {cards.map((card, i) => {
+          const pos = (i - front + n) % n; // 0 = front, 1 = side, 2 = other side
+          const isFront = pos === 0;
+          return (
+            <button
+              key={card.key}
+              type="button"
+              className={`stack__card stack__card--pos${pos}`}
+              onClick={() => (isFront ? setOpen(true) : (setFront(i), setOpen(false)))}
+              aria-label={isFront ? `${card.label}: ${text.open}` : card.label}
+            >
               <span className="stack__media">
-                {card.img ? <img src={card.img.src} alt={card.img.alt} loading="lazy" /> : card.art}
+                {card.img ? <img src={card.img.src} alt="" loading="lazy" /> : card.art}
               </span>
               <span className="stack__label">{card.label}</span>
-            </span>
+              {isFront && (
+                <span className="stack__zoom" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="stack-nav">
+        <div className="stack-nav__row">
+          <button type="button" className="stack-nav__btn" onClick={() => go(-1)} aria-label={text.prev}>
+            <Chevron flip={dir === 'ltr'} />
           </button>
-        );
-      })}
+          <div className="stack-nav__dots">
+            {cards.map((card, i) => (
+              <button
+                key={card.key}
+                type="button"
+                className="stack-nav__dot"
+                onClick={() => {
+                  setFront(i);
+                  setOpen(false);
+                }}
+                aria-label={`${text.card} ${num(i)}`}
+                aria-current={i === front}
+              >
+                <span />
+              </button>
+            ))}
+          </div>
+          <button type="button" className="stack-nav__btn stack-nav__btn--next" onClick={() => go(1)} aria-label={text.next}>
+            <Chevron flip={dir === 'rtl'} />
+          </button>
+        </div>
+        <p className="stack-nav__hint">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 11V5a2 2 0 0 1 4 0v5" /><path d="M13 10a2 2 0 0 1 4 0v1a2 2 0 0 1 4 0v4a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-3l-3-5a2 2 0 0 1 3-2l2 2" /></svg>
+          {text.open}
+        </p>
+      </div>
+
+      {open && (
+        <div className="stack-zoom" role="dialog" aria-modal="true" aria-label={current.label}>
+          <div className="stack-zoom__backdrop" onClick={() => setOpen(false)} />
+          <figure className="stack-zoom__card">
+            <span className="stack__media">
+              {current.img ? <img src={current.img.src} alt={current.img.alt} /> : current.art}
+            </span>
+            <figcaption className="stack__label">{current.label}</figcaption>
+          </figure>
+          <button ref={closeBtn} type="button" className="stack-zoom__close" onClick={() => setOpen(false)} aria-label={text.close}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          </button>
+        </div>
+      )}
     </div>
+  );
+}
+
+/** Points right; flipped, points left. */
+function Chevron({ flip }: { flip: boolean }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d={flip ? 'M15 6l-6 6 6 6' : 'M9 6l6 6-6 6'} />
+    </svg>
   );
 }
