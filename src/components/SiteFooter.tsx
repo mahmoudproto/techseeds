@@ -22,7 +22,7 @@ export default function SiteFooter({ lang }: { lang: Lang }) {
               {item.label}
             </Link>
           ))}
-          <Link href="/test" className="footer__link">
+          <Link href={lang === 'en' ? '/en/test' : '/test'} className="footer__link">
             {t.footer.test}
           </Link>
         </nav>

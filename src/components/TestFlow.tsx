@@ -1,27 +1,34 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { Answers, PublicResult, PublicTest, VersionId } from '@/lib/types';
+import { TEST_TEXT } from '@/lib/test-text';
 import { track } from '@/lib/track';
+import type { Answers, PublicResult, PublicTest, TestLang, VersionId } from '@/lib/types';
 import { versionForAge } from '@/lib/validate';
-import LeadForm from './LeadForm';
+import LeadForm, { type Laptop } from './LeadForm';
 import QuestionCard from './QuestionCard';
 import Result from './Result';
 import Welcome from './Welcome';
 
 type Step = 'welcome' | 'questions' | 'lead' | 'result';
 
+/**
+ * Progress is kept in sessionStorage, shared by the Arabic (/test) and English (/en/test) pages,
+ * so switching language reopens the test at the same point.
+ */
 interface Saved {
-  step: 'questions' | 'lead';
+  step: Step;
   childName: string;
   age: number;
   index: number;
   answers: Answers;
   order: Record<string, string[]>;
   startedAt: number;
+  parentName?: string;
+  result?: PublicResult;
 }
 
-const STORAGE_KEY = 'techseeds-test-v1';
+const STORAGE_KEY = 'techseeds-test-v2';
 const RETRY_DELAYS_MS = [5000, 15000];
 
 function shuffle<T>(items: T[]): T[] {
@@ -37,7 +44,9 @@ function shuffle<T>(items: T[]): T[] {
 function makeOrder(test: PublicTest): Record<string, string[]> {
   const order: Record<string, string[]> = {};
   for (const q of test.questions) {
-    const last = q.options.filter((o) => o.exclusive || o.label === 'مش عارف').map((o) => o.id);
+    const last = q.options
+      .filter((o) => o.exclusive || o.label === 'مش عارف' || o.label === "I don't know")
+      .map((o) => o.id);
     const rest = q.options.filter((o) => !last.includes(o.id)).map((o) => o.id);
     order[q.id] = [...shuffle(rest), ...last];
   }
@@ -62,7 +71,9 @@ function writeSaved(saved: Saved | null) {
   }
 }
 
-export default function TestFlow({ tests }: { tests: Record<VersionId, PublicTest> }) {
+export default function TestFlow({ tests, lang }: { tests: Record<VersionId, PublicTest>; lang: TestLang }) {
+  const text = TEST_TEXT[lang];
+  const [loaded, setLoaded] = useState(false);
   const [step, setStep] = useState<Step>('welcome');
   const [childName, setChildName] = useState('');
   const [parentName, setParentName] = useState('');
@@ -79,32 +90,54 @@ export default function TestFlow({ tests }: { tests: Record<VersionId, PublicTes
   const version = versionForAge(age);
   const test = version ? tests[version] : null;
 
-  // Pick up where the child left off after a refresh.
+  // Pick up where the child left off, after a refresh or a language switch.
   useEffect(() => {
     const saved = readSaved();
-    const savedVersion = saved ? versionForAge(saved.age) : null;
-    if (!saved || !savedVersion) return;
-    const total = tests[savedVersion].questions.length;
-    setChildName(saved.childName);
-    setAge(saved.age);
-    setAnswers(saved.answers ?? {});
-    setOrder(saved.order ?? {});
-    setStartedAt(saved.startedAt || Date.now());
-    setIndex(Math.min(Math.max(0, saved.index ?? 0), total - 1));
-    setStep(saved.step === 'lead' ? 'lead' : 'questions');
+    if (saved) {
+      setChildName(saved.childName ?? '');
+      setAge(saved.age ?? 0);
+      setAnswers(saved.answers ?? {});
+      setOrder(saved.order ?? {});
+      setStartedAt(saved.startedAt || Date.now());
+      setParentName(saved.parentName ?? '');
+      const savedVersion = versionForAge(saved.age);
+      if (saved.step === 'result' && saved.result) {
+        setResult(saved.result);
+        setStep('result');
+      } else if (savedVersion && (saved.step === 'questions' || saved.step === 'lead')) {
+        const total = tests[savedVersion].questions.length;
+        setIndex(Math.min(Math.max(0, saved.index ?? 0), total - 1));
+        setStep(saved.step);
+      }
+    }
+    setLoaded(true);
   }, [tests]);
 
   useEffect(() => {
-    if (step === 'questions' || step === 'lead') {
-      writeSaved({ step, childName, age, index, answers, order, startedAt });
-    }
-  }, [step, childName, age, index, answers, order, startedAt]);
+    if (!loaded) return;
+    writeSaved({
+      step,
+      childName,
+      age,
+      index,
+      answers,
+      order,
+      startedAt,
+      parentName,
+      ...(step === 'result' && result ? { result } : {}),
+    });
+  }, [loaded, step, childName, age, index, answers, order, startedAt, parentName, result]);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [step, index]);
+    if (loaded) window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [loaded, step, index]);
 
   useEffect(() => () => retryTimers.current.forEach(clearTimeout), []);
+
+  const draft = useCallback((name: string, childAge: number | null) => {
+    setChildName(name);
+    setAge(childAge ?? 0);
+  }, []);
 
   const start = useCallback(
     (name: string, childAge: number) => {
@@ -117,9 +150,9 @@ export default function TestFlow({ tests }: { tests: Record<VersionId, PublicTes
       setIndex(0);
       setStartedAt(Date.now());
       setStep('questions');
-      track('test_started', { version: v });
+      track('test_started', { version: v, lang });
     },
-    [tests],
+    [tests, lang],
   );
 
   const restart = useCallback(() => {
@@ -129,6 +162,7 @@ export default function TestFlow({ tests }: { tests: Record<VersionId, PublicTes
     setResult(null);
     setAnswers({});
     setChildName('');
+    setParentName('');
     setAge(0);
     setIndex(0);
     setServerError('');
@@ -145,7 +179,7 @@ export default function TestFlow({ tests }: { tests: Record<VersionId, PublicTes
     return (await response.json()) as PublicResult;
   }
 
-  async function submit(parent: string, phone: string, website: string) {
+  async function submit(parent: string, phone: string, laptop: Laptop, website: string) {
     if (submitting) return;
     setSubmitting(true);
     setServerError('');
@@ -154,6 +188,8 @@ export default function TestFlow({ tests }: { tests: Record<VersionId, PublicTes
       age,
       parentName: parent,
       phone,
+      laptop,
+      lang,
       website,
       answers,
       durationSec: Math.round((Date.now() - startedAt) / 1000),
@@ -161,14 +197,13 @@ export default function TestFlow({ tests }: { tests: Record<VersionId, PublicTes
     try {
       const data = await post(payload);
       if (!data) {
-        setServerError('حدث خطأ أثناء تجهيز النتيجة. حاول مرة أخرى.');
+        setServerError(text.lead.errServer);
         return;
       }
       setParentName(parent);
       setResult(data);
-      track('test_completed', { version: data.version, track: data.top });
-      writeSaved(null);
       setStep('result');
+      track('test_completed', { version: data.version, track: data.top, lang });
 
       // If the sheet could not be reached, try again quietly in the background.
       if (!data.saved) {
@@ -191,16 +226,19 @@ export default function TestFlow({ tests }: { tests: Record<VersionId, PublicTes
         }, 0);
       }
     } catch {
-      setServerError('تعذر الاتصال. تأكد من الإنترنت وحاول مرة أخرى.');
+      setServerError(text.lead.errNetwork);
     } finally {
       setSubmitting(false);
     }
   }
 
+  // Avoid flashing the welcome screen before saved progress is restored.
+  if (!loaded) return <div className="shell shell--narrow" aria-busy="true" style={{ minHeight: '60vh' }} />;
+
   if (step === 'result' && result) {
     return (
       <div className="shell shell--narrow">
-        <Result result={result} parentName={parentName} age={age} onRestart={restart} />
+        <Result lang={lang} result={result} parentName={parentName} age={age} onRestart={restart} />
       </div>
     );
   }
@@ -209,6 +247,7 @@ export default function TestFlow({ tests }: { tests: Record<VersionId, PublicTes
     return (
       <div className="shell shell--narrow">
         <LeadForm
+          lang={lang}
           childName={childName}
           submitting={submitting}
           serverError={serverError}
@@ -225,6 +264,7 @@ export default function TestFlow({ tests }: { tests: Record<VersionId, PublicTes
     return (
       <div className="shell shell--narrow">
         <QuestionCard
+          lang={lang}
           question={question}
           order={order[question.id] ?? question.options.map((o) => o.id)}
           value={answers[question.id]}
@@ -240,7 +280,13 @@ export default function TestFlow({ tests }: { tests: Record<VersionId, PublicTes
 
   return (
     <div className="shell">
-      <Welcome onStart={start} />
+      <Welcome
+        lang={lang}
+        initialName={childName}
+        initialAge={age >= 6 ? age : null}
+        onDraft={draft}
+        onStart={start}
+      />
     </div>
   );
 }

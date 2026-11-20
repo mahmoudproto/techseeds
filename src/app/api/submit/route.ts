@@ -43,6 +43,10 @@ export async function POST(request: Request) {
   const phone = normalizePhone(typeof body.phone === 'string' ? body.phone : '');
   if (!phone) return bad('phone');
 
+  const laptop = body.laptop === 'yes' || body.laptop === 'no' ? body.laptop : null;
+  if (!laptop) return bad('laptop');
+  const lang = body.lang === 'en' ? 'en' : 'ar';
+
   const test = getTest(version);
   const result = score(test, body.answers as Answers);
   if ('error' in result) return bad('answers');
@@ -53,7 +57,7 @@ export async function POST(request: Request) {
     : 0;
 
   const row = buildRow(
-    { childName, age, version, parentName, phone, durationSec, answers: body.answers as Answers },
+    { childName, age, version, parentName, phone, durationSec, answers: body.answers as Answers, laptop, lang },
     test,
     result,
   );

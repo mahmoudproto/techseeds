@@ -69,7 +69,7 @@ export default function Landing({ lang }: { lang: Lang }) {
             </h1>
             <p className="hero__lead">{t.hero.lead}</p>
             <div className="hero__cta-row">
-              <Link className="btn btn--big" href="/test">
+              <Link className="btn btn--big" href={lang === 'en' ? '/en/test' : '/test'}>
                 <span>{t.hero.cta}</span>
                 {arrow}
               </Link>
@@ -215,7 +215,7 @@ export default function Landing({ lang }: { lang: Lang }) {
             ))}
           </ol>
           <div className="center">
-            <Link className="btn btn--raised" href="/test">
+            <Link className="btn btn--raised" href={lang === 'en' ? '/en/test' : '/test'}>
               {t.how.cta}
             </Link>
           </div>
@@ -312,7 +312,7 @@ export default function Landing({ lang }: { lang: Lang }) {
               <h2 className="final__title">{t.final.title}</h2>
               <p>{t.final.text}</p>
               <div className="hero__ctas">
-                <Link className="btn btn--big" href="/test">
+                <Link className="btn btn--big" href={lang === 'en' ? '/en/test' : '/test'}>
                   <span>{t.final.cta}</span>
                   {arrow}
                 </Link>

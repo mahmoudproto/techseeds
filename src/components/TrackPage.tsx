@@ -143,7 +143,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
               <p>{p.ctaText}</p>
             </div>
             <div className="hero__ctas">
-              <Link className="btn" href="/test">
+              <Link className="btn" href={lang === 'en' ? '/en/test' : '/test'}>
                 <span>{p.test}</span>
                 <span className="btn__arrow" aria-hidden="true">{t.arrow}</span>
               </Link>

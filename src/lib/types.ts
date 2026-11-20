@@ -28,9 +28,13 @@ export type OptionVisual =
   | { kind: 'dots'; n: number }
   | { kind: 'icon'; name: IconName };
 
+export type TestLang = 'ar' | 'en';
+
 interface BaseOption {
   id: string;
   label: string;
+  /** English label; options without one (numbers, brand names) use `label`. */
+  en?: string;
   visual?: OptionVisual;
 }
 
@@ -39,6 +43,10 @@ interface BaseQuestion {
   prompt: string;
   /** A maths expression or number sequence, always shown left to right. */
   expr?: string;
+  /** A short program, one line per item; two leading spaces indent a line. */
+  program?: string[];
+  /** English wording for the question. */
+  en?: { prompt: string; program?: string[] };
   visual?: QuestionVisual;
 }
 
@@ -86,12 +94,14 @@ export interface PublicQuestion {
   multi: boolean;
   prompt: string;
   expr?: string;
+  program?: string[];
   visual?: QuestionVisual;
   options: PublicOption[];
 }
 
 export interface PublicTest {
   version: VersionId;
+  lang: TestLang;
   questions: PublicQuestion[];
 }
 

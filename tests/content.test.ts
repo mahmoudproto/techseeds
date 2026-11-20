@@ -86,25 +86,31 @@ describe('known answers', () => {
     expect(label('B', 'b1')).toBe('32');
     expect(label('B', 'b2')).toBe('دايرة زرقا');
     expect(label('B', 'b3')).toBe('20');
-    expect(label('B', 'b4')).toBe('يوسف');
+    expect(label('B', 'b4')).toBe('عمر');
     expect(label('B', 'b5')).toBe('المربع ب');
     expect(label('B', 'b6')).toBe('Google Chrome');
     expect(label('B', 'b7')).toBe('T!ger#92mK');
-    expect(label('C', 'c1')).toBe('42');
+    expect(label('C', 'c1')).toBe('33');
     expect(label('C', 'c2')).toBe('200');
-    expect(label('C', 'c3')).toBe('6');
+    expect(label('C', 'c3')).toBe('36');
     expect(label('C', 'c4')).toBe('9');
-    expect(label('C', 'c5')).toBe('5');
+    expect(label('C', 'c5')).toBe('هيكتب من 1 لـ 4 بس');
+    expect(label('C', 'c8')).toContain('أقسّمها');
+    expect(label('B', 'b8')).toBe('6 مرات تسقيف و3 مرات نط');
     expect(label('C', 'c6')).toBe('Windows');
   });
 
   it('agrees with the arithmetic', () => {
     expect(15 + 4 * 3 - 7).toBe(20);
     expect((35 + 11 + 4) * 4).toBe(200);
-    let x = 5;
-    x = x > 3 ? x * 2 : x + 1;
-    x -= 4;
-    expect(x).toBe(6);
+    let points = 5;
+    for (let i = 0; i < 3; i += 1) points *= 2;
+    expect(points - 4).toBe(36);
+    const written: number[] = [];
+    for (let n = 1; n < 5; n += 1) written.push(n);
+    expect(written).toEqual([1, 2, 3, 4]);
+    const seq = [2, 3, 5, 9, 17];
+    expect(seq[4] + (seq[4] - seq[3]) * 2).toBe(33);
   });
 
   it('puts the robot on square ب after: forward 2, turn right, forward 1', () => {
@@ -113,5 +119,36 @@ describe('known answers', () => {
     const [col, row] = q.visual.start;
     const end: [number, number] = [col + 1, row - 2];
     expect(q.visual.marks.find((m) => m.label === 'ب')?.at).toEqual(end);
+  });
+});
+
+describe('English version', () => {
+  it.each(['A', 'B', 'C'] as VersionId[])('version %s has English text for every question and word option', (version) => {
+    const pub = toPublic(getTest(version), 'en');
+    const arabic = /[\u0600-\u06FF]/;
+    for (const q of pub.questions) {
+      expect(q.prompt, q.id).not.toMatch(arabic);
+      for (const line of q.program ?? []) expect(line, q.id).not.toMatch(arabic);
+      for (const o of q.options) expect(o.label, `${q.id} ${o.id}`).not.toMatch(arabic);
+      if (q.visual?.kind === 'robotGrid') {
+        for (const m of q.visual.marks) expect(m.label).not.toMatch(arabic);
+      }
+    }
+    expect(pub.lang).toBe('en');
+  });
+
+  it('keeps the same question and option ids in both languages, so a switch keeps the answers', () => {
+    for (const version of ['A', 'B', 'C'] as VersionId[]) {
+      const ar = toPublic(getTest(version), 'ar');
+      const en = toPublic(getTest(version), 'en');
+      expect(en.questions.map((q) => q.id)).toEqual(ar.questions.map((q) => q.id));
+      en.questions.forEach((q, i) => expect(q.options.map((o) => o.id)).toEqual(ar.questions[i].options.map((o) => o.id)));
+    }
+  });
+
+  it('does not leak answers in English either', () => {
+    const json = JSON.stringify(toPublic(getTest('C'), 'en'));
+    expect(json).not.toContain('"correct"');
+    expect(json).not.toContain('"track"');
   });
 });
