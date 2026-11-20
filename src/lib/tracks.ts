@@ -57,57 +57,6 @@ export interface Track {
 
 export const TRACKS: Track[] = [
   {
-    slug: 'programming',
-    name: { ar: 'البرمجة', en: 'Programming' },
-    short: { ar: 'يتعلم يفكر بخطوات مرتبة ويبني برامج شغالة بنفسه.', en: 'Learns to think in clear steps and builds working programs.' },
-    about: {
-      ar: 'نبدأ من البرمجة بالبلوكات للصغار، ونوصل للغات البرمجة الحقيقية مع الكبار. في كل شهر يبني الطالب برنامجًا يعمل فعلًا ويعرضه بنفسه.',
-      en: 'Younger children start with block coding; older students move on to real programming languages. Every month ends with a working program the student presents.',
-    },
-    builds: { ar: 'برامج شغالة', en: 'Working programs' },
-    color: 'blue',
-    levels: {
-      young: { tools: ['mBlock'], text: { ar: 'البرمجة بالبلوكات: الأوامر والتكرار والشروط من خلال قصص وألعاب بسيطة.', en: 'Block coding: commands, loops and conditions through simple stories and games.' } },
-      middle: { tools: ['Python'], text: { ar: 'أول لغة برمجة حقيقية: المتغيرات والشروط والتكرار والدوال من خلال برامج صغيرة مفيدة.', en: 'A first real language: variables, conditions, loops and functions in small, useful programs.' } },
-      teen: { tools: ['JavaScript'], text: { ar: 'برمجة تطبيقات ومواقع تفاعلية، والتفكير في بناء مشروع كامل من البداية للنهاية.', en: 'Interactive apps and web pages, and planning a full project from start to finish.' } },
-    },
-    cards: [
-      { kind: 'art', label: { ar: 'من البلوكات إلى الكود', en: 'From blocks to code' } },
-      { kind: 'photo', label: { ar: 'برمجة حقيقية بأيديهم', en: 'Real coding, hands on' } },
-      { kind: 'project', label: { ar: 'مشروع: قصة تفاعلية', en: 'Project: an interactive story' }, tint: 'blue' },
-    ],
-    projects: [
-      { ar: 'قصة أو لعبة تفاعلية بالبلوكات', en: 'An interactive story or game in blocks' },
-      { ar: 'آلة حاسبة أو اختبار قصير بلغة Python', en: 'A calculator or short quiz in Python' },
-      { ar: 'صفحة ويب تفاعلية', en: 'An interactive web page' },
-    ],
-  },
-  {
-    slug: 'gamedev',
-    name: { ar: 'تطوير الألعاب', en: 'Game Development' },
-    short: { ar: 'يصمم ألعابه الخاصة، ويفهم إزاي اللعبة بتتبني من جوه.', en: 'Designs their own games and learns how games work inside.' },
-    about: {
-      ar: 'الطالب يتحول من لاعب إلى صانع ألعاب. يتعلم أساسيات البرمجة من خلال بناء لعبة حقيقية خطوة بخطوة، ويتعلم كمان أفكار تصميم الألعاب: إزاي نخلي اللعبة ممتعة وعادلة.',
-      en: 'Students go from playing games to making them. They learn programming basics by building a real game step by step, and the ideas behind good game design: how to make a game fun and fair.',
-    },
-    builds: { ar: 'ألعابه الخاصة', en: 'Their own games' },
-    color: 'yellow',
-    levels: {
-      middle: { tools: ['GameMaker'], text: { ar: 'بناء لعبة باستخدام البلوكات المرئية، مع الحركة والتصادم والنقاط والأرواح، ثم إضافة العشوائية وزيادة الصعوبة.', en: 'A full game with visual code blocks: movement, collisions, score and lives, then randomness and rising difficulty.' } },
-      teen: { tools: ['Unity'], text: { ar: 'تطوير ألعاب باستخدام محرك احترافي، وبناء مشاهد وشخصيات وتجربة لعب متكاملة.', en: 'Games in a professional engine, with scenes, characters and a complete play experience.' } },
-    },
-    cards: [
-      { kind: 'project', label: { ar: 'مشروع: لعبة سفينة الفضاء', en: 'Project: the spaceship game' }, project: 'spaceship', tint: 'yellow' },
-      { kind: 'art', label: { ar: 'من لاعب إلى صانع ألعاب', en: 'From player to game maker' } },
-      { kind: 'photo', label: { ar: 'يجرب لعبته بنفسه', en: 'Playtesting their own game' } },
-    ],
-    projects: [
-      { ar: 'لعبة سفينة فضاء تطلق الليزر على الكويكبات', en: 'A spaceship game that shoots lasers at asteroids' },
-      { ar: 'قوة خاصة (Power-up) يصممها كل طالب للعبته', en: 'A power-up each student designs for their game' },
-      { ar: 'لعبة كاملة بمحرك Unity', en: 'A complete game in Unity' },
-    ],
-  },
-  {
     slug: 'ai',
     name: { ar: 'الذكاء الاصطناعي', en: 'Artificial Intelligence' },
     short: { ar: 'يستخدم أدوات الذكاء الاصطناعي صح، في مهام ومشاريع حقيقية.', en: 'Uses AI tools well, on real tasks and projects.' },
@@ -134,6 +83,32 @@ export const TRACKS: Track[] = [
     ],
   },
   {
+    slug: 'programming',
+    name: { ar: 'البرمجة', en: 'Programming' },
+    short: { ar: 'يتعلم يفكر بخطوات مرتبة ويبني برامج شغالة بنفسه.', en: 'Learns to think in clear steps and builds working programs.' },
+    about: {
+      ar: 'نبدأ من البرمجة بالبلوكات للصغار، ونوصل للغات البرمجة الحقيقية مع الكبار. في كل شهر يبني الطالب برنامجًا يعمل فعلًا ويعرضه بنفسه.',
+      en: 'Younger children start with block coding; older students move on to real programming languages. Every month ends with a working program the student presents.',
+    },
+    builds: { ar: 'برامج شغالة', en: 'Working programs' },
+    color: 'blue',
+    levels: {
+      young: { tools: ['mBlock'], text: { ar: 'البرمجة بالبلوكات: الأوامر والتكرار والشروط من خلال قصص وألعاب بسيطة.', en: 'Block coding: commands, loops and conditions through simple stories and games.' } },
+      middle: { tools: ['Python'], text: { ar: 'أول لغة برمجة حقيقية: المتغيرات والشروط والتكرار والدوال من خلال برامج صغيرة مفيدة.', en: 'A first real language: variables, conditions, loops and functions in small, useful programs.' } },
+      teen: { tools: ['JavaScript'], text: { ar: 'برمجة تطبيقات ومواقع تفاعلية، والتفكير في بناء مشروع كامل من البداية للنهاية.', en: 'Interactive apps and web pages, and planning a full project from start to finish.' } },
+    },
+    cards: [
+      { kind: 'art', label: { ar: 'من البلوكات إلى الكود', en: 'From blocks to code' } },
+      { kind: 'photo', label: { ar: 'برمجة حقيقية بأيديهم', en: 'Real coding, hands on' } },
+      { kind: 'project', label: { ar: 'مشروع: قصة تفاعلية', en: 'Project: an interactive story' }, tint: 'blue' },
+    ],
+    projects: [
+      { ar: 'قصة أو لعبة تفاعلية بالبلوكات', en: 'An interactive story or game in blocks' },
+      { ar: 'آلة حاسبة أو اختبار قصير بلغة Python', en: 'A calculator or short quiz in Python' },
+      { ar: 'صفحة ويب تفاعلية', en: 'An interactive web page' },
+    ],
+  },
+  {
     slug: 'cyber',
     name: { ar: 'الأمن السيبراني', en: 'Cybersecurity' },
     short: { ar: 'يتعلم يحمي نفسه وأجهزته، ويحل تحديات الأمان.', en: 'Learns to protect themselves and their devices, and solves security challenges.' },
@@ -156,6 +131,31 @@ export const TRACKS: Track[] = [
       { ar: 'تطبيق تشفير للرسائل', en: 'A message encryption app' },
       { ar: 'فاحص قوة كلمة السر', en: 'A password strength checker' },
       { ar: 'حل تحديات CTF', en: 'Solving CTF challenges' },
+    ],
+  },
+  {
+    slug: 'gamedev',
+    name: { ar: 'تطوير الألعاب', en: 'Game Development' },
+    short: { ar: 'يصمم ألعابه الخاصة، ويفهم إزاي اللعبة بتتبني من جوه.', en: 'Designs their own games and learns how games work inside.' },
+    about: {
+      ar: 'الطالب يتحول من لاعب إلى صانع ألعاب. يتعلم أساسيات البرمجة من خلال بناء لعبة حقيقية خطوة بخطوة، ويتعلم كمان أفكار تصميم الألعاب: إزاي نخلي اللعبة ممتعة وعادلة.',
+      en: 'Students go from playing games to making them. They learn programming basics by building a real game step by step, and the ideas behind good game design: how to make a game fun and fair.',
+    },
+    builds: { ar: 'ألعابه الخاصة', en: 'Their own games' },
+    color: 'yellow',
+    levels: {
+      middle: { tools: ['GameMaker'], text: { ar: 'بناء لعبة باستخدام البلوكات المرئية، مع الحركة والتصادم والنقاط والأرواح، ثم إضافة العشوائية وزيادة الصعوبة.', en: 'A full game with visual code blocks: movement, collisions, score and lives, then randomness and rising difficulty.' } },
+      teen: { tools: ['Unity'], text: { ar: 'تطوير ألعاب باستخدام محرك احترافي، وبناء مشاهد وشخصيات وتجربة لعب متكاملة.', en: 'Games in a professional engine, with scenes, characters and a complete play experience.' } },
+    },
+    cards: [
+      { kind: 'project', label: { ar: 'مشروع: لعبة سفينة الفضاء', en: 'Project: the spaceship game' }, project: 'spaceship', tint: 'yellow' },
+      { kind: 'art', label: { ar: 'من لاعب إلى صانع ألعاب', en: 'From player to game maker' } },
+      { kind: 'photo', label: { ar: 'يجرب لعبته بنفسه', en: 'Playtesting their own game' } },
+    ],
+    projects: [
+      { ar: 'لعبة سفينة فضاء تطلق الليزر على الكويكبات', en: 'A spaceship game that shoots lasers at asteroids' },
+      { ar: 'قوة خاصة (Power-up) يصممها كل طالب للعبته', en: 'A power-up each student designs for their game' },
+      { ar: 'لعبة كاملة بمحرك Unity', en: 'A complete game in Unity' },
     ],
   },
 ];

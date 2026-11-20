@@ -68,7 +68,7 @@ export default function Landing({ lang }: { lang: Lang }) {
               )}
             </h1>
             <p className="hero__lead">{t.hero.lead}</p>
-            <div className="hero__cta-group">
+            <div className="hero__cta-row">
               <Link className="btn btn--big" href="/test">
                 <span>{t.hero.cta}</span>
                 {arrow}
@@ -81,13 +81,12 @@ export default function Landing({ lang }: { lang: Lang }) {
             <span className="shape shape--green" aria-hidden="true" />
             <span className="shape shape--yellow" aria-hidden="true" />
             <span className="shape shape--blue-dot" aria-hidden="true" />
-            <Sparkle className="hero__sparkle" />
             <img
               className="hero__photo"
               src={MEDIA.hero.src}
               alt={MEDIA.hero.alt[lang]}
-              width={642}
-              height={464}
+              width={640}
+              height={480}
               fetchPriority="high"
             />
           </div>
