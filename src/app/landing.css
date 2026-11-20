@@ -233,6 +233,7 @@
 
 .hl {
   position: relative;
+  isolation: isolate;
   display: inline-block;
   color: var(--green);
   white-space: nowrap;
@@ -240,6 +241,7 @@
 
 .squiggle {
   position: absolute;
+  z-index: -1; /* behind the words */
   inset-inline: -2%;
   bottom: -6px;
   width: 104%;
@@ -396,7 +398,6 @@ html[dir='rtl'] .hero__doodle {
   bottom: 2px;
   border-radius: 50%;
   background: #2f80e0;
-  z-index: 1;
 }
 
 .hero__sparkle {

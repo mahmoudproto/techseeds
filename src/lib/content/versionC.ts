@@ -39,11 +39,11 @@ export const versionC: TestDefinition = {
     },
     {
       id: 'c3',
-      en: { prompt: 'Follow the steps in order. How many points are there at the end?', program: ['points = 5', 'Repeat 3 times:', '  points = points × 2', 'Then: points = points − 4'] },
+      en: { prompt: 'Follow the steps in order. How many points are there at the end?', program: ['points = 5', 'Repeat 3 times: points = points × 2', 'Then: points = points − 4'] },
       kind: 'thinking',
       tag: 'logic',
       prompt: 'نفّذ الخطوات دي بالترتيب. النقط هتبقى كام في الآخر؟',
-      program: ['النقط = 5', 'كرّر 3 مرات:', '  النقط = النقط × 2', 'وبعدين: النقط = النقط − 4'],
+      program: ['النقط = 5', 'كرّر 3 مرات: النقط = النقط × 2', 'وبعدين: النقط = النقط − 4'],
       options: [
         { id: 'o1', label: '40' },
         { id: 'o2', label: '26' },
