@@ -1132,27 +1132,54 @@ html[dir='ltr'] select.input {
   border: 1px solid var(--border);
 }
 
-.faq__item summary {
+.faq__q {
+  margin: 0;
+  font: inherit;
+}
+
+.faq__q button {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
   padding: 16px 20px;
+  border: 0;
+  background: none;
+  color: var(--navy);
   font-family: var(--font-head);
   font-weight: 600;
   font-size: 17px;
+  line-height: 1.6;
+  text-align: start;
   cursor: pointer;
-  list-style: none;
 }
 
-.faq__item summary::-webkit-details-marker {
-  display: none;
-}
-
-.faq__item summary:focus-visible {
+.faq__q button:focus-visible {
   outline: 3px solid var(--blue);
   outline-offset: 2px;
   border-radius: var(--r-md);
+}
+
+/* The answer slides open: the row grows from 0 to its full height */
+.faq__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.faq__item--open .faq__panel {
+  grid-template-rows: 1fr;
+}
+
+.faq__inner {
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.faq__item--open .faq__inner {
+  opacity: 1;
 }
 
 .faq__icon {
@@ -1178,11 +1205,11 @@ html[dir='ltr'] select.input {
   transform: rotate(90deg);
 }
 
-.faq__item[open] .faq__icon::after {
+.faq__item--open .faq__icon::after {
   transform: rotate(0deg);
 }
 
-.faq__item p {
+.faq__inner p {
   margin: 0;
   padding: 0 20px 18px;
   color: var(--body);
@@ -2178,4 +2205,107 @@ html[dir='rtl'] .instructor {
   .stack-zoom__card {
     animation: none;
   }
+}
+
+/* Phones: the "about 10 minutes" note sits centred under the test button */
+@media (max-width: 719px) {
+  .hero__cta-row {
+    display: grid;
+    justify-content: start;
+    gap: 10px;
+  }
+
+  .hero__cta-row .hero__note {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* Switching the age tab: the new cards rise and fade in one after another */
+.track-grid .track-card {
+  animation: card-in 0.45s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Teaching team: one portrait per instructor under the group photo */
+.team__people {
+  list-style: none;
+  margin: 40px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.person__photo {
+  display: block;
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: var(--shadow-soft);
+}
+
+.person__name {
+  color: var(--navy);
+  font-size: 17px;
+}
+
+@media (max-width: 719px) {
+  .team__people {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px 12px;
+  }
+
+  .person {
+    flex: 0 0 calc((100% - 24px) / 3);
+  }
+
+  .person__name {
+    font-size: 15px;
+  }
+}
+
+/* Final call to action: the wide team photo across the top, the text under it */
+.final {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.final .final__photo {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 3 / 1;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+
+.day__name,
+.day__month {
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }

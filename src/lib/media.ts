@@ -37,17 +37,23 @@ export const MEDIA = {
     src: local('why-class'),
     alt: { ar: 'مدرّب يساعد أطفالًا في تيشيرتات تك سيدز أمام اللابتوب', en: 'An instructor helping children in TechSeeds T-shirts at their laptops' },
   },
-  // Still stock: no TechSeeds images for these yet.
+  // Our teaching team (photos taken 21 Nov 2026; only the background was replaced).
   team: {
-    src: pexels(5212695, 1200),
-    alt: { ar: 'مدرّب يتابع طلابه وهم يعملون على مشروعهم', en: 'An instructor guiding students through their project' },
-    credit: 'Max Fischer / Pexels',
+    src: local('team-standing'),
+    alt: { ar: 'فريق تدريس تك سيدز', en: 'The TechSeeds teaching team' },
   },
   finalCta: {
-    src: pexels(5212700, 1400),
-    alt: { ar: 'طلاب ومعلمتهم يصفقون احتفالًا في الفصل', en: 'Students and their teacher clapping to celebrate in class' },
-    credit: 'Max Fischer / Pexels',
+    src: local('team-sitting'),
+    alt: { ar: 'فريق تدريس تك سيدز حول طاولة عليها لابتوبات', en: 'The TechSeeds teaching team around a table with laptops' },
   },
+  /** One portrait per instructor, in the order they appear on the page. */
+  instructors: [
+    { src: local('instructor-mahmoud'), name: { ar: 'محمود', en: 'Mahmoud' } },
+    { src: local('instructor-george'), name: { ar: 'جورج', en: 'George' } },
+    { src: local('instructor-norhan'), name: { ar: 'نورهان', en: 'Norhan' } },
+    { src: local('instructor-sarah'), name: { ar: 'سارة', en: 'Sarah' } },
+    { src: local('instructor-shirien'), name: { ar: 'شيرين', en: 'Shirien' } },
+  ],
   // One 3D style for all four tracks (Shirien's redesign): objects and characters,
   // not a particular child. The older flat pictures are still in /public/media.
   tracks: {
@@ -101,4 +107,4 @@ export const MEDIA = {
       alt: { ar: 'درع أمان وعلم تحدي CTF', en: 'A security shield and a CTF flag' },
     },
   },
-} satisfies Record<string, Photo | Record<string, Photo>>;
+} satisfies Record<string, Photo | Record<string, Photo> | { src: string; name: { ar: string; en: string } }[]>;

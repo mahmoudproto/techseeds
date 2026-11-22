@@ -6,6 +6,7 @@ import { SITE, whatsappLink, type Lang } from '@/lib/site-content';
 import { LOCATION, NEXT_START_DATE, SEATS_LEFT } from '@/lib/site-config';
 import AgeTabs from './AgeTabs';
 import { Sparkle, Squiggle } from './Doodles';
+import Faq from './Faq';
 import Reveal from './Reveal';
 import Icon from './LandingIcon';
 import WorkshopForm from './WorkshopForm';
@@ -142,8 +143,7 @@ export default function Landing({ lang }: { lang: Lang }) {
         <div className="wrap team">
           <div className="team__photo-wrap">
             <span className="bg-shape bg-shape--green team__blob" aria-hidden="true" />
-            <img className="team__photo" src={MEDIA.team.src} alt={MEDIA.team.alt[lang]} loading="lazy" width={1200} height={800} />
-            <span className="sticker">{t.team.soon}</span>
+            <img className="team__photo" src={MEDIA.team.src} alt={MEDIA.team.alt[lang]} loading="lazy" width={1600} height={1067} />
           </div>
           <div>
             <Head kicker={t.team.kicker} title={t.team.title} text={t.team.text} />
@@ -159,6 +159,16 @@ export default function Landing({ lang }: { lang: Lang }) {
               ))}
             </div>
           </div>
+        </div>
+        <div className="wrap">
+          <ul className="team__people" aria-label={t.team.people}>
+            {MEDIA.instructors.map((p) => (
+              <li className="person" key={p.src}>
+                <img className="person__photo" src={p.src} alt="" loading="lazy" width={480} height={480} />
+                <strong className="person__name">{p.name[lang]}</strong>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -288,17 +298,7 @@ export default function Landing({ lang }: { lang: Lang }) {
       <section className="section section--green" id="faq">
         <div className="wrap wrap--narrow">
           <Head kicker={t.faq.kicker} title={t.faq.title} center />
-          <div className="faq">
-            {t.faq.items.map((item, i) => (
-              <details className="faq__item" key={item.q} open={i === 0}>
-                <summary>
-                  <span>{item.q}</span>
-                  <span className="faq__icon" aria-hidden="true" />
-                </summary>
-                <p>{item.a}</p>
-              </details>
-            ))}
-          </div>
+          <Faq items={t.faq.items} />
         </div>
       </section>
 
@@ -306,7 +306,7 @@ export default function Landing({ lang }: { lang: Lang }) {
       <section className="section">
         <div className="wrap">
           <div className="final">
-            <img className="final__photo" src={MEDIA.finalCta.src} alt={MEDIA.finalCta.alt[lang]} loading="lazy" width={1400} height={878} />
+            <img className="final__photo" src={MEDIA.finalCta.src} alt={MEDIA.finalCta.alt[lang]} loading="lazy" width={1600} height={533} />
             <div className="final__copy">
               <Sparkle className="final__sparkle" />
               <h2 className="final__title">{t.final.title}</h2>

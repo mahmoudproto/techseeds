@@ -57,17 +57,19 @@ export default function AgeTabs({ lang }: { lang: Lang }) {
         })}
       </div>
 
+      {/* key={band}: the cards are drawn fresh on every switch, so they play their entrance again */}
       <div
+        key={band}
         className={`track-grid track-grid--${tracks.length}`}
         role="tabpanel"
         id={`${id}-panel`}
         aria-labelledby={`${id}-tab-${band}`}
       >
-        {tracks.map((tr) => {
+        {tracks.map((tr, i) => {
           const level = tr.levels[band]!;
           const photo = MEDIA.tracks[tr.slug];
           return (
-            <article className={`track-card track-card--${tr.slug}`} key={tr.slug}>
+            <article className={`track-card track-card--${tr.slug}`} key={tr.slug} style={{ '--i': i } as React.CSSProperties}>
               <div className="track-card__media">
                 <img src={photo.src} alt={photo.alt[lang]} loading="lazy" width={732} height={555} />
               </div>

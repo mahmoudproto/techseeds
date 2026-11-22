@@ -40,7 +40,8 @@ function nextSundays(locale: string, word: string) {
     const value = `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, '0')}-${String(day.getDate()).padStart(2, '0')}`;
     const label = `${word} ${new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long' }).format(day)}`;
     const dayNum = new Intl.DateTimeFormat(locale, { day: 'numeric' }).format(day);
-    const month = new Intl.DateTimeFormat(locale, { month: 'long' }).format(day);
+    // English month names are too long for four buttons on a phone, so they are shortened (Nov, Dec).
+    const month = new Intl.DateTimeFormat(locale, { month: locale.startsWith('en') ? 'short' : 'long' }).format(day);
     out.push({ value, label, day: dayNum, month });
     day.setDate(day.getDate() + 7);
   }

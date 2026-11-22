@@ -984,13 +984,14 @@ html {
 
 .option__check {
   flex: none;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   border-radius: 8px;
-  border: 1.5px solid var(--line);
+  border: 2px solid var(--body);
   background: #ffffff;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 700;
   line-height: 1;
   display: grid;
   place-items: center;
@@ -1331,6 +1332,8 @@ html[dir='ltr'] .h2 {
   html[dir='rtl'] .footer__brand {
     direction: rtl;
   }
+}
+
 /* A short program inside a question; follows the page direction */
 
 .program {
@@ -1371,21 +1374,77 @@ html[dir='ltr'] .unknown::after {
   cursor: pointer;
 }
 
+.check {
+  align-items: center;
+  padding: 12px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--blue-panel);
+  font-size: 15px;
+}
+
+.check:has(input:checked) {
+  border-color: var(--green);
+  background: var(--green-tint);
+}
+
+/* A larger box with a thick border, so parents don't miss it */
 .check input {
   flex: none;
-  width: 20px;
-  height: 20px;
-  margin-top: 3px;
-  accent-color: var(--green);
+  appearance: none;
+  -webkit-appearance: none;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  border: 2.5px solid var(--navy);
+  border-radius: 8px;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.check input::after {
+  content: '';
+  width: 8px;
+  height: 15px;
+  margin-top: -3px;
+  border: solid #ffffff;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.15s ease;
+}
+
+.check input:checked {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.check input:checked::after {
+  transform: rotate(45deg) scale(1);
+}
+
+.check input:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
 }
 
 /* Yes / No choice */
 .yesno {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
 .yesno .age {
   font-family: inherit;
+}
+
+/* The link back to the questions sits centred under the form */
+.lead-step .link {
+  width: 100%;
+  max-width: 520px;
+  margin-inline: 0;
+  text-align: center;
 }
