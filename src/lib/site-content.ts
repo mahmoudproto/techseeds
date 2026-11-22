@@ -28,7 +28,7 @@ export interface SiteContent {
   hero: { title: string; highlight: string; lead: string; cta: string; whatsapp: string; note: string };
   stats: (Tinted & { value: string; label: string })[];
   why: Head & { text: string; items: (Tinted & { title: string; text: string })[]; founder: { title: string; quote: string; name?: string } };
-  team: Head & { text: string; roles: { title: string; text: string }[]; people: string };
+  team: Head & { text: string; roles: { title: string; text: string }[] };
   tracks: Head & { text: string; tabs: string; more: string; tools: string };
   how: Head & { sub: string; cta: string; steps: { n: string; title: string; text: string }[] };
   workshop: Head & { text: string; points: { title: string; text: string }[]; place: string; address: string; mapTitle: string; mapOpen: string };
@@ -102,7 +102,6 @@ const ar: SiteContent = {
       { title: 'المدرّب', text: 'بيشرح الفكرة، ويسأل أسئلة تساعد الطفل يفكر ويوصل للحل بنفسه. الطفل هو اللي بيكتب ويجرّب.' },
       { title: 'المساعد', text: 'بيتابع الأطفال واحد واحد، وبيتدخل وقت ما حد يحتاج مساعدة، علشان محدش يفضل واقف أو محتار.' },
     ],
-    people: 'المدرّبون',
   },
   tracks: {
     kicker: 'المسارات حسب السن',
@@ -282,7 +281,6 @@ const en: SiteContent = {
       { title: 'The instructor', text: 'Explains the idea and asks questions; the child does the typing and reaches the answer.' },
       { title: 'The assistant', text: 'Goes round the children one by one, so help arrives when it is needed.' },
     ],
-    people: 'Our instructors',
   },
   tracks: {
     kicker: 'Tracks by age',

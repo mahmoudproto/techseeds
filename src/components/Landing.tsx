@@ -160,16 +160,6 @@ export default function Landing({ lang }: { lang: Lang }) {
             </div>
           </div>
         </div>
-        <div className="wrap">
-          <ul className="team__people" aria-label={t.team.people}>
-            {MEDIA.instructors.map((p) => (
-              <li className="person" key={p.src}>
-                <img className="person__photo" src={p.src} alt="" loading="lazy" width={480} height={480} />
-                <strong className="person__name">{p.name[lang]}</strong>
-              </li>
-            ))}
-          </ul>
-        </div>
       </section>
 
       {/* 5. Tracks by age */}
@@ -306,7 +296,7 @@ export default function Landing({ lang }: { lang: Lang }) {
       <section className="section">
         <div className="wrap">
           <div className="final">
-            <img className="final__photo" src={MEDIA.finalCta.src} alt={MEDIA.finalCta.alt[lang]} loading="lazy" width={1600} height={533} />
+            <img className="final__photo" src={MEDIA.finalCta.src} alt={MEDIA.finalCta.alt[lang]} loading="lazy" width={1400} height={878} />
             <div className="final__copy">
               <Sparkle className="final__sparkle" />
               <h2 className="final__title">{t.final.title}</h2>

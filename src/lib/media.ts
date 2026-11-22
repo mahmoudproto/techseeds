@@ -42,18 +42,12 @@ export const MEDIA = {
     src: local('team-standing'),
     alt: { ar: 'فريق تدريس تك سيدز', en: 'The TechSeeds teaching team' },
   },
+  // Still stock: no TechSeeds photo for this yet.
   finalCta: {
-    src: local('team-sitting'),
-    alt: { ar: 'فريق تدريس تك سيدز حول طاولة عليها لابتوبات', en: 'The TechSeeds teaching team around a table with laptops' },
+    src: pexels(5212700, 1400),
+    alt: { ar: 'طلاب ومعلمتهم يصفقون احتفالًا في الفصل', en: 'Students and their teacher clapping to celebrate in class' },
+    credit: 'Max Fischer / Pexels',
   },
-  /** One portrait per instructor, in the order they appear on the page. */
-  instructors: [
-    { src: local('instructor-mahmoud'), name: { ar: 'محمود كمال', en: 'Mahmoud Kamal' } },
-    { src: local('instructor-george'), name: { ar: 'جورج عدلي', en: 'George Adly' } },
-    { src: local('instructor-nourhan'), name: { ar: 'نورهان عادل', en: 'Nourhan Adel' } },
-    { src: local('instructor-sarah'), name: { ar: 'سارة أشرف', en: 'Sarah Ashraf' } },
-    { src: local('instructor-shirien'), name: { ar: 'شيرين أشرف', en: 'Shirien Ashraf' } },
-  ],
   // One 3D style for all four tracks (Shirien's redesign): objects and characters,
   // not a particular child. The older flat pictures are still in /public/media.
   tracks: {
@@ -107,4 +101,4 @@ export const MEDIA = {
       alt: { ar: 'درع أمان وعلم تحدي CTF', en: 'A security shield and a CTF flag' },
     },
   },
-} satisfies Record<string, Photo | Record<string, Photo> | { src: string; name: { ar: string; en: string } }[]>;
+} satisfies Record<string, Photo | Record<string, Photo>>;
