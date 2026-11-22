@@ -48,11 +48,11 @@ export const MEDIA = {
   },
   /** One portrait per instructor, in the order they appear on the page. */
   instructors: [
-    { src: local('instructor-mahmoud'), name: { ar: 'محمود', en: 'Mahmoud' } },
-    { src: local('instructor-george'), name: { ar: 'جورج', en: 'George' } },
-    { src: local('instructor-norhan'), name: { ar: 'نورهان', en: 'Norhan' } },
-    { src: local('instructor-sarah'), name: { ar: 'سارة', en: 'Sarah' } },
-    { src: local('instructor-shirien'), name: { ar: 'شيرين', en: 'Shirien' } },
+    { src: local('instructor-mahmoud'), name: { ar: 'محمود كمال', en: 'Mahmoud Kamal' } },
+    { src: local('instructor-george'), name: { ar: 'جورج عدلي', en: 'George Adly' } },
+    { src: local('instructor-nourhan'), name: { ar: 'نورهان عادل', en: 'Nourhan Adel' } },
+    { src: local('instructor-sarah'), name: { ar: 'سارة أشرف', en: 'Sarah Ashraf' } },
+    { src: local('instructor-shirien'), name: { ar: 'شيرين أشرف', en: 'Shirien Ashraf' } },
   ],
   // One 3D style for all four tracks (Shirien's redesign): objects and characters,
   // not a particular child. The older flat pictures are still in /public/media.

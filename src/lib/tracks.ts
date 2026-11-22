@@ -31,9 +31,21 @@ export type TrackCard =
 
 export interface Instructor {
   name: L;
-  /** e.g. '/media/instructor-gamedev.webp' */
+  /** e.g. '/media/instructor-george.webp' */
   photo: string;
+  /** Only when a track has more than one instructor: the age bands this one teaches. */
+  bands?: AgeBand[];
+  /** For the Arabic label: مدرّبة instead of مدرّب. */
+  female?: boolean;
 }
+
+const INSTRUCTORS = {
+  george: { name: { ar: 'جورج عدلي', en: 'George Adly' }, photo: '/media/instructor-george.webp' },
+  sarah: { name: { ar: 'سارة أشرف', en: 'Sarah Ashraf' }, photo: '/media/instructor-sarah.webp', female: true },
+  mahmoud: { name: { ar: 'محمود كمال', en: 'Mahmoud Kamal' }, photo: '/media/instructor-mahmoud.webp' },
+  shirien: { name: { ar: 'شيرين أشرف', en: 'Shirien Ashraf' }, photo: '/media/instructor-shirien.webp', female: true },
+  nourhan: { name: { ar: 'نورهان عادل', en: 'Nourhan Adel' }, photo: '/media/instructor-nourhan.webp', female: true },
+} satisfies Record<string, Instructor>;
 
 export interface Track {
   slug: TrackSlug;
@@ -51,13 +63,14 @@ export interface Track {
   projects: L[];
   /** The three overlapping cards on the track page, front card first. */
   cards: [TrackCard, TrackCard, TrackCard];
-  /** Leave out until there is a real photo; a placeholder shows instead. */
-  instructor?: Instructor;
+  /** Who teaches the track; leave empty and a placeholder shows instead. */
+  instructors?: Instructor[];
 }
 
 export const TRACKS: Track[] = [
   {
     slug: 'ai',
+    instructors: [INSTRUCTORS.sarah],
     name: { ar: 'الذكاء الاصطناعي', en: 'Artificial Intelligence' },
     short: { ar: 'يستخدم أدوات الذكاء الاصطناعي صح، في مهام ومشاريع حقيقية.', en: 'Uses AI tools well, on real tasks and projects.' },
     about: {
@@ -84,6 +97,7 @@ export const TRACKS: Track[] = [
   },
   {
     slug: 'programming',
+    instructors: [{ ...INSTRUCTORS.george, bands: ['young', 'middle'] }, { ...INSTRUCTORS.shirien, bands: ['teen'] }],
     name: { ar: 'البرمجة', en: 'Programming' },
     short: { ar: 'يتعلم يفكر بخطوات مرتبة ويبني برامج شغالة بنفسه.', en: 'Learns to think in clear steps and builds working programs.' },
     about: {
@@ -110,6 +124,7 @@ export const TRACKS: Track[] = [
   },
   {
     slug: 'cyber',
+    instructors: [INSTRUCTORS.nourhan],
     name: { ar: 'الأمن السيبراني', en: 'Cybersecurity' },
     short: { ar: 'يتعلم يحمي نفسه وأجهزته، ويحل تحديات الأمان.', en: 'Learns to protect themselves and their devices, and solves security challenges.' },
     about: {
@@ -135,6 +150,7 @@ export const TRACKS: Track[] = [
   },
   {
     slug: 'gamedev',
+    instructors: [INSTRUCTORS.mahmoud],
     name: { ar: 'تطوير الألعاب', en: 'Game Development' },
     short: { ar: 'يصمم ألعابه الخاصة، ويفهم إزاي اللعبة بتتبني من جوه.', en: 'Designs their own games and learns how games work inside.' },
     about: {

@@ -2135,14 +2135,23 @@ html[dir='ltr'] select.input {
   .stack__label { font-size: 13px; }
 }
 
-.instructor {
-  /* centred under the cards, as in the Figma design */
+.instructors {
+  /* centred under the cards, as in the Figma design; two instructors sit side by side */
   position: absolute;
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
-  white-space: nowrap;
   z-index: 5;
+  width: max-content;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.instructor {
+  white-space: nowrap;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -2308,4 +2317,14 @@ html[dir='rtl'] .instructor {
 .day__month {
   max-width: 100%;
   overflow-wrap: anywhere;
+}
+
+/* Two instructors (programming): the badges stack, so leave room for the second one */
+.track-visual--two {
+  padding-bottom: 184px;
+}
+
+.track-visual--two .instructors {
+  flex-direction: column;
+  align-items: stretch;
 }

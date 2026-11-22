@@ -41,7 +41,7 @@ export interface SiteContent {
     others: string; open: string; prev: string; next: string; close: string; hint: string;
     back: string; ages: string; tools: string; builds: string; projects: string; projectsNote: string;
     how: string; howItems: string[]; cta: string; ctaText: string; test: string; whatsapp: string; notTaught: string;
-    instructor: string; instructorSoon: string; cards: string;
+    instructor: string; instructorF: string; instructorAges: (from: string, to: string) => string; instructorSoon: string; cards: string;
   };
   whatsappLabel: string;
   /** Pre-filled message when a parent opens WhatsApp from the site. */
@@ -214,6 +214,8 @@ const ar: SiteContent = {
     whatsapp: 'اسألنا على واتساب',
     notTaught: 'هذا المسار يبدأ من سن 10 سنوات.',
     instructor: 'مدرّب المسار',
+    instructorF: 'مدرّبة المسار',
+    instructorAges: (from, to) => `من ${from} إلى ${to} سنة`,
     instructorSoon: 'الصورة والاسم قريبًا',
     cards: 'صور من المسار، اضغط على أي صورة لتظهر في المقدمة',
   },
@@ -385,6 +387,8 @@ const en: SiteContent = {
     whatsapp: 'Ask us on WhatsApp',
     notTaught: 'This track starts from age 10.',
     instructor: 'Track instructor',
+    instructorF: 'Track instructor',
+    instructorAges: (from, to) => `ages ${from} to ${to}`,
     instructorSoon: 'Photo and name coming soon',
     cards: 'Pictures from this track; click one to bring it to the front',
   },
