@@ -1463,18 +1463,22 @@ html[dir='ltr'] .unknown::after {
 
 /* Header buttons: the raised edge counts as part of the button, so the button and its edge
    together sit centred with the menu links. The language button gets the same edge. */
-.header__actions .btn,
-.header__actions .lang {
+.header__actions .btn {
   margin-bottom: 4px;
 }
 
+/* The language button has a thinner edge than the other buttons */
+.header__actions .lang {
+  margin-bottom: 2px;
+}
+
 .lang {
-  box-shadow: 0 4px 0 #c9d6e3;
+  box-shadow: 0 2px 0 #c9d6e3;
   background: #ffffff;
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .lang:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 #c9d6e3;
+  transform: translateY(2px);
+  box-shadow: 0 0 0 #c9d6e3;
 }
