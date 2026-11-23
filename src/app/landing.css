@@ -2388,9 +2388,9 @@ html[dir='rtl'] .instructor {
   overflow-y: hidden;
   margin-inline: -20px;
   padding: 6px 20px 14px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--green) var(--border);
-  cursor: grab;
+  scrollbar-width: none;
+  /* a two-way arrow instead of the hand: you can pull the row either way */
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='16' fill='%232fa84f' stroke='white' stroke-width='2'/%3E%3Cpath d='M14 12l-6 6 6 6M22 12l6 6-6 6' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 18 18, ew-resize;
   user-select: none;
   -webkit-user-select: none;
   /* soft fade at both edges so cards slide in and out */
@@ -2398,8 +2398,45 @@ html[dir='rtl'] .instructor {
   mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
 }
 
+.pscroll::-webkit-scrollbar {
+  display: none;
+}
+
 .pscroll.is-dragging {
-  cursor: grabbing;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='16' fill='%2326893f' stroke='white' stroke-width='2'/%3E%3Cpath d='M14 12l-6 6 6 6M22 12l6 6-6 6' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 18 18, ew-resize;
+}
+
+/* The bar under the row: it loops with the cards, so the thumb wraps round at the end */
+.pscroll-bar {
+  position: relative;
+  height: 8px;
+  max-width: 320px;
+  margin: 4px auto 0;
+  border-radius: var(--r-pill);
+  background: var(--border);
+  overflow: hidden;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='16' fill='%232fa84f' stroke='white' stroke-width='2'/%3E%3Cpath d='M14 12l-6 6 6 6M22 12l6 6-6 6' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 18 18, ew-resize;
+  touch-action: none;
+}
+
+.pscroll-bar::before {
+  /* a taller invisible area so the thin bar is easy to grab */
+  content: '';
+  position: absolute;
+  inset: -10px 0;
+}
+
+.pscroll-bar__thumb {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: var(--r-pill);
+  background: var(--green);
+}
+
+.pscroll-bar.is-dragging .pscroll-bar__thumb,
+.pscroll-bar:hover .pscroll-bar__thumb {
+  background: var(--green-dark);
 }
 
 .pscroll img {
@@ -2407,15 +2444,15 @@ html[dir='rtl'] .instructor {
   pointer-events: none;
 }
 
-/* Phones and tablets: no bar, the row is swiped with a finger */
+/* Phones and tablets: the row is swiped with a finger; the bar only shows where you are */
 @media (hover: none) {
-  .pscroll {
-    scrollbar-width: none;
+  .pscroll,
+  .pscroll-bar {
     cursor: auto;
   }
 
-  .pscroll::-webkit-scrollbar {
-    display: none;
+  .pscroll-bar {
+    pointer-events: none;
   }
 }
 
