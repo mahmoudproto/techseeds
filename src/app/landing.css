@@ -1049,7 +1049,7 @@ html[dir='ltr'] select.input {
   overflow-y: hidden;
   /* no snapping: the row stays exactly where the visitor drags or swipes it */
   padding: 8px 0 14px;
-  padding-inline-start: 20px;
+  padding-inline-start: 40px;
   scrollbar-width: none;
 }
 
@@ -1057,11 +1057,11 @@ html[dir='ltr'] select.input {
   display: none;
 }
 
-/* the same 20px gap after the last card (card gap + this), done with a spacer because
+/* the same 40px gap after the last card (card gap + this), done with a spacer because
    some browsers drop the end padding of a scrolling row */
 .reviews::after {
   content: '';
-  flex: 0 0 4px;
+  flex: 0 0 24px;
 }
 
 .reviews .review {
@@ -1152,6 +1152,7 @@ html[dir='ltr'] select.input {
 
 .reviews__hint {
   margin: 10px 0 0;
+  text-align: center;
   color: var(--body);
   font-size: 13px;
 }
