@@ -1142,7 +1142,7 @@ html[dir='ltr'] select.input {
   position: absolute;
   top: 8px;
   bottom: 18px;
-  width: 22px;
+  width: 11px;
   z-index: 1;
   pointer-events: none;
   opacity: 0;
@@ -1151,25 +1151,21 @@ html[dir='ltr'] select.input {
 
 .edge-shade::before {
   inset-inline-start: -4px;
-  background: linear-gradient(to left, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.14));
-  border-start-start-radius: 12px;
-  border-end-start-radius: 12px;
+  background: linear-gradient(to left, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.3));
 }
 
 .edge-shade::after {
   inset-inline-end: -4px;
-  background: linear-gradient(to right, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.14));
-  border-start-end-radius: 12px;
-  border-end-end-radius: 12px;
+  background: linear-gradient(to right, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.3));
 }
 
 /* in right-to-left pages the start is on the right, so the gradients flip */
 [dir='rtl'] .edge-shade::before {
-  background: linear-gradient(to right, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.14));
+  background: linear-gradient(to right, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.3));
 }
 
 [dir='rtl'] .edge-shade::after {
-  background: linear-gradient(to left, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.14));
+  background: linear-gradient(to left, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.3));
 }
 
 .edge-shade--start::before,
