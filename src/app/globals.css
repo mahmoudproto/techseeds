@@ -396,20 +396,31 @@ html {
   line-height: 1.5;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
 
 .btn:hover {
   background: var(--green-dark);
 }
 
+/* Raised edge on every button, as on "ابدأ بالخطوة الأولى" */
+.btn {
+  box-shadow: 0 5px 0 var(--green-dark);
+}
+
 .btn:active {
-  transform: scale(0.98);
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--green-dark);
+}
+
+.btn--small {
+  box-shadow: 0 4px 0 var(--green-dark);
 }
 
 .btn:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+  transform: none;
 }
 
 .btn:focus-visible,
@@ -438,9 +449,10 @@ html {
 }
 
 .btn--ghost {
-  background: transparent;
+  background: #ffffff;
   color: var(--navy);
   border: 1.5px solid var(--line);
+  box-shadow: 0 5px 0 #c9d6e3;
 }
 
 .btn--ghost:hover {

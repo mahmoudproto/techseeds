@@ -52,8 +52,8 @@ export const MEDIA = {
   // not a particular child. The older flat pictures are still in /public/media.
   tracks: {
     programming: {
-      src: local('track-programming-v2'),
-      alt: { ar: 'ثعبان بايثون مبتسم ملفوف حول بلوكات برمجة', en: 'A smiling Python snake wrapped around coding blocks' },
+      src: local('track-programming-v3'),
+      alt: { ar: 'لابتوب عليه كود وشاشتين حواليه في رسم ثلاثي الأبعاد', en: 'A 3D laptop showing code, connected to two screens' },
     },
     gamedev: {
       src: local('track-gamedev-v2'),
@@ -91,6 +91,7 @@ export const MEDIA = {
       credit: 'Fernando Arcos / Pexels',
     },
   },
+  // Real student work (screenshots), and two drawings kept for older cards.
   projects: {
     spaceship: {
       src: local('project-spaceship'),
@@ -99,6 +100,46 @@ export const MEDIA = {
     ctf: {
       src: local('project-ctf'),
       alt: { ar: 'درع أمان وعلم تحدي CTF', en: 'A security shield and a CTF flag' },
+    },
+    aiTeachable: {
+      src: local('project-ai-teachable'),
+      alt: { ar: 'نموذج في Teachable Machine بيفرّق بين صور التفاح والموز', en: 'A Teachable Machine model telling apples from bananas' },
+    },
+    aiChatbot: {
+      src: local('project-ai-chatbot'),
+      alt: { ar: 'روبوت محادثة بيطلب من الطالب يقول أهلًا', en: 'A chatbot robot asking the student to say hello' },
+    },
+    aiTaskify: {
+      src: local('project-ai-taskify'),
+      alt: { ar: 'تطبيق Taskify لتنظيم المهام بالعربي', en: 'Taskify, an Arabic task-planning app' },
+    },
+    progScratch: {
+      src: local('project-prog-scratch'),
+      alt: { ar: 'لعبة التقاط التفاح في Scratch بالبلوكات', en: 'An apple-catching game in Scratch blocks' },
+    },
+    progMaze: {
+      src: local('project-prog-maze'),
+      alt: { ar: 'لعبة متاهة الكنز مكتوبة بلغة Python', en: 'A treasure maze game written in Python' },
+    },
+    progThor: {
+      src: local('project-prog-thor'),
+      alt: { ar: 'تحدي Power of Thor على CodinGame بلغة C#', en: 'The Power of Thor challenge on CodinGame in C#' },
+    },
+    progCodingame: {
+      src: local('project-prog-codingame'),
+      alt: { ar: 'تحدي سفينة الفضاء على CodinGame بلغة C#', en: 'The spaceship onboarding challenge on CodinGame in C#' },
+    },
+    gameShield: {
+      src: local('project-game-shield'),
+      alt: { ar: 'لعبة سفينة فضاء في GameMaker مع درع حماية', en: 'A GameMaker spaceship game with a shield' },
+    },
+    gamePink: {
+      src: local('project-game-pink'),
+      alt: { ar: 'لعبة سفينة فضاء وردية في GameMaker', en: 'A pink spaceship game in GameMaker' },
+    },
+    cyberNetwork: {
+      src: local('project-cyber-network'),
+      alt: { ar: 'محاكاة شبكة شركة في Cisco Packet Tracer مع جهاز دخيل', en: 'A company network in Cisco Packet Tracer with a rogue device' },
     },
   },
 } satisfies Record<string, Photo | Record<string, Photo>>;

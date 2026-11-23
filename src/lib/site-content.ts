@@ -5,6 +5,7 @@
  */
 
 import type { IconName } from '@/components/LandingIcon';
+import type { ProjectShot } from '@/lib/tracks';
 
 export type Lang = 'ar' | 'en';
 
@@ -32,14 +33,14 @@ export interface SiteContent {
   tracks: Head & { text: string; tabs: string; more: string; tools: string };
   how: Head & { sub: string; cta: string; steps: { n: string; title: string; text: string }[] };
   workshop: Head & { text: string; points: { title: string; text: string }[]; place: string; address: string; mapTitle: string; mapOpen: string };
-  projects: Head & { text: string; note: string; items: { track: string; title: string; text: string; tint: Tinted['tint']; img?: 'spaceship' | 'ctf' }[] };
+  projects: Head & { text: string; note: string; items: { track: string; title: string; text: string; tint: Tinted['tint']; img?: ProjectShot }[] };
   reviews: Head & { sub: string; hint: string; parent: string; items: { name: string; text: string }[] };
   faq: Head & { items: { q: string; a: string }[] };
   final: { title: string; text: string; cta: string; whatsapp: string };
   next: { starts: string; seats: (n: number) => string; locale: string };
   trackPage: {
     others: string; open: string; prev: string; next: string; close: string; hint: string;
-    back: string; ages: string; tools: string; builds: string; projects: string; projectsNote: string;
+    back: string; ages: string; tools: string; builds: string; projects: string; projectsNote: string; shots: string;
     how: string; howItems: string[]; cta: string; ctaText: string; test: string; whatsapp: string; notTaught: string;
     instructor: string; instructorF: string; instructorAges: (from: string, to: string) => string; instructorSoon: string; cards: string;
   };
@@ -141,12 +142,12 @@ const ar: SiteContent = {
     kicker: 'مشاريع الطلاب',
     title: 'كل شهر بينتهي بمشروع الطالب بيعمله بأيده',
     text: 'دي أمثلة للمشروعات اللي ممكن الطالب يبنيها ويعرضها بنفسه خلال رحلته التعليمية.',
-    note: 'صور مشاريع طلابنا الحقيقية قريبًا',
+    note: 'لقطات حقيقية من مشاريع طلابنا',
     items: [
-      { track: 'الذكاء الاصطناعي', title: 'مشروع بأدوات الذكاء الاصطناعي', text: 'كتيّب أو عرض تقديمي أو موقع بسيط، الطالب بيخطط له وينفذه باستخدام أدوات AI.', tint: 'green' },
-      { track: 'البرمجة', title: 'قصة تفاعلية', text: 'شخصيات بتتحرك وبتتكلم وبتستجيب لاختيارات اللاعب، بحيث كل اختيار يغيّر مجرى القصة.', tint: 'blue' },
-      { track: 'الأمن السيبراني', title: 'تحدي أمن سيبراني (CTF)', text: 'الطالب بيدوّر على ثغرة، وبيحل ألغاز لحد ما يوصل للعلم، داخل معمل تدريب آمن.', tint: 'mint', img: 'ctf' },
-      { track: 'تطوير الألعاب', title: 'لعبة سفينة الفضاء', text: 'سفينة بتتحرك في كل الاتجاهات، وبتطلق الليزر على الكويكبات، ومعاها 3 أرواح.', tint: 'yellow', img: 'spaceship' },
+      { track: 'الذكاء الاصطناعي', title: 'الكمبيوتر يميّز الصور', text: 'الطالب بيدرّب نموذج ذكاء اصطناعي يفرّق بين التفاح والموز بصور بيجمعها بنفسه، وبعدين يجرّبه على صور جديدة.', tint: 'green', img: 'aiTeachable' },
+      { track: 'البرمجة', title: 'لعبة متاهة الكنز', text: 'الطالب بيكتب بلغة Python الكود اللي بيحرّك المستكشف خطوة بخطوة لحد ما يوصل للكنز.', tint: 'blue', img: 'progMaze' },
+      { track: 'الأمن السيبراني', title: 'محاكاة شبكة وجهاز دخيل', text: 'الطالب بيبني شبكة لأقسام شركة في Cisco Packet Tracer، ويتتبع جهاز دخيل بيحاول يوصل لباقي الأجهزة.', tint: 'mint', img: 'cyberNetwork' },
+      { track: 'تطوير الألعاب', title: 'لعبة سفينة الفضاء', text: 'سفينة بتتحرك في كل الاتجاهات، وبتطلق الليزر على الكويكبات، وتجمع درع حماية، ومعاها 3 أرواح.', tint: 'yellow', img: 'gameShield' },
     ],
   },
   reviews: {
@@ -198,7 +199,8 @@ const ar: SiteContent = {
     tools: 'الأدوات',
     builds: 'الطالب يبني',
     projects: 'أمثلة لمشاريع في هذا المسار',
-    projectsNote: 'صور مشاريع طلابنا قريبًا',
+    projectsNote: '',
+    shots: 'من مشاريع طلابنا',
     how: 'كيف يمشي الشهر؟',
     howItems: [
       '6 حصص في الشهر، مدة الحصة 3 ساعات',
@@ -320,12 +322,12 @@ const en: SiteContent = {
     kicker: 'Student projects',
     title: 'Every month ends with a project the student builds by hand',
     text: 'Examples of projects our students build with their own hands and present themselves.',
-    note: 'Photos of our students\' real projects coming soon',
+    note: 'Real screenshots of our students\' work',
     items: [
-      { track: 'AI', title: 'An AI-powered project', text: 'A booklet, presentation or simple website the student plans and builds.', tint: 'green' },
-      { track: 'Programming', title: 'Interactive story', text: 'Characters that move, talk and respond to the player\'s choices.', tint: 'blue' },
-      { track: 'Cybersecurity', title: 'Cybersecurity challenge (CTF)', text: 'Students find the weak spot and solve puzzles until they capture the flag, in a safe practice lab.', tint: 'mint', img: 'ctf' },
-      { track: 'Game Development', title: 'Spaceship game', text: 'A ship that flies in every direction, fires lasers at asteroids and has three lives.', tint: 'yellow', img: 'spaceship' },
+      { track: 'AI', title: 'Teaching a computer to tell pictures apart', text: 'The student trains an AI model to tell apples from bananas using pictures they collect, then tests it on new ones.', tint: 'green', img: 'aiTeachable' },
+      { track: 'Programming', title: 'Treasure maze game', text: 'The student writes the Python code that moves the explorer, step by step, to the treasure.', tint: 'blue', img: 'progMaze' },
+      { track: 'Cybersecurity', title: 'A network and a rogue device', text: 'The student builds a company network in Cisco Packet Tracer and traces a rogue device trying to reach the other computers.', tint: 'mint', img: 'cyberNetwork' },
+      { track: 'Game Development', title: 'Spaceship game', text: 'A ship that flies in every direction, fires lasers at asteroids, picks up a shield and has three lives.', tint: 'yellow', img: 'gameShield' },
     ],
   },
   reviews: {
@@ -370,7 +372,8 @@ const en: SiteContent = {
     tools: 'Tools',
     builds: 'Students build',
     projects: 'Example projects in this track',
-    projectsNote: 'Photos of our students\' projects coming soon',
+    projectsNote: '',
+    shots: 'From our students\' projects',
     how: 'How a month works',
     howItems: [
       '6 sessions a month, 3 hours each',

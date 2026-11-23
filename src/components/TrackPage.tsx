@@ -130,7 +130,31 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
         </div>
       </section>
 
-      <section className="section section--tint">
+      {track.shots.length > 0 && (
+        <section className="section section--tint" aria-labelledby="shots-title">
+          <div className="wrap">
+            <div className="s-head">
+              <p className="kicker">{p.projects}</p>
+              <h2 className="h2" id="shots-title">{p.shots}</h2>
+            </div>
+            <div className={`shots${track.shots.length === 1 ? ' shots--one' : ''}`}>
+              {track.shots.map((shot) => {
+                const m = MEDIA.projects[shot.img];
+                return (
+                  <figure className="shot" key={shot.img}>
+                    <a className="shot__img" href={m.src} target="_blank" rel="noopener noreferrer">
+                      <img src={m.src} alt={m.alt[lang]} loading="lazy" />
+                    </a>
+                    <figcaption>{shot.caption[lang]}</figcaption>
+                  </figure>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section className="section">
         <div className="wrap track-detail">
           <div>
             <h2 className="h2 h2--small">{p.projects}</h2>
@@ -139,7 +163,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
                 <li key={pr.en}>{pr[lang]}</li>
               ))}
             </ul>
-            <p className="soon-note soon-note--start">{p.projectsNote}</p>
+            {p.projectsNote && <p className="soon-note soon-note--start">{p.projectsNote}</p>}
           </div>
           <div>
             <h2 className="h2 h2--small">{p.how}</h2>
@@ -152,7 +176,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
         </div>
       </section>
 
-      <section className="section">
+      <section className="section section--tint">
         <div className="wrap">
           <div className="track-cta">
             <div>

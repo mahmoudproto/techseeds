@@ -27,7 +27,21 @@ export interface TrackLevel {
 export type TrackCard =
   | { kind: 'art'; label: L } // the track illustration
   | { kind: 'photo'; label: L } // a real photo (media.ts trackPhotos)
-  | { kind: 'project'; label: L; project?: 'spaceship' | 'ctf'; tint: 'blue' | 'green' | 'yellow' | 'mint' };
+  | { kind: 'project'; label: L; project?: ProjectShot; tint: 'blue' | 'green' | 'yellow' | 'mint' };
+
+/** Screenshots of student work, by key in media.ts `projects`. */
+export type ProjectShot =
+  | 'spaceship' | 'ctf'
+  | 'aiTeachable' | 'aiChatbot' | 'aiTaskify'
+  | 'progScratch' | 'progMaze' | 'progThor' | 'progCodingame'
+  | 'gameShield' | 'gamePink'
+  | 'cyberNetwork';
+
+/** One screenshot in a track page's "from our students' projects" gallery. */
+export interface Shot {
+  img: ProjectShot;
+  caption: L;
+}
 
 export interface Instructor {
   name: L;
@@ -63,6 +77,8 @@ export interface Track {
   projects: L[];
   /** The three overlapping cards on the track page, front card first. */
   cards: [TrackCard, TrackCard, TrackCard];
+  /** Real screenshots of student projects in this track. */
+  shots: Shot[];
   /** Who teaches the track; leave empty and a placeholder shows instead. */
   instructors?: Instructor[];
 }
@@ -87,7 +103,12 @@ export const TRACKS: Track[] = [
     cards: [
       { kind: 'art', label: { ar: 'الذكاء الاصطناعي أداة', en: 'AI is a tool' } },
       { kind: 'photo', label: { ar: 'يستخدمه صح وبأمان', en: 'Used well and safely' } },
-      { kind: 'project', label: { ar: 'مشروع بأدوات AI', en: 'A project with AI tools' }, tint: 'green' },
+      { kind: 'project', label: { ar: 'مشروع: الكمبيوتر يميّز الصور', en: 'Project: teaching a computer to tell pictures apart' }, project: 'aiTeachable', tint: 'green' },
+    ],
+    shots: [
+      { img: 'aiTeachable', caption: { ar: 'نموذج بيفرّق بين التفاح والموز في Teachable Machine', en: 'A model that tells apples from bananas, in Teachable Machine' } },
+      { img: 'aiChatbot', caption: { ar: 'روبوت محادثة بيرد على الطالب', en: 'A chatbot robot that talks back' } },
+      { img: 'aiTaskify', caption: { ar: 'تطبيق Taskify لتنظيم المهام، مبني بمساعدة الذكاء الاصطناعي', en: 'Taskify, a task app built with AI help' } },
     ],
     projects: [
       { ar: 'كتيّب أو عرض تقديمي معمول بأدوات AI', en: 'A booklet or presentation made with AI tools' },
@@ -109,17 +130,23 @@ export const TRACKS: Track[] = [
     levels: {
       young: { tools: ['mBlock'], text: { ar: 'البرمجة بالبلوكات: الأوامر والتكرار والشروط من خلال قصص وألعاب بسيطة.', en: 'Block coding: commands, loops and conditions through simple stories and games.' } },
       middle: { tools: ['Python'], text: { ar: 'أول لغة برمجة حقيقية: المتغيرات والشروط والتكرار والدوال من خلال برامج صغيرة مفيدة.', en: 'A first real language: variables, conditions, loops and functions in small, useful programs.' } },
-      teen: { tools: ['JavaScript'], text: { ar: 'برمجة تطبيقات ومواقع تفاعلية، والتفكير في بناء مشروع كامل من البداية للنهاية.', en: 'Interactive apps and web pages, and planning a full project from start to finish.' } },
+      teen: { tools: ['C#'], text: { ar: 'برمجة حقيقية بلغة ⁨C#⁩: حل تحديات وألعاب برمجية، والتفكير في بناء مشروع كامل من البداية للنهاية.', en: 'Real coding in C#: programming challenges and games, and planning a full project from start to finish.' } },
     },
     cards: [
       { kind: 'art', label: { ar: 'من البلوكات إلى الكود', en: 'From blocks to code' } },
       { kind: 'photo', label: { ar: 'برمجة حقيقية بأيديهم', en: 'Real coding, hands on' } },
-      { kind: 'project', label: { ar: 'مشروع: قصة تفاعلية', en: 'Project: an interactive story' }, tint: 'blue' },
+      { kind: 'project', label: { ar: 'مشروع: متاهة الكنز بلغة Python', en: 'Project: a treasure maze in Python' }, project: 'progMaze', tint: 'blue' },
+    ],
+    shots: [
+      { img: 'progScratch', caption: { ar: 'لعبة التقاط التفاح بالبلوكات في Scratch', en: 'An apple-catching game in Scratch blocks' } },
+      { img: 'progMaze', caption: { ar: 'متاهة الكنز: الكود بيحرّك المستكشف لحد الكنز (Python)', en: 'Treasure maze: code moves the explorer to the treasure (Python)' } },
+      { img: 'progThor', caption: { ar: 'تحدي Power of Thor على CodinGame بلغة ⁨C#⁩', en: 'The Power of Thor challenge on CodinGame, in C#' } },
+      { img: 'progCodingame', caption: { ar: 'سفينة بتختار أقرب عدو تضربه، بلغة ⁨C#⁩', en: 'A ship that picks the nearest enemy to shoot, in C#' } },
     ],
     projects: [
       { ar: 'قصة أو لعبة تفاعلية بالبلوكات', en: 'An interactive story or game in blocks' },
       { ar: 'آلة حاسبة أو اختبار قصير بلغة Python', en: 'A calculator or short quiz in Python' },
-      { ar: 'صفحة ويب تفاعلية', en: 'An interactive web page' },
+      { ar: 'تحديات برمجة وألعاب بلغة ⁨C#⁩ على CodinGame', en: 'Coding challenges and games in C# on CodinGame' },
     ],
   },
   {
@@ -138,9 +165,12 @@ export const TRACKS: Track[] = [
       teen: { tools: ['Python', 'Linux', 'Wireshark', 'TryHackMe', 'picoCTF'], text: { ar: 'أدوات أمان باستخدام Python، وأساسيات الشبكات وLinux، وتحديات CTF في معامل تدريب آمنة.', en: 'Security tools in Python, networking and Linux basics, and CTF challenges in safe labs.' } },
     },
     cards: [
-      { kind: 'project', label: { ar: 'مشروع: تحدي CTF', en: 'Project: a CTF challenge' }, project: 'ctf', tint: 'mint' },
+      { kind: 'project', label: { ar: 'مشروع: محاكاة شبكة وجهاز دخيل', en: 'Project: a network and a rogue device' }, project: 'cyberNetwork', tint: 'mint' },
       { kind: 'art', label: { ar: 'يحمي نفسه وأجهزته', en: 'Protecting themselves and their devices' } },
       { kind: 'photo', label: { ar: 'أدوات أمان حقيقية', en: 'Real security tools' } },
+    ],
+    shots: [
+      { img: 'cyberNetwork', caption: { ar: 'شبكة لأقسام شركة في Cisco Packet Tracer، والطالب بيتتبع جهاز دخيل', en: 'A company network in Cisco Packet Tracer, tracing a rogue device' } },
     ],
     projects: [
       { ar: 'تطبيق تشفير للرسائل', en: 'A message encryption app' },
@@ -164,9 +194,13 @@ export const TRACKS: Track[] = [
       teen: { tools: ['Unity'], text: { ar: 'تطوير ألعاب باستخدام محرك احترافي، وبناء مشاهد وشخصيات وتجربة لعب متكاملة.', en: 'Games in a professional engine, with scenes, characters and a complete play experience.' } },
     },
     cards: [
-      { kind: 'project', label: { ar: 'مشروع: لعبة سفينة الفضاء', en: 'Project: the spaceship game' }, project: 'spaceship', tint: 'yellow' },
+      { kind: 'project', label: { ar: 'مشروع: لعبة سفينة الفضاء', en: 'Project: the spaceship game' }, project: 'gameShield', tint: 'yellow' },
       { kind: 'art', label: { ar: 'من لاعب إلى صانع ألعاب', en: 'From player to game maker' } },
       { kind: 'photo', label: { ar: 'يجرب لعبته بنفسه', en: 'Playtesting their own game' } },
+    ],
+    shots: [
+      { img: 'gameShield', caption: { ar: 'سفينة بدرع حماية، وكويكبات، و3 أرواح في GameMaker', en: 'A ship with a shield, asteroids and 3 lives, in GameMaker' } },
+      { img: 'gamePink', caption: { ar: 'نفس اللعبة بتصميم طالبة تانية: سفينة وردية و4 أرواح', en: 'The same game, designed by another student: a pink ship and 4 lives' } },
     ],
     projects: [
       { ar: 'لعبة سفينة فضاء تطلق الليزر على الكويكبات', en: 'A spaceship game that shoots lasers at asteroids' },

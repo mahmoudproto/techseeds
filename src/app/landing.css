@@ -2262,3 +2262,116 @@ html[dir='rtl'] .instructor {
   flex-direction: column;
   align-items: stretch;
 }
+
+/* Track page: screenshots of student work. Two to four in a row, sideways scroll on phones. */
+.shots {
+  display: grid;
+  gap: 18px;
+}
+
+.shot {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 10px 14px;
+  border-radius: var(--r-lg);
+  background: #ffffff;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+.shot__img {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: #0f1d2e;
+}
+
+.shot__img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.3s ease;
+}
+
+.shot__img:hover img {
+  transform: scale(1.03);
+}
+
+.shot__img:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.shot figcaption {
+  padding: 0 4px;
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+@media (min-width: 720px) {
+  .shots {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shots--one {
+    grid-template-columns: minmax(0, 720px);
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1100px) {
+  .shots:not(.shots--one) {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 719px) {
+  .shots:not(.shots--one) {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-inline: -20px;
+    padding: 4px 20px 16px;
+    scroll-padding-inline: 20px;
+  }
+
+  .shots:not(.shots--one) .shot {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+  }
+}
+
+/* Every button gets the raised edge of the "ابدأ بالخطوة الأولى" button */
+.btn--wa,
+.btn--ghost {
+  box-shadow: 0 5px 0 #c9d6e3;
+}
+
+.btn--ghost-light {
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.22);
+}
+
+.btn--wa:active,
+.btn--ghost:active,
+.btn--ghost-light:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #c9d6e3;
+}
+
+.track-card__more {
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--ink) 28%, var(--tint));
+  transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.track-card__more:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--ink) 28%, var(--tint));
+}
