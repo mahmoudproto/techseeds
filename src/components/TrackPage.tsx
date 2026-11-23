@@ -38,7 +38,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
     <>
       <ScrollToTop key={track.slug} />
       <Reveal />
-      <section className={`track-hero track-hero--${track.color}`}>
+      <section className={`track-hero track-hero--${track.slug}`}>
         <div className="wrap track-hero__inner">
           <div>
             <Link className="back" href={`${base}/#tracks`}>

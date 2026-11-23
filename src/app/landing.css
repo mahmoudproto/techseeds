@@ -1328,10 +1328,11 @@ html[dir='ltr'] select.input {
   background: linear-gradient(180deg, var(--hero-tint, #f2faf5) 0%, #ffffff 100%);
 }
 
-.track-hero--blue { --hero-tint: #eaf5fd; }
-.track-hero--yellow { --hero-tint: #fff7e2; }
-.track-hero--green { --hero-tint: #ecf8f0; }
-.track-hero--mint { --hero-tint: #e8f6f1; }
+/* Same tint as each track's card on the home page */
+.track-hero--ai { --hero-tint: #fef3d6; }
+.track-hero--programming { --hero-tint: #e6eefc; }
+.track-hero--cyber { --hero-tint: #e1f5ee; }
+.track-hero--gamedev { --hero-tint: #e3f0fb; }
 
 .track-hero__inner {
   display: grid;
