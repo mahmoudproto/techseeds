@@ -39,7 +39,7 @@ export const MEDIA = {
   },
   // Our teaching team (photos taken 21 Nov 2026; only the background was replaced).
   team: {
-    src: local('team-standing'),
+    src: local('team-standing-v2'),
     alt: { ar: 'فريق تدريس تك سيدز', en: 'The TechSeeds teaching team' },
   },
   // Still stock: no TechSeeds photo for this yet.
@@ -60,8 +60,8 @@ export const MEDIA = {
       alt: { ar: 'شاشة لعبة فضاء يخرج منها صاروخ نحو كويكب', en: 'A rocket flying out of a space-game screen towards an asteroid' },
     },
     ai: {
-      src: local('track-ai-v2'),
-      alt: { ar: 'روبوت بنفسجي صغير يمسك تابلت وفوقه لمبة', en: 'A small purple robot holding a tablet under a light bulb' },
+      src: local('track-ai-v3'),
+      alt: { ar: 'روبوت يمسك عقل مضيء وحواليه روبوتات وشاشات ذكاء اصطناعي', en: 'A robot holding a glowing brain, surrounded by smaller robots and AI screens' },
     },
     cyber: {
       src: local('track-cyber-v2'),

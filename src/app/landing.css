@@ -734,7 +734,7 @@ html[dir='rtl'] .hero__doodle {
 
 .track-card--programming { --tint: #e6eefc; --ink: #2456c4; }
 .track-card--gamedev { --tint: #e3f0fb; --ink: #1d6aa3; }
-.track-card--ai { --tint: #f1e9fa; --ink: #6a45a3; }
+.track-card--ai { --tint: #fef3d6; --ink: #8a5a00; }
 .track-card--cyber { --tint: #e1f5ee; --ink: #1b7a5f; }
 
 .track-card__media {
@@ -1419,7 +1419,7 @@ html[dir='ltr'] select.input {
 
 .other-track--programming { --tint: #e6eefc; --ink: #2456c4; }
 .other-track--gamedev { --tint: #e3f0fb; --ink: #1d6aa3; }
-.other-track--ai { --tint: #f1e9fa; --ink: #6a45a3; }
+.other-track--ai { --tint: #fef3d6; --ink: #8a5a00; }
 .other-track--cyber { --tint: #e1f5ee; --ink: #1b7a5f; }
 
 .other-track:hover {

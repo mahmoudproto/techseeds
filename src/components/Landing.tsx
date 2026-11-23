@@ -382,7 +382,7 @@ export function ProjectArt({ tint }: { tint: string }) {
   );
 }
 
-const TRACK_TINT = { ai: 'green', programming: 'blue', cyber: 'mint', gamedev: 'yellow' } as const;
+const TRACK_TINT = { ai: 'yellow', programming: 'blue', cyber: 'mint', gamedev: 'green' } as const;
 
 /** Every student project screenshot, track by track. The four featured ones keep their longer text. */
 function projectItems(lang: Lang): ScrollerItem[] {
