@@ -1043,13 +1043,14 @@ html[dir='ltr'] select.input {
 
 .reviews {
   --col: calc(100vw - 40px);
+  --edge: 20px; /* gap before the first and after the last card: 20px on phones, 40px on computers */
   display: flex;
   gap: 16px;
   overflow-x: auto;
   overflow-y: hidden;
   /* no snapping: the row stays exactly where the visitor drags or swipes it */
   padding: 8px 0 14px;
-  padding-inline-start: 40px;
+  padding-inline-start: var(--edge);
   scrollbar-width: none;
 }
 
@@ -1057,11 +1058,11 @@ html[dir='ltr'] select.input {
   display: none;
 }
 
-/* the same 40px gap after the last card (card gap + this), done with a spacer because
+/* the same gap after the last card (card gap + this), done with a spacer because
    some browsers drop the end padding of a scrolling row */
 .reviews::after {
   content: '';
-  flex: 0 0 24px;
+  flex: 0 0 calc(var(--edge) - 16px);
 }
 
 .reviews .review {
@@ -1074,7 +1075,7 @@ html[dir='ltr'] select.input {
 }
 
 @media (min-width: 960px) {
-  .reviews { --col: calc(min(100vw, 1160px) - 80px); }
+  .reviews { --col: calc(min(100vw, 1160px) - 80px); --edge: 40px; }
 }
 
 @media (min-width: 1024px) {
