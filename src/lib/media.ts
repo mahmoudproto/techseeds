@@ -60,7 +60,7 @@ export const MEDIA = {
       alt: { ar: 'شاشة لعبة فضاء يخرج منها صاروخ نحو كويكب', en: 'A rocket flying out of a space-game screen towards an asteroid' },
     },
     ai: {
-      src: local('track-ai-v3'),
+      src: local('track-ai-v4'),
       alt: { ar: 'روبوت يمسك عقل مضيء وحواليه روبوتات وشاشات ذكاء اصطناعي', en: 'A robot holding a glowing brain, surrounded by smaller robots and AI screens' },
     },
     cyber: {
