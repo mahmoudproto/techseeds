@@ -1054,8 +1054,9 @@ html[dir='ltr'] select.input {
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
-  padding: 8px 4px 18px;
-  margin: 0 -4px;
+  /* full screen width, like the projects row; snapping keeps a card lined up with the edge gap */
+  padding: 8px 20px 18px;
+  scroll-padding-inline: 20px;
   scrollbar-width: thin;
   scrollbar-color: var(--green) var(--border);
 }
@@ -1129,48 +1130,6 @@ html[dir='ltr'] select.input {
 .reviews.is-dragging {
   scroll-snap-type: none;
   scroll-behavior: auto;
-}
-
-/* A soft shadow on an edge while there are more reviews past it */
-.edge-shade {
-  position: relative;
-}
-
-.edge-shade::before,
-.edge-shade::after {
-  content: '';
-  position: absolute;
-  top: 8px;
-  bottom: 18px;
-  width: 11px;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.edge-shade::before {
-  inset-inline-start: -4px;
-  background: linear-gradient(to left, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.3));
-}
-
-.edge-shade::after {
-  inset-inline-end: -4px;
-  background: linear-gradient(to right, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.3));
-}
-
-/* in right-to-left pages the start is on the right, so the gradients flip */
-[dir='rtl'] .edge-shade::before {
-  background: linear-gradient(to right, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.3));
-}
-
-[dir='rtl'] .edge-shade::after {
-  background: linear-gradient(to left, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.3));
-}
-
-.edge-shade--start::before,
-.edge-shade--end::after {
-  opacity: 1;
 }
 
 .reviews__hint {
@@ -2540,8 +2499,8 @@ html[dir='rtl'] .instructor {
   object-position: top center;
 }
 
-@media (min-width: 1240px) {
-  .pscroll {
-    margin-inline: calc((1160px - 100vw) / 2 + 20px);
-  }
+/* Both sideways rows reach the edges of the screen at every width */
+.pscroll,
+.reviews {
+  margin-inline: calc(50% - 50vw);
 }

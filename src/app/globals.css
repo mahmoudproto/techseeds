@@ -1482,3 +1482,9 @@ html[dir='ltr'] .unknown::after {
   transform: translateY(2px);
   box-shadow: 0 0 0 #c9d6e3;
 }
+
+/* Rows that reach the screen edges must never make the page scroll sideways */
+html,
+body {
+  overflow-x: clip;
+}
