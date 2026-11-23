@@ -137,7 +137,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
               <p className="kicker">{p.projects}</p>
               <h2 className="h2" id="shots-title">{p.shots}</h2>
             </div>
-            <div className={`shots${track.shots.length === 1 ? ' shots--one' : ''}`}>
+            <div className={`shots${track.shots.length === 1 ? ' shots--one' : ''}${track.shots.length > 4 ? ' shots--many' : ''}`}>
               {track.shots.map((shot) => {
                 const m = MEDIA.projects[shot.img];
                 return (

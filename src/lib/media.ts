@@ -137,6 +137,18 @@ export const MEDIA = {
       src: local('project-game-pink'),
       alt: { ar: 'لعبة سفينة فضاء وردية في GameMaker', en: 'A pink spaceship game in GameMaker' },
     },
+    unityTruck: {
+      src: local('project-unity-truck'),
+      alt: { ar: 'شاحنة حمراء بتخبط في صناديق خشب في Unity', en: 'A red truck crashing into wooden crates in Unity' },
+    },
+    unityAnimals: {
+      src: local('project-unity-animals'),
+      alt: { ar: 'لعبة إطعام الحيوانات من فوق في Unity', en: 'A top-down animal feeding game in Unity' },
+    },
+    unitySumo: {
+      src: local('project-unity-sumo'),
+      alt: { ar: 'كورة سودا بتزق كور بيضا على منصة في Unity', en: 'A black ball pushing white balls on a platform in Unity' },
+    },
     cyberNetwork: {
       src: local('project-cyber-network'),
       alt: { ar: 'محاكاة شبكة شركة في Cisco Packet Tracer مع جهاز دخيل', en: 'A company network in Cisco Packet Tracer with a rogue device' },

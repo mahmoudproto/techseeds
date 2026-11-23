@@ -2330,6 +2330,11 @@ html[dir='rtl'] .instructor {
   .shots:not(.shots--one) {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
+
+  /* five or more: three to a row, so no screenshot sits alone */
+  .shots.shots--many {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 719px) {

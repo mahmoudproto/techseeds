@@ -34,7 +34,7 @@ export type ProjectShot =
   | 'spaceship' | 'ctf'
   | 'aiTeachable' | 'aiChatbot' | 'aiTaskify'
   | 'progScratch' | 'progMaze' | 'progThor' | 'progCodingame'
-  | 'gameShield' | 'gamePink'
+  | 'gameShield' | 'gamePink' | 'unityTruck' | 'unityAnimals' | 'unitySumo'
   | 'cyberNetwork';
 
 /** One screenshot in a track page's "from our students' projects" gallery. */
@@ -201,6 +201,9 @@ export const TRACKS: Track[] = [
     shots: [
       { img: 'gameShield', caption: { ar: 'سفينة بدرع حماية، وكويكبات، و3 أرواح في GameMaker', en: 'A ship with a shield, asteroids and 3 lives, in GameMaker' } },
       { img: 'gamePink', caption: { ar: 'نفس اللعبة بتصميم طالبة تانية: سفينة وردية و4 أرواح', en: 'The same game, designed by another student: a pink ship and 4 lives' } },
+      { img: 'unityTruck', caption: { ar: 'شاحنة بتخبط في صناديق بفيزياء حقيقية (Unity)', en: 'A truck crashing into crates with real physics (Unity)' } },
+      { img: 'unityAnimals', caption: { ar: 'لعبة إطعام الحيوانات: كل حيوان ياكل يزوّد النقط (Unity)', en: 'Feed the animals: every fed animal adds to the score (Unity)' } },
+      { img: 'unitySumo', caption: { ar: 'كورة بتزق الكور التانية برّه المنصة بقوة خاصة (Unity)', en: 'A ball that knocks the others off the platform with a power-up (Unity)' } },
     ],
     projects: [
       { ar: 'لعبة سفينة فضاء تطلق الليزر على الكويكبات', en: 'A spaceship game that shoots lasers at asteroids' },
