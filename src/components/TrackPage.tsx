@@ -130,6 +130,64 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
         </div>
       </section>
 
+      <section className="section section--tint" aria-labelledby="gains-title">
+        <div className="wrap gains">
+          <div>
+            <h2 className="h2 h2--small" id="gains-title">{p.gains}</h2>
+            <ul className="check-list">
+              {track.gains.map((g) => (
+                <li key={g.en}>{g[lang]}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h2 className="h2 h2--small">{p.skills}</h2>
+            <ul className="skills">
+              {p.skillItems.map((sk) => (
+                <li className="skill" key={sk.title}>
+                  <strong>{sk.title}</strong>
+                  <span>{sk.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {AGE_BANDS.some((b) => track.journey[b.id]) && (
+        <section className="section" aria-labelledby="journey-title">
+          <div className="wrap">
+            <div className="s-head">
+              <h2 className="h2" id="journey-title">{p.journey}</h2>
+            </div>
+            {AGE_BANDS.map((b) => {
+              const j = track.journey[b.id];
+              if (!j) return null;
+              return (
+                <div className="journey" key={b.id}>
+                  <h3 className="journey__head">
+                    {b.label[lang]} · <span dir={lang === 'ar' ? 'rtl' : 'ltr'}>{j.heading[lang]}</span>
+                  </h3>
+                  <ol className="journey__levels">
+                    {j.levels.map((lv, i) => (
+                      <li className="jlevel" key={lv.title.en}>
+                        <span className="jlevel__n">{p.level(i + 1)}</span>
+                        <h4 className="jlevel__title">{lv.title[lang]}</h4>
+                        <p className="jlevel__text">{lv.text[lang]}</p>
+                        <p className="jlevel__project">
+                          <strong>{p.finalProject}</strong> {lv.project[lang]}
+                        </p>
+                      </li>
+                    ))}
+                  </ol>
+                  {j.note && <p className="journey__note">{j.note[lang]}</p>}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
       {track.shots.length > 0 && (
         <section className="section section--tint" aria-labelledby="shots-title">
           <div className="wrap">
@@ -157,15 +215,6 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
       <section className="section">
         <div className="wrap track-detail">
           <div>
-            <h2 className="h2 h2--small">{p.projects}</h2>
-            <ul className="check-list">
-              {track.projects.map((pr) => (
-                <li key={pr.en}>{pr[lang]}</li>
-              ))}
-            </ul>
-            {p.projectsNote && <p className="soon-note soon-note--start">{p.projectsNote}</p>}
-          </div>
-          <div>
             <h2 className="h2 h2--small">{p.how}</h2>
             <ul className="check-list">
               {p.howItems.map((item) => (
@@ -173,6 +222,10 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
               ))}
             </ul>
           </div>
+          <aside className="guarantee-box">
+            <h2 className="h2 h2--small">{p.guarantee.title}</h2>
+            <p>{p.guarantee.text}</p>
+          </aside>
         </div>
       </section>
 

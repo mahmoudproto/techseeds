@@ -43,6 +43,24 @@ export interface Shot {
   caption: L;
 }
 
+/** One level (one month) of a track's journey, from the track documents. */
+export interface JourneyLevel {
+  title: L;
+  /** What the level covers. */
+  text: L;
+  /** The level's final project. */
+  project: L;
+}
+
+/** The level-by-level plan for one age band. */
+export interface Journey {
+  /** e.g. "Python" or "Chapter 1: Space Shooter"; shown after the age label. */
+  heading: L;
+  levels: JourneyLevel[];
+  /** A note under the levels (what comes next, privacy rules...). */
+  note?: L;
+}
+
 export interface Instructor {
   name: L;
   /** e.g. '/media/instructor-george.webp' */
@@ -66,15 +84,17 @@ export interface Track {
   name: L;
   /** One line for the card. */
   short: L;
-  /** A short paragraph for the track page. */
+  /** The track's one-line promise, shown under its name on the track page. */
   about: L;
   /** What the student walks away with. */
   builds: L;
   color: 'blue' | 'yellow' | 'green' | 'mint';
   /** Only the age bands this track is taught for. */
   levels: Partial<Record<AgeBand, TrackLevel>>;
-  /** Example projects, shown on the track page. */
-  projects: L[];
+  /** "What your child gains", from the track document. */
+  gains: L[];
+  /** The level-by-level journey, for the age bands that have one written up. */
+  journey: Partial<Record<AgeBand, Journey>>;
   /** The three overlapping cards on the track page, front card first. */
   cards: [TrackCard, TrackCard, TrackCard];
   /** Real screenshots of student projects in this track. */
@@ -90,15 +110,15 @@ export const TRACKS: Track[] = [
     name: { ar: 'الذكاء الاصطناعي', en: 'Artificial Intelligence' },
     short: { ar: 'يستخدم أدوات الذكاء الاصطناعي صح، في مهام ومشاريع حقيقية.', en: 'Uses AI tools well, on real tasks and projects.' },
     about: {
-      ar: 'الذكاء الاصطناعي أداة، والمهم إن الطفل يعرف يستخدمها صح وبأمان. نعلّمه يكتب طلبات واضحة، ويراجع النتيجة بعقله، ويستخدم الأدوات في مشاريع مفيدة.',
-      en: 'AI is a tool, and what matters is using it well and safely. We teach children to ask clearly, check the answer with their own judgement, and use the tools on useful projects.',
+      ar: 'أطفال فاهمين الذكاء الاصطناعي، بيستخدموه في شغل حقيقي، وعارفين إمتى إجابته تبقى غلط.',
+      en: 'Children who understand AI, use it for real work, and know when its answer is wrong.',
     },
     builds: { ar: 'مستندات وصور وخطط ومواقع بالـ AI', en: 'Documents, images, plans and websites with AI' },
     color: 'green',
     levels: {
       young: { tools: ['AI'], text: { ar: 'أول تعارف مع الذكاء الاصطناعي بطريقة بسيطة وآمنة ومناسبة للسن.', en: 'A first, simple and safe introduction to AI, suited to their age.' } },
-      middle: { tools: ['AI'], text: { ar: 'استخدام أدوات AI في مهام حقيقية زي الكتابة وإنشاء الصور والعروض وتنظيم الأفكار.', en: 'AI tools for real tasks: writing, images, presentations and organising ideas.' } },
-      teen: { tools: ['AI'], text: { ar: 'مشاريع AI متقدمة: تخطيط مواقع ومشاريع كاملة ينفذها الطالب بنفسه بمساعدة أدوات الذكاء الاصطناعي.', en: 'Advanced AI projects: plans, websites and full projects the student leads.' } },
+      middle: { tools: ['Teachable Machine', 'Canva', 'Lovable'], text: { ar: 'أدوات AI لمهام حقيقية: مهارات الكمبيوتر مع أوامر واضحة، ومستندات وصور وعروض ومواقع معمولة بالـ AI.', en: 'AI tools for real tasks: computer skills plus clear prompts, and documents, images, presentations and websites made with AI.' } },
+      teen: { tools: ['AI'], text: { ar: 'مشاريع AI متقدمة: مشاريع أعمق بأدوات ونماذج AI، حوالين مشاكل حقيقية.', en: 'Advanced AI projects: deeper projects with AI tools and models, built around real problems.' } },
     },
     cards: [
       { kind: 'art', label: { ar: 'الذكاء الاصطناعي أداة', en: 'AI is a tool' } },
@@ -110,11 +130,36 @@ export const TRACKS: Track[] = [
       { img: 'aiChatbot', caption: { ar: 'روبوت محادثة بيرد على الطالب', en: 'A chatbot robot that talks back' } },
       { img: 'aiTaskify', caption: { ar: 'تطبيق Taskify لتنظيم المهام، مبني بمساعدة الذكاء الاصطناعي', en: 'Taskify, a task app built with AI help' } },
     ],
-    projects: [
-      { ar: 'كتيّب أو عرض تقديمي معمول بأدوات AI', en: 'A booklet or presentation made with AI tools' },
-      { ar: 'خطة مشروع كاملة', en: 'A complete project plan' },
-      { ar: 'موقع بسيط مبني بمساعدة الذكاء الاصطناعي', en: 'A simple website built with AI help' },
+    gains: [
+      { ar: 'يستخدم الكمبيوتر بثقة: ملفات وفولدرات وبحث آمن وإيميل', en: 'Use the computer with confidence: files, folders, safe search and email' },
+      { ar: 'يفهم الآلة بتتعلم إزاي، ويدرّب نماذج صور وأصوات بنفسه', en: 'Explain how a machine learns, and train their own image and sound models' },
+      { ar: 'يكتب أوامر (Prompts) واضحة ويحسّنها خطوة بخطوة', en: 'Write clear prompts and improve them step by step' },
+      { ar: 'يراجع إجابة الـ AI ويعرف إمتى تكون غلط', en: 'Check AI answers and spot when they are wrong' },
+      { ar: 'يحافظ على خصوصيته، ويستخدم الـ AI علشان يفهم مش علشان يغش', en: 'Protect their privacy and use AI to understand, not to cheat' },
     ],
+    journey: {
+      middle: {
+        heading: { ar: 'أدوات AI لمهام حقيقية', en: 'AI tools for real tasks' },
+        levels: [
+          {
+            title: { ar: 'اتعرّف على الكمبيوتر والـ AI', en: 'Meet the computer, meet AI' },
+            text: { ar: 'الكمبيوتر شغال إزاي، الملفات والفولدرات، البحث الآمن، الـ AI بيتعلم إزاي (نماذج صور وأصوات بـ Teachable Machine)، وأول Prompts واضحة.', en: 'How computers work, files and folders, safe search, how AI learns (image and sound models with Teachable Machine) and first clear prompts.' },
+            project: { ar: '«دليلي الذكي للكمبيوتر» لحد لسه بيبدأ، محفوظ PDF.', en: '“My Smart Computer Guide” for someone new to computers, saved as a PDF.' },
+          },
+          {
+            title: { ar: 'اعمل بالـ AI', en: 'Create with AI' },
+            text: { ar: 'Prompts للنصوص والصور، و Word و PowerPoint و Canva، ومقارنة أدوات الـ AI ومراجعة إجاباتها.', en: 'Prompts for text and images; Word, PowerPoint and Canva; comparing AI tools and checking their answers.' },
+            project: { ar: 'كتاب قصة مصوّر وعرض تقديمي قصير.', en: 'An illustrated story book and a short presentation.' },
+          },
+          {
+            title: { ar: 'ابنِ بالـ AI', en: 'Build with AI' },
+            text: { ar: 'من فكرة واضحة لموقع شغال بالـ AI (Vibe coding بأدوات زي Lovable)، ومعاها خطط وأدوات مذاكرة.', en: 'From a clear idea to a working website with AI (vibe coding with tools such as Lovable), plus plans and study tools.' },
+            project: { ar: 'موقع أو خطة من تصميم الطالب، بيعرضها بنفسه.', en: 'A website or plan the student designs and presents.' },
+          },
+        ],
+        note: { ar: 'الطالب بيشتغل على حساباته الخاصة، واللي بنعملها مع ولي الأمر. ومن أول يوم بنعلّم قواعد الخصوصية: لا أسماء كاملة ولا عناوين ولا صور شخصية في أي أداة AI.', en: 'Students work on their own accounts, set up together with a parent. Privacy rules start on day one: no full names, addresses or personal photos in any AI tool.' },
+      },
+    },
   },
   {
     slug: 'programming',
@@ -122,15 +167,15 @@ export const TRACKS: Track[] = [
     name: { ar: 'البرمجة', en: 'Programming' },
     short: { ar: 'يتعلم يفكر بخطوات مرتبة ويبني برامج شغالة بنفسه.', en: 'Learns to think in clear steps and builds working programs.' },
     about: {
-      ar: 'نبدأ من البرمجة بالبلوكات للصغار، ونوصل للغات البرمجة الحقيقية مع الكبار. في كل شهر يبني الطالب برنامجًا يعمل فعلًا ويعرضه بنفسه.',
-      en: 'Younger children start with block coding; older students move on to real programming languages. Every month ends with a working program the student presents.',
+      ar: 'من استخدام التطبيقات لبنائها. البرمجة طريقة تفكير، مش كود منقول من فيديو.',
+      en: 'From using apps to building them. Programming is a way of thinking, not code copied from a video.',
     },
     builds: { ar: 'برامج شغالة', en: 'Working programs' },
     color: 'blue',
     levels: {
-      young: { tools: ['mBlock'], text: { ar: 'البرمجة بالبلوكات: الأوامر والتكرار والشروط من خلال قصص وألعاب بسيطة.', en: 'Block coding: commands, loops and conditions through simple stories and games.' } },
-      middle: { tools: ['Python'], text: { ar: 'أول لغة برمجة حقيقية: المتغيرات والشروط والتكرار والدوال من خلال برامج صغيرة مفيدة.', en: 'A first real language: variables, conditions, loops and functions in small, useful programs.' } },
-      teen: { tools: ['JavaScript'], text: { ar: 'برمجة تطبيقات ومواقع تفاعلية بلغة JavaScript، والتفكير في بناء مشروع كامل من البداية للنهاية.', en: 'Interactive apps and web pages in JavaScript, and planning a full project from start to finish.' } },
+      young: { tools: ['mBlock'], text: { ar: 'برمجة بالبلوكات: قصص وأنيميشن وألعاب صغيرة. الطفل بيتعلم الترتيب والمنطق قبل ما يكتب سطر كود.', en: 'Block coding: stories, animations and small games. Children learn order and logic before they type a line of code.' } },
+      middle: { tools: ['Python'], text: { ar: 'كود حقيقي مكتوب: برامج بتسأل وتقرر وترد. وكل مستوى بيخلص ببرنامج شغال.', en: 'Real, typed code: programs that ask, decide and respond. Every level ends with a working program.' } },
+      teen: { tools: ['JavaScript'], text: { ar: 'لغة الويب: برامج بتخزّن البيانات الحقيقية وتحللها وتنظمها.', en: 'The language of the web: programs that store, analyse and organise real data.' } },
     },
     cards: [
       { kind: 'art', label: { ar: 'من البلوكات إلى الكود', en: 'From blocks to code' } },
@@ -143,11 +188,55 @@ export const TRACKS: Track[] = [
       { img: 'progThor', caption: { ar: 'تحدي Power of Thor على CodinGame', en: 'The Power of Thor challenge on CodinGame' } },
       { img: 'progCodingame', caption: { ar: 'تحدي على CodinGame: سفينة بتختار أقرب عدو تضربه', en: 'A CodinGame challenge: a ship that picks the nearest enemy to shoot' } },
     ],
-    projects: [
-      { ar: 'قصة أو لعبة تفاعلية بالبلوكات', en: 'An interactive story or game in blocks' },
-      { ar: 'آلة حاسبة أو اختبار قصير بلغة Python', en: 'A calculator or short quiz in Python' },
-      { ar: 'صفحة ويب تفاعلية بلغة JavaScript', en: 'An interactive web page in JavaScript' },
+    gains: [
+      { ar: 'يقسّم المشكلة الكبيرة لخطوات صغيرة وواضحة', en: 'Break a big problem into small, clear steps' },
+      { ar: 'يخطط للحل بخطوات أو Flowchart قبل ما يكتب الكود', en: 'Plan a solution as steps or a flowchart before coding' },
+      { ar: 'يقرا رسالة الخطأ، ويلاقي المشكلة ويصلّحها', en: 'Read an error message, find the bug and fix it' },
+      { ar: 'يخلّص كل مستوى ببرنامج شغال من عمله', en: 'Finish every level with a working program of their own' },
+      { ar: 'يشرح برنامجه شغال إزاي، وليه أخد كل قرار', en: 'Explain how their program works, decision by decision' },
     ],
+    journey: {
+      middle: {
+        heading: { ar: 'Python', en: 'Python' },
+        levels: [
+          {
+            title: { ar: 'أساسيات البرمجة', en: 'Programming basics' },
+            text: { ar: 'يعني إيه برمجة، الـ Flowchart، الطباعة على الشاشة، المتغيرات، إدخال البيانات، القرارات (if / else)، وتصحيح الأخطاء.', en: 'What programming is, flowcharts, output, variables, user input, decisions (if / else) and debugging.' },
+            project: { ar: 'لعبة مغامرة «البحث عن الكنز»: كل اختيار بيودّي لنهاية مختلفة، ومعاها عدّاد نقاط.', en: 'A treasure-hunt adventure game where every choice leads to a different ending, with a score.' },
+          },
+          {
+            title: { ar: 'برامج تفاعلية', en: 'Interactive programs' },
+            text: { ar: 'التكرار (Loops) والقوائم والدوال: برامج بتتفاعل مع المستخدم.', en: 'Loops, lists and functions: programs that react to the user.' },
+            project: { ar: 'مسابقة أو لعبة يلعبها صاحبه.', en: 'A quiz or game a friend can play.' },
+          },
+          {
+            title: { ar: 'حلّال المشكلات', en: 'Problem solver' },
+            text: { ar: 'البيانات والملفات وخوارزميات بسيطة لحل مشكلة حقيقية.', en: 'Data, files and simple algorithms, used to solve a real problem.' },
+            project: { ar: 'تطبيق صغير لحد يعرفه.', en: 'A small app for someone they know.' },
+          },
+        ],
+      },
+      teen: {
+        heading: { ar: 'JavaScript', en: 'JavaScript' },
+        levels: [
+          {
+            title: { ar: 'أساسيات JavaScript', en: 'JavaScript fundamentals' },
+            text: { ar: 'المتغيرات وأنواع البيانات والعمليات الحسابية والقرارات.', en: 'Variables, data types, operators and decisions.' },
+            project: { ar: 'حاسبة نقاط: درجات مدرسة، أو نقاط لعبة، أو فاتورة محل.', en: 'A score calculator: school grades, game scores or a shop invoice.' },
+          },
+          {
+            title: { ar: 'التكرار والدوال والـ Arrays', en: 'Loops, functions and arrays' },
+            text: { ar: 'تكرار المهام، ودوال بتتعاد، وقوائم بيانات.', en: 'Repeating tasks, reusable functions and lists of data.' },
+            project: { ar: 'برنامج بيحلّل بيانات كتير: المتوسط وأعلى وأقل قيمة والبحث.', en: 'An analyser that handles many records: averages, highest, lowest and search.' },
+          },
+          {
+            title: { ar: 'الـ Objects والبيانات الحقيقية', en: 'Objects and real data' },
+            text: { ar: 'الـ Objects، والبحث والفلترة والترتيب.', en: 'Objects, arrays of objects, searching, filtering and sorting.' },
+            project: { ar: 'نظام لإدارة السجلات: طلاب أو لاعيبة أو منتجات.', en: 'A record-management system for students, players or products.' },
+          },
+        ],
+      },
+    },
   },
   {
     slug: 'cyber',
@@ -155,14 +244,14 @@ export const TRACKS: Track[] = [
     name: { ar: 'الأمن السيبراني', en: 'Cybersecurity' },
     short: { ar: 'يتعلم يحمي نفسه وأجهزته، ويحل تحديات الأمان.', en: 'Learns to protect themselves and their devices, and solves security challenges.' },
     about: {
-      ar: 'نبدأ بالأمان على الإنترنت وحماية الحسابات، ونوصل لأدوات الأمان الحقيقية وتحديات CTF في معامل تدريب آمنة.',
-      en: 'We start with staying safe online and protecting accounts, then move to real security tools and CTF challenges in safe practice labs.',
+      ar: 'يفهم الهجمات بتحصل إزاي علشان يعرف يحمي منها، وده في معامل تدريب آمنة بس.',
+      en: 'Understand how attacks work so you can defend against them, in safe practice labs only.',
     },
     builds: { ar: 'أدوات أمان وتحديات CTF', en: 'Security tools and CTF challenges' },
     color: 'mint',
     levels: {
-      middle: { tools: ['Google Interland', 'CyberChef', 'Scratch'], text: { ar: 'التعرّف على الأمان على الإنترنت، وحماية الحسابات، وكلمات السر القوية، وأساسيات التشفير بطريقة عملية.', en: 'Online safety, strong passwords and the basics of encryption, hands-on and fun.' } },
-      teen: { tools: ['Python', 'Linux', 'Wireshark', 'TryHackMe', 'picoCTF'], text: { ar: 'أدوات أمان باستخدام Python، وأساسيات الشبكات وLinux، وتحديات CTF في معامل تدريب آمنة.', en: 'Security tools in Python, networking and Linux basics, and CTF challenges in safe labs.' } },
+      middle: { tools: ['Google Interland', 'CyberChef', 'Scratch'], text: { ar: 'الأمان على الإنترنت والشفرات: تطبيقات تشفير وفاحص لقوة الباسورد.', en: 'Online safety, codes and ciphers: secret-code apps and password checkers.' } },
+      teen: { tools: ['Python', 'Linux', 'Wireshark', 'TryHackMe', 'picoCTF'], text: { ar: 'الشبكات والتهديدات والحماية: أدوات أمان بالـ Python وتحديات CTF في معامل آمنة.', en: 'Networks, threats and defence: Python security tools and capture-the-flag challenges in safe labs.' } },
     },
     cards: [
       { kind: 'project', label: { ar: 'مشروع: محاكاة شبكة وجهاز دخيل', en: 'Project: a network and a rogue device' }, project: 'cyberNetwork', tint: 'mint' },
@@ -172,11 +261,35 @@ export const TRACKS: Track[] = [
     shots: [
       { img: 'cyberNetwork', caption: { ar: 'شبكة لأقسام شركة في Cisco Packet Tracer، والطالب بيتتبع جهاز دخيل', en: 'A company network in Cisco Packet Tracer, tracing a rogue device' } },
     ],
-    projects: [
-      { ar: 'تطبيق تشفير للرسائل', en: 'A message encryption app' },
-      { ar: 'فاحص قوة كلمة السر', en: 'A password strength checker' },
-      { ar: 'حل تحديات CTF', en: 'Solving CTF challenges' },
+    gains: [
+      { ar: 'يكشف رسائل الـ Phishing والنصب والتحميلات الخطر', en: 'Spot phishing, scams and unsafe downloads' },
+      { ar: 'يعمل باسوردات قوية ويحمي حساباته', en: 'Create strong passwords and protect their accounts' },
+      { ar: 'يفهم الشبكات والإنترنت شغالين إزاي', en: 'Understand how networks and the internet work' },
+      { ar: 'يقيّم المخاطر ويخطط للحماية', en: 'Assess risks and plan a defence' },
+      { ar: 'يلتزم بالأخلاقيات: يتدرب في معامل مسموح بيها بس، وعمره ما يجرّب على أنظمة حقيقية', en: 'Act ethically: practise only in authorised labs, never on real systems' },
     ],
+    journey: {
+      teen: {
+        heading: { ar: 'الفصل الأول: أساسيات الأمن السيبراني', en: 'Chapter 1: Cybersecurity foundations' },
+        levels: [
+          {
+            title: { ar: 'الشبكات وأساسيات الأمن', en: 'Networks and cyber basics' },
+            text: { ar: 'أجهزة الشبكة، وعناوين IP، والإنترنت شغال إزاي، والـ Ports، وحل المشاكل البسيطة.', en: 'Network devices, IP addresses, how the internet works, ports and basic troubleshooting.' },
+            project: { ar: 'تصميم شبكة آمنة لمدرسة: رسمة وجدول عناوين وقائمة فحص أمان.', en: 'A secure network design for a school: diagram, address table and security checklist.' },
+          },
+          {
+            title: { ar: 'التهديدات والحماية الرقمية', en: 'Threats and digital protection' },
+            text: { ar: 'تقييم المخاطر، والبرامج الضارة، والـ Phishing والهندسة الاجتماعية، والباسوردات والأمان على الويب.', en: 'Risk assessment, malware, phishing and social engineering, passwords and web safety.' },
+            project: { ar: 'تحقيق في حادثة وهمية في مدرسة، ومعاه حملة توعية.', en: 'An investigation of a fictional school incident, plus an awareness campaign.' },
+          },
+          {
+            title: { ar: 'الأمن الدفاعي', en: 'Defensive security' },
+            text: { ar: 'حماية أنظمة التشغيل، والـ Firewalls، و Linux و Wireshark، والمراقبة والتعامل مع الحوادث.', en: 'Operating-system security, firewalls, Linux, Wireshark, monitoring and incident response.' },
+            project: { ar: 'خطة أمان لشركة صغيرة.', en: 'A security plan for a small organisation.' },
+          },
+        ],
+      },
+    },
   },
   {
     slug: 'gamedev',
@@ -184,14 +297,14 @@ export const TRACKS: Track[] = [
     name: { ar: 'تطوير الألعاب', en: 'Game Development' },
     short: { ar: 'يصمم ألعابه الخاصة، ويفهم إزاي اللعبة بتتبني من جوه.', en: 'Designs their own games and learns how games work inside.' },
     about: {
-      ar: 'الطالب يتحول من لاعب إلى صانع ألعاب. يتعلم أساسيات البرمجة من خلال بناء لعبة حقيقية خطوة بخطوة، ويتعلم كمان أفكار تصميم الألعاب: إزاي نخلي اللعبة ممتعة وعادلة.',
-      en: 'Students go from playing games to making them. They learn programming basics by building a real game step by step, and the ideas behind good game design: how to make a game fun and fair.',
+      ar: 'من لعب الألعاب لتصميمها، وفهم الألعاب بتحاول تشدّ اللاعب إزاي.',
+      en: 'From playing games to designing them, and understanding how games try to keep players hooked.',
     },
     builds: { ar: 'ألعابه الخاصة', en: 'Their own games' },
     color: 'yellow',
     levels: {
-      middle: { tools: ['GameMaker'], text: { ar: 'بناء لعبة باستخدام البلوكات المرئية، مع الحركة والتصادم والنقاط والأرواح، ثم إضافة العشوائية وزيادة الصعوبة.', en: 'A full game with visual code blocks: movement, collisions, score and lives, then randomness and rising difficulty.' } },
-      teen: { tools: ['Unity'], text: { ar: 'تطوير ألعاب باستخدام محرك احترافي، وبناء مشاهد وشخصيات وتجربة لعب متكاملة.', en: 'Games in a professional engine, with scenes, characters and a complete play experience.' } },
+      middle: { tools: ['GameMaker'], text: { ar: 'محرك ألعاب حقيقي: المنطق بالسحب والإفلات الأول، وبعدين الكود. كل حصة فيها هدف للمبرمج ولحظة تفكير للمصمم.', en: 'A real game engine: drag-and-drop logic first, then code. Every session has a programmer goal and a designer moment.' } },
+      teen: { tools: ['Unity'], text: { ar: 'محرك احترافي بتستخدمه شركات ألعاب حوالين العالم. الطالب بيبني ألعابه الخاصة.', en: 'A professional engine used by studios around the world. Students build their own playable games.' } },
     },
     cards: [
       { kind: 'project', label: { ar: 'مشروع: لعبة سفينة الفضاء', en: 'Project: the spaceship game' }, project: 'gameShield', tint: 'yellow' },
@@ -199,17 +312,42 @@ export const TRACKS: Track[] = [
       { kind: 'photo', label: { ar: 'يجرب لعبته بنفسه', en: 'Playtesting their own game' } },
     ],
     shots: [
-      { img: 'gameShield', caption: { ar: 'سفينة بدرع حماية، وكويكبات، و3 أرواح في GameMaker', en: 'A ship with a shield, asteroids and 3 lives, in GameMaker' } },
-      { img: 'gamePink', caption: { ar: 'نفس اللعبة بتصميم طالبة تانية: سفينة وردية و4 أرواح', en: 'The same game, designed by another student: a pink ship and 4 lives' } },
+      { img: 'gameShield', caption: { ar: 'سفينة بدرع حماية وكويكبات، وعندها 3 أرواح (GameMaker)', en: 'A ship with a shield, asteroids and 3 lives, in GameMaker' } },
+      { img: 'gamePink', caption: { ar: 'نفس اللعبة بتصميم طالبة تانية: سفينة وردية وعندها 4 أرواح', en: 'The same game, designed by another student: a pink ship and 4 lives' } },
       { img: 'unityTruck', caption: { ar: 'شاحنة بتخبط في صناديق بفيزياء حقيقية (Unity)', en: 'A truck crashing into crates with real physics (Unity)' } },
       { img: 'unityAnimals', caption: { ar: 'لعبة إطعام الحيوانات: كل حيوان ياكل يزوّد النقط (Unity)', en: 'Feed the animals: every fed animal adds to the score (Unity)' } },
       { img: 'unitySumo', caption: { ar: 'كورة بتزق الكور التانية برّه المنصة بقوة خاصة (Unity)', en: 'A ball that knocks the others off the platform with a power-up (Unity)' } },
     ],
-    projects: [
-      { ar: 'لعبة سفينة فضاء تطلق الليزر على الكويكبات', en: 'A spaceship game that shoots lasers at asteroids' },
-      { ar: 'قوة خاصة (Power-up) يصممها كل طالب للعبته', en: 'A power-up each student designs for their game' },
-      { ar: 'لعبة كاملة بمحرك Unity', en: 'A complete game in Unity' },
+    gains: [
+      { ar: 'يبرمج الحركة والضرب والتصادم والنقاط والأرواح', en: 'Program movement, shooting, collisions, score and lives' },
+      { ar: 'يصمم لعبة ممتعة وعادلة وفيها تحدي', en: 'Design a game that is fun, fair and challenging' },
+      { ar: 'يجرّب لعبته مع لاعيبة حقيقيين ويحسّنها من آرائهم', en: 'Test their game with real players and improve it from feedback' },
+      { ar: 'يفهم الجوايز العشوائية والـ Pay-to-win، ويحط لنفسه حدود لوقت الشاشة', en: 'Understand random rewards and pay-to-win, and set their own screen limits' },
+      { ar: 'يعرض لعبته ويشرح قرارات التصميم', en: 'Present their game and explain their design decisions' },
     ],
+    journey: {
+      middle: {
+        heading: { ar: 'GameMaker · الفصل الأول: Space Shooter', en: 'GameMaker · Chapter 1: Space Shooter' },
+        levels: [
+          {
+            title: { ar: 'Space Rookie', en: 'Space Rookie' },
+            text: { ar: 'أول خطوة في GameMaker: الحركة والضرب والتصادم والأرواح والعشوائية.', en: 'First steps in GameMaker: movement, shooting, collisions, lives and randomness.' },
+            project: { ar: 'سفينة بتتحرك وبتضرب وبتتفادى صخور عشوائية.', en: 'A playable ship that moves, shoots and dodges random rocks.' },
+          },
+          {
+            title: { ar: 'Space Pilot', en: 'Space Pilot' },
+            text: { ar: 'المؤقتات والنقاط والـ Power-ups ومنحنى صعوبة بيزيد، وليه الألعاب بتحسسنا بالمكافأة.', en: 'Timers, score, power-ups and a rising difficulty curve, and why games feel rewarding.' },
+            project: { ar: 'لعبة Shooter مفتوحة بعدّاد نقاط و Power-ups.', en: 'An endless shooter with a live score and power-ups.' },
+          },
+          {
+            title: { ar: 'Space Captain', en: 'Space Captain' },
+            text: { ar: 'الصوت والأنيميشن والقوائم ومعركة الـ Boss، واختبار اللعبة.', en: 'Sound, animation, menus, a boss battle and playtesting.' },
+            project: { ar: 'لعبة كاملة بقائمة بداية وصوت ومعركة Boss، بيلعبها زمايله في يوم الـ Arcade.', en: 'A finished game with a start menu, sound and a boss fight, played by classmates on Arcade Day.' },
+          },
+        ],
+        note: { ar: 'بعدها: الفصل التاني لعبة Platformer (جاذبية ومراحل وأعداء)، والفصل التالت لعبة فريق من تصميم الطلاب، بيبنوها وينشروها.', en: 'Next: Chapter 2 builds a platformer (gravity, levels, enemies). Chapter 3 is a team game that students design, build and publish.' },
+      },
+    },
   },
 ];
 

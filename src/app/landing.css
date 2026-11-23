@@ -1388,6 +1388,125 @@ html[dir='ltr'] select.input {
 .track-detail {
   display: grid;
   gap: 32px;
+  align-items: start;
+}
+
+/* What your child gains + thinking skills */
+.gains {
+  display: grid;
+  gap: 32px;
+}
+
+.skills {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.skill {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: var(--r-md);
+  background: #ffffff;
+  border: 1px solid var(--border);
+}
+
+.skill strong {
+  color: var(--navy);
+  font-size: 15px;
+}
+
+.skill span {
+  color: var(--body);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* The journey, level by level */
+.journey + .journey {
+  margin-top: 36px;
+}
+
+.journey__head {
+  margin: 0 0 14px;
+  color: var(--green-dark);
+  font-size: 17px;
+}
+
+.journey__levels {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.jlevel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  border-radius: var(--r-lg);
+  background: #ffffff;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+.jlevel__n {
+  color: var(--body);
+  font-size: 13px;
+}
+
+.jlevel__title {
+  margin: 0;
+  color: var(--navy);
+  font-size: 18px;
+}
+
+.jlevel__text {
+  margin: 0;
+  color: var(--navy);
+  line-height: 1.9;
+  flex: 1;
+}
+
+.jlevel__project {
+  margin: 6px 0 0;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+  color: var(--navy);
+  line-height: 1.8;
+}
+
+.jlevel__project strong {
+  color: var(--green-dark);
+}
+
+.journey__note {
+  margin: 16px 0 0;
+  padding: 14px 18px;
+  border-radius: var(--r-md);
+  background: var(--yellow-tint);
+  color: var(--navy);
+  line-height: 1.8;
+}
+
+/* Money-back guarantee next to "How we teach" */
+.guarantee-box {
+  padding: 24px;
+  border-radius: var(--r-lg);
+  background: var(--yellow-tint);
+}
+
+.guarantee-box p {
+  margin: 12px 0 0;
+  color: var(--navy);
+  line-height: 1.9;
 }
 
 .check-list {
@@ -1634,6 +1753,15 @@ html[dir='ltr'] select.input {
   .track-detail {
     grid-template-columns: 1fr 1fr;
     gap: 48px;
+  }
+
+  .gains {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  .journey__levels {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
