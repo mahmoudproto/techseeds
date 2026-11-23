@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import type React from 'react';
 
 export interface StackCard {
   key: string;
@@ -81,12 +82,58 @@ export default function TrackCards({ cards, text, dir }: { cards: StackCard[]; t
     setOpen(false);
     setFront((f) => (f + step + n) % n);
   };
+
+  // Swipe (finger) or drag (mouse) sideways across the cards: the side card on the far side
+  // of the swipe comes to the front, like flicking through a pile of photos.
+  const swipe = useRef<{ x: number; y: number; done: boolean } | null>(null);
+  const skipClick = useRef(false);
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    swipe.current = { x: e.clientX, y: e.clientY, done: false };
+    skipClick.current = false;
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    const s = swipe.current;
+    if (!s || s.done) return;
+    const dx = e.clientX - s.x;
+    const dy = e.clientY - s.y;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    s.done = true;
+    skipClick.current = true;
+    // swiping left brings the card on the right, and the other way round
+    const one = box.current?.querySelector<HTMLElement>('.stack__card--pos1')?.getBoundingClientRect();
+    const two = box.current?.querySelector<HTMLElement>('.stack__card--pos2')?.getBoundingClientRect();
+    const oneIsRight = one && two ? one.left + one.width / 2 > two.left + two.width / 2 : dir === 'ltr';
+    const wantRight = dx < 0;
+    go(wantRight === oneIsRight ? 1 : -1);
+  };
+  const onPointerEnd = () => {
+    swipe.current = null;
+  };
   const num = (i: number) => (dir === 'rtl' ? ['١', '٢', '٣', '٤', '٥'][i] ?? String(i + 1) : String(i + 1));
   const current = cards[front];
 
   return (
     <div className="stack-wrap">
-      <div ref={box} className={`stack${shown ? ' stack--shown' : ''}`} role="group" aria-label={text.label}>
+      <div
+        ref={box}
+        className={`stack${shown ? ' stack--shown' : ''}`}
+        role="group"
+        aria-label={text.label}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerEnd}
+        onPointerCancel={onPointerEnd}
+        onClickCapture={(e) => {
+          // a swipe is not a tap: don't also open or pick the card under the finger
+          if (skipClick.current) {
+            e.stopPropagation();
+            e.preventDefault();
+            skipClick.current = false;
+          }
+        }}
+        onDragStart={(e) => e.preventDefault()}
+      >
         {cards.map((card, i) => {
           const pos = (i - front + n) % n; // 0 = front, 1 = side, 2 = other side
           const isFront = pos === 0;

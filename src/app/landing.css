@@ -1113,6 +1113,70 @@ html[dir='ltr'] select.input {
   font-size: 13px;
 }
 
+/* Reviews can be dragged with the mouse; text isn't selected while dragging */
+.reviews {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+@media (hover: hover) {
+  .reviews {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='16' fill='%232fa84f' stroke='white' stroke-width='2'/%3E%3Cpath d='M14 12l-6 6 6 6M22 12l6 6-6 6' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 18 18, ew-resize;
+  }
+}
+
+/* while dragging, snapping waits until the mouse is let go */
+.reviews.is-dragging {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
+/* A soft shadow on an edge while there are more reviews past it */
+.edge-shade {
+  position: relative;
+}
+
+.edge-shade::before,
+.edge-shade::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 18px;
+  width: 22px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.edge-shade::before {
+  inset-inline-start: -4px;
+  background: linear-gradient(to left, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.14));
+  border-start-start-radius: 12px;
+  border-end-start-radius: 12px;
+}
+
+.edge-shade::after {
+  inset-inline-end: -4px;
+  background: linear-gradient(to right, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.14));
+  border-start-end-radius: 12px;
+  border-end-end-radius: 12px;
+}
+
+/* in right-to-left pages the start is on the right, so the gradients flip */
+[dir='rtl'] .edge-shade::before {
+  background: linear-gradient(to right, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.14));
+}
+
+[dir='rtl'] .edge-shade::after {
+  background: linear-gradient(to left, rgba(18, 46, 79, 0), rgba(18, 46, 79, 0.14));
+}
+
+.edge-shade--start::before,
+.edge-shade--end::after {
+  opacity: 1;
+}
+
 .reviews__hint {
   margin: 4px 0 0;
   color: var(--body);
@@ -1903,6 +1967,14 @@ html[dir='ltr'] select.input {
   position: relative;
   width: 100%;
   aspect-ratio: 640 / 420;
+  /* sideways swipes change the card; up and down still scroll the page */
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.stack img {
+  -webkit-user-drag: none;
 }
 
 .stack__card {

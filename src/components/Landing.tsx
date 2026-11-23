@@ -4,6 +4,7 @@ import { WHATSAPP_NUMBER } from '@/lib/labels';
 import { MEDIA } from '@/lib/media';
 import { TRACKS } from '@/lib/tracks';
 import ProjectsScroller, { type ScrollerItem } from './ProjectsScroller';
+import DragRow from './DragRow';
 import { SITE, whatsappLink, type Lang } from '@/lib/site-content';
 import { LOCATION, NEXT_START_DATE, SEATS_LEFT } from '@/lib/site-config';
 import AgeTabs from './AgeTabs';
@@ -251,7 +252,7 @@ export default function Landing({ lang }: { lang: Lang }) {
       <section className="section" id="reviews">
         <div className="wrap">
           <Head kicker={t.reviews.kicker} title={t.reviews.title} text={t.reviews.sub} />
-          <div className="reviews" tabIndex={0} role="region" aria-label={t.reviews.title}>
+          <DragRow className="reviews" label={t.reviews.title}>
             {SITE.ar.reviews.items.map((r) => (
               <figure className="review" key={r.name} lang="ar" dir="rtl">
                 <span className="review__quote" aria-hidden="true">”</span>
@@ -262,7 +263,7 @@ export default function Landing({ lang }: { lang: Lang }) {
                 </figcaption>
               </figure>
             ))}
-          </div>
+          </DragRow>
           <p className="reviews__hint">{t.reviews.hint} {t.arrow}</p>
         </div>
       </section>
