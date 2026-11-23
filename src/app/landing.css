@@ -1038,27 +1038,47 @@ html[dir='ltr'] select.input {
   line-height: 1.8;
 }
 
-/* 9. Testimonials: sized so part of the next review always peeks in */
-
-@media (min-width: 640px) {
-  .reviews .review { flex-basis: calc((100% - 16px) / 2.3); }
-}
-
-@media (min-width: 1024px) {
-  .reviews .review { flex-basis: calc((100% - 32px) / 3.3); }
-}
+/* 9. Testimonials. The row is as wide as the screen, but each card keeps the width it had
+   when the row sat inside the page column (--col is that column's width). */
 
 .reviews {
+  --col: calc(100vw - 40px);
   display: flex;
   gap: 16px;
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  /* full screen width, like the projects row; snapping keeps a card lined up with the edge gap */
-  padding: 8px 20px 18px;
-  scroll-padding-inline: 20px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--green) var(--border);
+  /* no snapping: the row stays exactly where the visitor drags or swipes it */
+  padding: 8px 0 14px;
+  padding-inline-start: 20px;
+  scrollbar-width: none;
+}
+
+.reviews::-webkit-scrollbar {
+  display: none;
+}
+
+/* the same 20px gap after the last card (card gap + this), done with a spacer because
+   some browsers drop the end padding of a scrolling row */
+.reviews::after {
+  content: '';
+  flex: 0 0 4px;
+}
+
+.reviews .review {
+  flex-basis: calc(var(--col) * 0.82);
+  scroll-snap-align: none;
+}
+
+@media (min-width: 640px) {
+  .reviews .review { flex-basis: calc((var(--col) - 16px) / 2.3); }
+}
+
+@media (min-width: 960px) {
+  .reviews { --col: calc(min(100vw, 1160px) - 80px); }
+}
+
+@media (min-width: 1024px) {
+  .reviews .review { flex-basis: calc((var(--col) - 32px) / 3.3); }
 }
 
 .review {
@@ -1126,14 +1146,12 @@ html[dir='ltr'] select.input {
   }
 }
 
-/* while dragging, snapping waits until the mouse is let go */
 .reviews.is-dragging {
-  scroll-snap-type: none;
   scroll-behavior: auto;
 }
 
 .reviews__hint {
-  margin: 4px 0 0;
+  margin: 10px 0 0;
   color: var(--body);
   font-size: 13px;
 }
