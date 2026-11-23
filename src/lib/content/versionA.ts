@@ -130,7 +130,7 @@ export const versionA: TestDefinition = {
       id: 'a9',
       en: { prompt: 'Which class would you enjoy more?' },
       kind: 'interest',
-      prompt: 'تحب أنهي حصة أكتر؟',
+      prompt: 'تحب أنهي سيشن أكتر؟',
       options: [
         { id: 'o1', label: 'أحكي حكاية وكمبيوتر ذكي يرسمها', en: 'Tell a story and a smart computer draws it', track: 'ai' },
         { id: 'o2', label: 'أخلي شخصية كرتون تتحرك وترقص بأوامر أنا اللي أرتّبها', en: 'Make a cartoon character move and dance to commands I put in order', track: 'programming' },

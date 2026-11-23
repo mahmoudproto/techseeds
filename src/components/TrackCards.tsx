@@ -185,10 +185,6 @@ export default function TrackCards({ cards, text, dir }: { cards: StackCard[]; t
             <Chevron flip={dir === 'rtl'} />
           </button>
         </div>
-        <p className="stack-nav__hint">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 11V5a2 2 0 0 1 4 0v5" /><path d="M13 10a2 2 0 0 1 4 0v1a2 2 0 0 1 4 0v4a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-3l-3-5a2 2 0 0 1 3-2l2 2" /></svg>
-          {text.open}
-        </p>
       </div>
 
       {open && (

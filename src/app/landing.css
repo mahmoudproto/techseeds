@@ -764,7 +764,28 @@ html[dir='rtl'] .hero__doodle {
   font-size: 21px;
   font-weight: 700;
   color: var(--navy);
+  /* shrink to the name so the line under it can follow its width */
+  align-self: flex-start;
+  position: relative;
+  padding-bottom: 12px;
 }
+
+/* A line in the track's colour under its name, slightly shorter than the name */
+.track-card__name::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  inset-inline-start: 0;
+  width: 88%;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--line, var(--green));
+}
+
+.track-card--ai { --line: #f4a70c; }
+.track-card--programming { --line: #4254a7; }
+.track-card--cyber { --line: #3db1a9; }
+.track-card--gamedev { --line: #73a9dc; }
 
 .track-card__text {
   margin: 0;
@@ -2041,7 +2062,7 @@ html[dir='ltr'] select.input {
   display: grid;
   place-items: center;
   min-height: 360px;
-  padding-bottom: 104px; /* room for the instructor badge under the cards */
+  padding-bottom: 96px; /* room for the instructor badge, 16px under the arrows */
 }
 
 .track-visual__blue {
@@ -2240,15 +2261,6 @@ html[dir='ltr'] select.input {
   background: var(--green);
 }
 
-.stack-nav__hint {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0;
-  color: #4a5d73;
-  font-size: 14px;
-  font-weight: 600;
-}
 
 /* The enlarged front card, over the whole visual */
 .stack-zoom {
@@ -2437,7 +2449,7 @@ html[dir='rtl'] .instructor {
 
 /* Two instructors (programming): the badges stack, so leave room for the second one */
 .track-visual--two {
-  padding-bottom: 184px;
+  padding-bottom: 186px;
 }
 
 .track-visual--two .instructors {

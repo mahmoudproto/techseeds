@@ -254,8 +254,8 @@ export const TRACKS: Track[] = [
       teen: { tools: ['Python', 'Linux', 'Wireshark', 'TryHackMe', 'picoCTF'], text: { ar: 'الشبكات والتهديدات والحماية: أدوات أمان بالـ Python وتحديات CTF في معامل آمنة.', en: 'Networks, threats and defence: Python security tools and capture-the-flag challenges in safe labs.' } },
     },
     cards: [
-      { kind: 'project', label: { ar: 'مشروع: محاكاة شبكة وجهاز دخيل', en: 'Project: a network and a rogue device' }, project: 'cyberNetwork', tint: 'mint' },
       { kind: 'art', label: { ar: 'يحمي نفسه وأجهزته', en: 'Protecting themselves and their devices' } },
+      { kind: 'project', label: { ar: 'مشروع: محاكاة شبكة وجهاز دخيل', en: 'Project: a network and a rogue device' }, project: 'cyberNetwork', tint: 'mint' },
       { kind: 'photo', label: { ar: 'أدوات أمان حقيقية', en: 'Real security tools' } },
     ],
     shots: [
@@ -303,12 +303,12 @@ export const TRACKS: Track[] = [
     builds: { ar: 'ألعابه الخاصة', en: 'Their own games' },
     color: 'yellow',
     levels: {
-      middle: { tools: ['GameMaker'], text: { ar: 'محرك ألعاب حقيقي: المنطق بالسحب والإفلات الأول، وبعدين الكود. كل حصة فيها هدف للمبرمج ولحظة تفكير للمصمم.', en: 'A real game engine: drag-and-drop logic first, then code. Every session has a programmer goal and a designer moment.' } },
+      middle: { tools: ['GameMaker'], text: { ar: 'محرك ألعاب حقيقي: المنطق بالسحب والإفلات الأول، وبعدين الكود. كل سيشن فيها هدف للمبرمج ولحظة تفكير للمصمم.', en: 'A real game engine: drag-and-drop logic first, then code. Every session has a programmer goal and a designer moment.' } },
       teen: { tools: ['Unity'], text: { ar: 'محرك احترافي بتستخدمه شركات ألعاب حوالين العالم. الطالب بيبني ألعابه الخاصة.', en: 'A professional engine used by studios around the world. Students build their own playable games.' } },
     },
     cards: [
-      { kind: 'project', label: { ar: 'مشروع: لعبة سفينة الفضاء', en: 'Project: the spaceship game' }, project: 'gameShield', tint: 'yellow' },
       { kind: 'art', label: { ar: 'من لاعب إلى صانع ألعاب', en: 'From player to game maker' } },
+      { kind: 'project', label: { ar: 'مشروع: لعبة سفينة الفضاء', en: 'Project: the spaceship game' }, project: 'gameShield', tint: 'yellow' },
       { kind: 'photo', label: { ar: 'يجرب لعبته بنفسه', en: 'Playtesting their own game' } },
     ],
     shots: [
