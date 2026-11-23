@@ -123,11 +123,11 @@ export const MEDIA = {
     },
     progThor: {
       src: local('project-prog-thor'),
-      alt: { ar: 'تحدي Power of Thor على CodinGame بلغة C#', en: 'The Power of Thor challenge on CodinGame in C#' },
+      alt: { ar: 'تحدي Power of Thor على CodinGame', en: 'The Power of Thor challenge on CodinGame' },
     },
     progCodingame: {
       src: local('project-prog-codingame'),
-      alt: { ar: 'تحدي سفينة الفضاء على CodinGame بلغة C#', en: 'The spaceship onboarding challenge on CodinGame in C#' },
+      alt: { ar: 'تحدي سفينة الفضاء على CodinGame', en: 'The spaceship onboarding challenge on CodinGame' },
     },
     gameShield: {
       src: local('project-game-shield'),

@@ -130,7 +130,7 @@ export const TRACKS: Track[] = [
     levels: {
       young: { tools: ['mBlock'], text: { ar: 'البرمجة بالبلوكات: الأوامر والتكرار والشروط من خلال قصص وألعاب بسيطة.', en: 'Block coding: commands, loops and conditions through simple stories and games.' } },
       middle: { tools: ['Python'], text: { ar: 'أول لغة برمجة حقيقية: المتغيرات والشروط والتكرار والدوال من خلال برامج صغيرة مفيدة.', en: 'A first real language: variables, conditions, loops and functions in small, useful programs.' } },
-      teen: { tools: ['C#'], text: { ar: 'برمجة حقيقية بلغة ⁨C#⁩: حل تحديات وألعاب برمجية، والتفكير في بناء مشروع كامل من البداية للنهاية.', en: 'Real coding in C#: programming challenges and games, and planning a full project from start to finish.' } },
+      teen: { tools: ['JavaScript'], text: { ar: 'برمجة تطبيقات ومواقع تفاعلية بلغة JavaScript، والتفكير في بناء مشروع كامل من البداية للنهاية.', en: 'Interactive apps and web pages in JavaScript, and planning a full project from start to finish.' } },
     },
     cards: [
       { kind: 'art', label: { ar: 'من البلوكات إلى الكود', en: 'From blocks to code' } },
@@ -140,13 +140,13 @@ export const TRACKS: Track[] = [
     shots: [
       { img: 'progScratch', caption: { ar: 'لعبة التقاط التفاح بالبلوكات في Scratch', en: 'An apple-catching game in Scratch blocks' } },
       { img: 'progMaze', caption: { ar: 'متاهة الكنز: الكود بيحرّك المستكشف لحد الكنز (Python)', en: 'Treasure maze: code moves the explorer to the treasure (Python)' } },
-      { img: 'progThor', caption: { ar: 'تحدي Power of Thor على CodinGame بلغة ⁨C#⁩', en: 'The Power of Thor challenge on CodinGame, in C#' } },
-      { img: 'progCodingame', caption: { ar: 'سفينة بتختار أقرب عدو تضربه، بلغة ⁨C#⁩', en: 'A ship that picks the nearest enemy to shoot, in C#' } },
+      { img: 'progThor', caption: { ar: 'تحدي Power of Thor على CodinGame', en: 'The Power of Thor challenge on CodinGame' } },
+      { img: 'progCodingame', caption: { ar: 'تحدي على CodinGame: سفينة بتختار أقرب عدو تضربه', en: 'A CodinGame challenge: a ship that picks the nearest enemy to shoot' } },
     ],
     projects: [
       { ar: 'قصة أو لعبة تفاعلية بالبلوكات', en: 'An interactive story or game in blocks' },
       { ar: 'آلة حاسبة أو اختبار قصير بلغة Python', en: 'A calculator or short quiz in Python' },
-      { ar: 'تحديات برمجة وألعاب بلغة ⁨C#⁩ على CodinGame', en: 'Coding challenges and games in C# on CodinGame' },
+      { ar: 'صفحة ويب تفاعلية بلغة JavaScript', en: 'An interactive web page in JavaScript' },
     ],
   },
   {

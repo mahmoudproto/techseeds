@@ -2298,14 +2298,6 @@ html[dir='rtl'] .instructor {
   transition: transform 0.3s ease;
 }
 
-.shot__img:hover img {
-  transform: scale(1.03);
-}
-
-.shot__img:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 2px;
-}
 
 .shot figcaption {
   padding: 0 4px;
@@ -2379,4 +2371,44 @@ html[dir='rtl'] .instructor {
 .track-card__more:active {
   transform: translateY(3px);
   box-shadow: 0 1px 0 color-mix(in srgb, var(--ink) 28%, var(--tint));
+}
+
+/* Projects block: one row of every student project that scrolls by itself */
+.pscroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-inline: -20px;
+  padding: 6px 20px 18px;
+  scrollbar-width: none;
+  /* soft fade at both edges so cards slide in and out */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+}
+
+.pscroll::-webkit-scrollbar {
+  display: none;
+}
+
+.pscroll:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+  border-radius: var(--r-lg);
+}
+
+.pscroll .project {
+  flex: 0 0 min(300px, 78vw);
+  scroll-snap-align: none;
+}
+
+.pscroll .project__art {
+  aspect-ratio: 16 / 9;
+  object-position: top center;
+}
+
+@media (min-width: 1240px) {
+  .pscroll {
+    margin-inline: calc((1160px - 100vw) / 2 + 20px);
+  }
 }

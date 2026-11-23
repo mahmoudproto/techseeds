@@ -142,9 +142,9 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
                 const m = MEDIA.projects[shot.img];
                 return (
                   <figure className="shot" key={shot.img}>
-                    <a className="shot__img" href={m.src} target="_blank" rel="noopener noreferrer">
+                    <div className="shot__img">
                       <img src={m.src} alt={m.alt[lang]} loading="lazy" />
-                    </a>
+                    </div>
                     <figcaption>{shot.caption[lang]}</figcaption>
                   </figure>
                 );

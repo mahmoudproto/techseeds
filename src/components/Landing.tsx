@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import { WHATSAPP_NUMBER } from '@/lib/labels';
 import { MEDIA } from '@/lib/media';
+import { TRACKS } from '@/lib/tracks';
+import ProjectsScroller, { type ScrollerItem } from './ProjectsScroller';
 import { SITE, whatsappLink, type Lang } from '@/lib/site-content';
 import { LOCATION, NEXT_START_DATE, SEATS_LEFT } from '@/lib/site-config';
 import AgeTabs from './AgeTabs';
@@ -170,26 +172,7 @@ export default function Landing({ lang }: { lang: Lang }) {
 
           <div className="projects-block" id="projects">
             <Head kicker={t.projects.kicker} title={t.projects.title} text={t.projects.text} center />
-            <div className="projects">
-              {t.projects.items.map((p) => {
-                const img = p.img ? MEDIA.projects[p.img] : null;
-                return (
-                  <article className={`project project--${p.tint}`} key={p.title}>
-                    <div className="project__screen">
-                      <span className="project__bar" aria-hidden="true"><i /><i /><i /></span>
-                      {img ? (
-                        <img className="project__art" src={img.src} alt={img.alt[lang]} loading="lazy" width={480} height={300} />
-                      ) : (
-                        <ProjectArt tint={p.tint} />
-                      )}
-                    </div>
-                    <span className="project__track">{p.track}</span>
-                    <h3 className="project__title">{p.title}</h3>
-                    <p className="project__text">{p.text}</p>
-                  </article>
-                );
-              })}
-            </div>
+            <ProjectsScroller items={projectItems(lang)} label={t.projects.title} />
             <p className="soon-note">{t.projects.note}</p>
           </div>
 
@@ -396,5 +379,27 @@ export function ProjectArt({ tint }: { tint: string }) {
       <path d="M147 30 v-12" stroke="#2fa84f" strokeWidth="3" strokeLinecap="round" />
       <circle cx="147" cy="16" r="4" fill="#f8bc17" />
     </svg>
+  );
+}
+
+const TRACK_TINT = { ai: 'green', programming: 'blue', cyber: 'mint', gamedev: 'yellow' } as const;
+
+/** Every student project screenshot, track by track. The four featured ones keep their longer text. */
+function projectItems(lang: Lang): ScrollerItem[] {
+  const featured = SITE[lang].projects.items;
+  return TRACKS.flatMap((tr) =>
+    tr.shots.map((shot) => {
+      const m = MEDIA.projects[shot.img];
+      const f = featured.find((x) => x.img === shot.img);
+      return {
+        key: shot.img,
+        src: m.src,
+        alt: m.alt[lang],
+        track: tr.name[lang],
+        tint: TRACK_TINT[tr.slug],
+        title: f ? f.title : shot.caption[lang],
+        text: f?.text,
+      };
+    }),
   );
 }
