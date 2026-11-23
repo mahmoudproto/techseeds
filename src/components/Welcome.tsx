@@ -35,7 +35,6 @@ export default function Welcome({ lang, initialName, initialAge, onDraft, onStar
   return (
     <section className="welcome">
       <div className="welcome__copy">
-        <p className="eyebrow">Growing Young Minds</p>
         <h1 className="title">{t.title}</h1>
         <span className="title__bar" />
         <p className="lead">{t.lead}</p>
