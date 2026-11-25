@@ -44,7 +44,7 @@ export interface SiteContent {
     how: string; howItems: string[]; cta: string; ctaText: string; test: string; whatsapp: string; notTaught: string;
     instructor: string; instructorF: string; instructors: string; instructorSoon: string; cards: string;
     gains: string; skills: string; skillItems: { title: string; text: string }[];
-    journey: string; level: (n: number) => string; finalProject: string;
+    journey: string; level: (n: number) => string; finalProject: string; prereq: string;
     guarantee: { title: string; text: string };
   };
   whatsappLabel: string;
@@ -237,6 +237,7 @@ const ar: SiteContent = {
     journey: 'الرحلة مستوى بمستوى',
     level: (n) => `المستوى ${n}`,
     finalProject: 'المشروع النهائي:',
+    prereq: 'قبل ما يبدأ:',
     guarantee: {
       title: 'ضمان استرداد قيمة المستوى',
       text: 'لو طفلك حضر 5 سيشنز على الأقل من 6 في المستوى وما خلّصش المشروع النهائي، بنرجّعلكم قيمة المستوى ده. الطلب بيكون خلال 7 أيام من آخر سيشن.',
@@ -429,6 +430,7 @@ const en: SiteContent = {
     journey: 'The journey, level by level',
     level: (n) => `Level ${n}`,
     finalProject: 'Final project:',
+    prereq: 'Before starting:',
     guarantee: {
       title: 'Money-back guarantee',
       text: "If your child attends at least 5 of the level's 6 sessions and doesn't complete the final project, we refund that level. Claim within 7 days of the last session.",

@@ -1454,6 +1454,16 @@ html[dir='ltr'] select.input {
   margin-top: 36px;
 }
 
+.journey__prereq {
+  margin: -4px 0 14px;
+  color: var(--body);
+  line-height: 1.8;
+}
+
+.journey__prereq strong {
+  color: var(--navy);
+}
+
 .journey__head {
   margin: 0 0 14px;
   color: var(--green-dark);

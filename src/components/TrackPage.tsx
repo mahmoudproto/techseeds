@@ -161,20 +161,23 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
         </div>
       </section>
 
-      {AGE_BANDS.some((b) => track.journey[b.id]) && (
+      {AGE_BANDS.some((b) => track.journey[b.id]?.length) && (
         <section className="section" aria-labelledby="journey-title">
           <div className="wrap">
             <div className="s-head">
               <h2 className="h2" id="journey-title">{p.journey}</h2>
             </div>
-            {AGE_BANDS.map((b) => {
-              const j = track.journey[b.id];
-              if (!j) return null;
-              return (
-                <div className="journey" key={b.id}>
+            {AGE_BANDS.flatMap((b) =>
+              (track.journey[b.id] ?? []).map((j) => (
+                <div className="journey" key={`${b.id}-${j.heading.en}`}>
                   <h3 className="journey__head">
                     {b.label[lang]} · <span dir={lang === 'ar' ? 'rtl' : 'ltr'}>{j.heading[lang]}</span>
                   </h3>
+                  {j.prereq && (
+                    <p className="journey__prereq">
+                      <strong>{p.prereq}</strong> {j.prereq[lang]}
+                    </p>
+                  )}
                   <ol className="journey__levels">
                     {j.levels.map((lv, i) => (
                       <li className="jlevel" key={lv.title.en}>
@@ -189,8 +192,8 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
                   </ol>
                   {j.note && <p className="journey__note">{j.note[lang]}</p>}
                 </div>
-              );
-            })}
+              )),
+            )}
           </div>
         </section>
       )}
@@ -224,8 +227,9 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
           <div>
             <h2 className="h2 h2--small">{p.how}</h2>
             <ul className="check-list">
-              {p.howItems.map((item) => (
-                <li key={item}>{item}</li>
+              {p.howItems.map((item, i) => (
+                // the second line describes what each session is for; some tracks run their levels differently
+                <li key={item}>{i === 1 && track.rhythm ? track.rhythm[lang] : item}</li>
               ))}
             </ul>
           </div>
