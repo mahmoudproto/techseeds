@@ -42,7 +42,7 @@ export interface SiteContent {
     others: string; open: string; prev: string; next: string; close: string; hint: string;
     back: string; ages: string; tools: string; builds: string; projects: string; projectsNote: string; shots: string;
     how: string; howItems: string[]; cta: string; ctaText: string; test: string; whatsapp: string; notTaught: string;
-    instructor: string; instructorF: string; instructorAges: (from: string, to: string) => string; instructorSoon: string; cards: string;
+    instructor: string; instructorF: string; instructors: string; instructorSoon: string; cards: string;
     gains: string; skills: string; skillItems: { title: string; text: string }[];
     journey: string; level: (n: number) => string; finalProject: string;
     guarantee: { title: string; text: string };
@@ -222,7 +222,7 @@ const ar: SiteContent = {
     notTaught: 'هذا المسار يبدأ من سن 10 سنوات.',
     instructor: 'مدرّب المسار',
     instructorF: 'مدرّبة المسار',
-    instructorAges: (from, to) => `من ${from} إلى ${to} سنة`,
+    instructors: 'مدرّبين المسار',
     instructorSoon: 'الصورة والاسم قريبًا',
     cards: 'صور من المسار، اضغط على أي صورة لتظهر في المقدمة',
     gains: 'طفلك هيطلع بإيه',
@@ -414,7 +414,7 @@ const en: SiteContent = {
     notTaught: 'This track starts from age 10.',
     instructor: 'Track instructor',
     instructorF: 'Track instructor',
-    instructorAges: (from, to) => `ages ${from} to ${to}`,
+    instructors: 'Track instructors',
     instructorSoon: 'Photo and name coming soon',
     cards: 'Pictures from this track; click one to bring it to the front',
     gains: 'What your child gains',

@@ -65,8 +65,6 @@ export interface Instructor {
   name: L;
   /** e.g. '/media/instructor-george.webp' */
   photo: string;
-  /** Only when a track has more than one instructor: the age bands this one teaches. */
-  bands?: AgeBand[];
   /** For the Arabic label: مدرّبة instead of مدرّب. */
   female?: boolean;
 }
@@ -106,7 +104,7 @@ export interface Track {
 export const TRACKS: Track[] = [
   {
     slug: 'ai',
-    instructors: [INSTRUCTORS.sarah],
+    instructors: [INSTRUCTORS.shirien, INSTRUCTORS.sarah],
     name: { ar: 'الذكاء الاصطناعي', en: 'Artificial Intelligence' },
     short: { ar: 'يستخدم أدوات الذكاء الاصطناعي صح، في مهام ومشاريع حقيقية.', en: 'Uses AI tools well, on real tasks and projects.' },
     about: {
@@ -163,7 +161,7 @@ export const TRACKS: Track[] = [
   },
   {
     slug: 'programming',
-    instructors: [{ ...INSTRUCTORS.george, bands: ['young', 'middle'] }, { ...INSTRUCTORS.shirien, bands: ['teen'] }],
+    instructors: [INSTRUCTORS.shirien, INSTRUCTORS.george, INSTRUCTORS.sarah],
     name: { ar: 'البرمجة', en: 'Programming' },
     short: { ar: 'يتعلم يفكر بخطوات مرتبة ويبني برامج شغالة بنفسه.', en: 'Learns to think in clear steps and builds working programs.' },
     about: {
@@ -240,7 +238,7 @@ export const TRACKS: Track[] = [
   },
   {
     slug: 'cyber',
-    instructors: [INSTRUCTORS.nourhan],
+    instructors: [INSTRUCTORS.nourhan, INSTRUCTORS.george],
     name: { ar: 'الأمن السيبراني', en: 'Cybersecurity' },
     short: { ar: 'يتعلم يحمي نفسه وأجهزته، ويحل تحديات الأمان.', en: 'Learns to protect themselves and their devices, and solves security challenges.' },
     about: {
@@ -293,7 +291,7 @@ export const TRACKS: Track[] = [
   },
   {
     slug: 'gamedev',
-    instructors: [INSTRUCTORS.mahmoud],
+    instructors: [INSTRUCTORS.shirien, INSTRUCTORS.mahmoud],
     name: { ar: 'تطوير الألعاب', en: 'Game Development' },
     short: { ar: 'يصمم ألعابه الخاصة، ويفهم إزاي اللعبة بتتبني من جوه.', en: 'Designs their own games and learns how games work inside.' },
     about: {

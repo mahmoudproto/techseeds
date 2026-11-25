@@ -57,7 +57,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
               ))}
             </p>
           </div>
-          <div className={`track-visual${(track.instructors?.length ?? 0) > 1 ? ' track-visual--two' : ''}`}>
+          <div className={`track-visual${(track.instructors?.length ?? 0) > 1 ? ' track-visual--team' : ''}`}>
             <span className="bg-shape bg-shape--blue track-visual__blue" aria-hidden="true" />
             <span className="bg-shape bg-shape--green track-visual__green" aria-hidden="true" />
             <TrackCards
@@ -66,36 +66,43 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
               dir={lang === 'ar' ? 'rtl' : 'ltr'}
               text={{ label: p.cards, open: p.open, prev: p.prev, next: p.next, close: p.close, card: p.hint }}
             />
-            <div className="instructors">
-              {track.instructors?.length ? (
-                track.instructors.map((ins) => {
-                  const bands = ins.bands && AGE_BANDS.filter((band) => ins.bands!.includes(band.id));
-                  const role = ins.female && lang === 'ar' ? p.instructorF : p.instructor;
-                  const ages = bands?.length
-                    ? p.instructorAges(bands[0].range.split('–')[0], bands[bands.length - 1].range.split('–')[1])
-                    : '';
-                  return (
+            {(track.instructors?.length ?? 0) > 1 ? (
+              <div className="instructors instructors--team">
+                <small className="instructors__label">{p.instructors}</small>
+                <ul className="instructors__list">
+                  {track.instructors!.map((ins) => (
+                    <li className="instructors__person" key={ins.photo}>
+                      <img className="instructor__photo" src={ins.photo} alt="" width={72} height={72} />
+                      <strong>{ins.name[lang]}</strong>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <div className="instructors">
+                {track.instructors?.length ? (
+                  track.instructors.map((ins) => (
                     <div className="instructor" key={ins.photo}>
                       <img className="instructor__photo" src={ins.photo} alt="" width={72} height={72} />
                       <span className="instructor__text">
-                        <small>{ages ? `${role} · ${ages}` : role}</small>
+                        <small>{ins.female && lang === 'ar' ? p.instructorF : p.instructor}</small>
                         <strong>{ins.name[lang]}</strong>
                       </span>
                     </div>
-                  );
-                })
-              ) : (
-                <div className="instructor">
-                  <span className="instructor__photo instructor__photo--empty" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="34" height="34" fill="#8fa3b7"><circle cx="12" cy="8.5" r="4.2" /><path d="M3.8 21c.8-4.4 4.2-6.6 8.2-6.6s7.4 2.2 8.2 6.6z" /></svg>
-                  </span>
-                  <span className="instructor__text">
-                    <small>{p.instructor}</small>
-                    <strong>{p.instructorSoon}</strong>
-                  </span>
-                </div>
-              )}
-            </div>
+                  ))
+                ) : (
+                  <div className="instructor">
+                    <span className="instructor__photo instructor__photo--empty" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="34" height="34" fill="#8fa3b7"><circle cx="12" cy="8.5" r="4.2" /><path d="M3.8 21c.8-4.4 4.2-6.6 8.2-6.6s7.4 2.2 8.2 6.6z" /></svg>
+                    </span>
+                    <span className="instructor__text">
+                      <small>{p.instructor}</small>
+                      <strong>{p.instructorSoon}</strong>
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </section>

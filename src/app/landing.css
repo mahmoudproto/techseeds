@@ -2449,13 +2449,57 @@ html[dir='rtl'] .instructor {
 }
 
 /* Two instructors (programming): the badges stack, so leave room for the second one */
-.track-visual--two {
-  padding-bottom: 186px;
+.track-visual--team {
+  padding-bottom: 164px; /* room for the instructors card, 16px under the arrows */
 }
 
-.track-visual--two .instructors {
+/* Two or three instructors: one card with a title and each person side by side */
+.instructors--team {
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px 14px;
+  border-radius: var(--r-lg);
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(18, 46, 79, 0.16);
+}
+
+.instructors__label {
+  color: var(--green-dark);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.instructors__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.instructors__person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.instructors__person strong {
+  color: var(--navy);
+  font-size: 14px;
+}
+
+@media (max-width: 420px) {
+  .instructors__list {
+    gap: 12px;
+  }
+
+  .instructors__person strong {
+    font-size: 13px;
+  }
 }
 
 /* Track page: screenshots of student work. Two to four in a row, sideways scroll on phones. */
