@@ -42,11 +42,10 @@ export const MEDIA = {
     src: local('team-standing-v2'),
     alt: { ar: 'فريق تدريس تك سيدز', en: 'The TechSeeds teaching team' },
   },
-  // Still stock: no TechSeeds photo for this yet.
+  // Our students with their certificates, six photos in one 3:2 collage.
   finalCta: {
-    src: pexels(5212700, 1400),
-    alt: { ar: 'طلاب ومعلمتهم يصفقون احتفالًا في الفصل', en: 'Students and their teacher clapping to celebrate in class' },
-    credit: 'Max Fischer / Pexels',
+    src: local('final-collage'),
+    alt: { ar: 'طلاب تك سيدز مع مدرّبيهم وأهاليهم وهم يستلمون شهادات إتمام المستوى', en: 'TechSeeds students receiving their level certificates with their instructors and parents' },
   },
   // One 3D style for all four tracks (Shirien's redesign): objects and characters,
   // not a particular child. The older flat pictures are still in /public/media.

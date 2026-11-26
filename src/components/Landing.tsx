@@ -278,7 +278,7 @@ export default function Landing({ lang }: { lang: Lang }) {
       <section className="section">
         <div className="wrap">
           <div className="final">
-            <img className="final__photo" src={MEDIA.finalCta.src} alt={MEDIA.finalCta.alt[lang]} loading="lazy" width={1400} height={878} />
+            <img className="final__photo" src={MEDIA.finalCta.src} alt={MEDIA.finalCta.alt[lang]} loading="lazy" width={1500} height={1000} />
             <div className="final__copy">
               <Sparkle className="final__sparkle" />
               <h2 className="final__title">{t.final.title}</h2>

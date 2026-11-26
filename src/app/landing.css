@@ -2781,3 +2781,11 @@ html[dir='ltr'] select.input {
 .reviews {
   margin-inline: calc(50% - 50vw);
 }
+
+/* Final call to action: the student collage is shown whole (3:2), never cropped */
+.final .final__photo {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
