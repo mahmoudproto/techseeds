@@ -42,7 +42,7 @@ export const MEDIA = {
     src: local('team-standing-v2'),
     alt: { ar: 'فريق تدريس تك سيدز', en: 'The TechSeeds teaching team' },
   },
-  // Our students with their certificates: six photos (certificates and two game-demo shots) as tilted prints in one 3:2 image.
+  // Our students with their certificates: seven photos (certificates, two game demos and the audience clapping) as tilted prints in one 3:2 image.
   finalCta: {
     src: local('final-collage'),
     alt: { ar: 'طلاب تك سيدز وهم يستلمون شهادات إتمام المستوى ويعرضون الألعاب التي صمموها', en: 'TechSeeds students receiving their level certificates and showing the games they built' },
