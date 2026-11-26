@@ -8,6 +8,7 @@ import { Squiggle } from './Doodles';
 import { ProjectArt, WaIcon } from './Landing';
 import ScrollToTop from './ScrollToTop';
 import InstructorPicker from './InstructorPicker';
+import Reveal from './Reveal';
 import TrackCards, { type StackCard } from './TrackCards';
 
 /** One track's own page: what it is, what each age learns, and how a month runs. */
@@ -37,7 +38,8 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
   return (
     <>
       <ScrollToTop key={track.slug} />
-      <section className={`track-hero track-hero--${track.slug}`}>
+      <Reveal />
+      <section className={`track-hero track-hero--${track.slug}`} id="top">
         <div className="wrap track-hero__inner">
           <div>
             <Link className="back" href={`${base}/#tracks`}>
@@ -69,6 +71,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
               <InstructorPicker
                 key={`${track.slug}-trainers`}
                 people={track.instructors}
+                lead={track.leadInstructor}
                 lang={lang}
                 text={{ title: p.trainersTitle, pick: p.trainersPick }}
               />
@@ -87,7 +90,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="ages">
         <div className="wrap">
           <div className="s-head">
             <h2 className="h2">{track.short[lang]}</h2>
@@ -116,7 +119,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
         </div>
       </section>
 
-      <section className="section section--tint" aria-labelledby="gains-title">
+      <section className="section section--tint" id="gains" aria-labelledby="gains-title">
         <div className="wrap gains">
           <div>
             <h2 className="h2 h2--small" id="gains-title">{p.gains}</h2>
@@ -141,7 +144,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
       </section>
 
       {AGE_BANDS.some((b) => track.journey[b.id]?.length) && (
-        <section className="section" aria-labelledby="journey-title">
+        <section className="section" id="journey" aria-labelledby="journey-title">
           <div className="wrap">
             <div className="s-head">
               <h2 className="h2" id="journey-title">{p.journey}</h2>
@@ -178,7 +181,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
       )}
 
       {track.shots.length > 0 && (
-        <section className="section section--tint" aria-labelledby="shots-title">
+        <section className="section section--tint" id="projects" aria-labelledby="shots-title">
           <div className="wrap">
             <div className="s-head">
               <h2 className="h2" id="shots-title">{p.shots}</h2>
@@ -200,7 +203,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
         </section>
       )}
 
-      <section className="section">
+      <section className="section" id="how">
         <div className="wrap track-detail">
           <div>
             <h2 className="h2 h2--small">{p.how}</h2>
@@ -218,7 +221,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
         </div>
       </section>
 
-      <section className="section section--tint">
+      <section className="section section--tint" id="start">
         <div className="wrap">
           <div className="track-cta">
             <div>

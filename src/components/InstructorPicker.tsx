@@ -12,14 +12,17 @@ import type { Lang } from '@/lib/site-content';
  */
 export default function InstructorPicker({
   people,
+  lead,
   lang,
   text,
 }: {
   people: Instructor[];
+  /** Who is picked when the page opens. */
+  lead?: Instructor;
   lang: Lang;
   text: { title: string; pick: string };
 }) {
-  const [picked, setPicked] = useState(0);
+  const [picked, setPicked] = useState(() => Math.max(0, lead ? people.indexOf(lead) : 0));
   const current = people[Math.min(picked, people.length - 1)];
   if (!current) return null;
   const many = people.length > 1;

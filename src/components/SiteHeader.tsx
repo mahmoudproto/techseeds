@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { WHATSAPP_NUMBER } from '@/lib/labels';
 import { SITE, whatsappLink, type Lang } from '@/lib/site-content';
+import LangSwitch from './LangSwitch';
 import LogoLink from './LogoLink';
 import MobileMenu from './MobileMenu';
 import TopNav from './TopNav';
@@ -36,10 +37,8 @@ export default function SiteHeader({
         <TopNav items={t.nav} label={t.header.menu} />
 
         <div className="header__actions">
-          {/* A plain link so the browser loads the other language's page fully. */}
-          <a className="lang" href={otherHref ?? t.other.href} lang={lang === 'ar' ? 'en' : 'ar'}>
-            {t.other.label}
-          </a>
+          {/* Opens the same page and section in the other language (a full page load). */}
+          <LangSwitch lang={lang} label={t.other.label} href={otherHref ?? t.other.href} />
 
           {cta === 'test' ? (
             <Link className="btn btn--small" href={lang === 'en' ? '/en/test' : '/test'}>

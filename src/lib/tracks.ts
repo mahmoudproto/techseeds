@@ -77,7 +77,7 @@ const INSTRUCTORS = {
   george: { name: { ar: 'جورج عدلي', en: 'George Adly' }, role: { ar: 'مطوّر Full Stack', en: 'Full stack developer' }, photo: '/media/instructor-george.webp' },
   sarah: { name: { ar: 'سارة أشرف', en: 'Sarah Ashraf' }, role: { ar: 'مساعدة تدريس في الأكاديمية العربية', en: 'Teaching assistant at the Arab Academy' }, photo: '/media/instructor-sarah.webp', female: true },
   mahmoud: { name: { ar: 'محمود كمال', en: 'Mahmoud Kamal' }, role: { ar: 'مطوّر ألعاب في Sega UK', en: 'Game developer at Sega UK' }, photo: '/media/instructor-mahmoud.webp' },
-  shirien: { name: { ar: 'شيرين أشرف', en: 'Shirien Ashraf' }, role: { ar: 'مطوّرة برمجيات في ExpertX USA', en: 'Software developer at ExpertX USA' }, photo: '/media/instructor-shirien.webp', female: true },
+  shirien: { name: { ar: 'شيرين أشرف', en: 'Shirien Ashraf' }, role: { ar: 'مطوّرة برمجيات في ExpertX AI', en: 'Software developer at ExpertX AI' }, photo: '/media/instructor-shirien.webp', female: true },
   nourhan: { name: { ar: 'نورهان عادل', en: 'Nourhan Adel' }, role: { ar: 'متخصصة في الأمن السيبراني', en: 'Cyber security specialist' }, photo: '/media/instructor-nourhan.webp', female: true },
 } satisfies Record<string, Instructor>;
 
@@ -105,6 +105,8 @@ export interface Track {
   shots: Shot[];
   /** Who teaches the track; leave empty and a placeholder shows instead. */
   instructors?: Instructor[];
+  /** The instructor shown first in the picker (defaults to the first one in the list). */
+  leadInstructor?: Instructor;
 }
 
 export const TRACKS: Track[] = [
@@ -171,6 +173,7 @@ export const TRACKS: Track[] = [
   {
     slug: 'programming',
     instructors: [INSTRUCTORS.shirien, INSTRUCTORS.george, INSTRUCTORS.sarah],
+    leadInstructor: INSTRUCTORS.sarah,
     name: { ar: 'البرمجة', en: 'Programming' },
     short: { ar: 'يتعلم يفكر بخطوات مرتبة ويبني برامج شغالة بنفسه.', en: 'Learns to think in clear steps and builds working programs.' },
     about: {
@@ -327,6 +330,7 @@ export const TRACKS: Track[] = [
   {
     slug: 'gamedev',
     instructors: [INSTRUCTORS.shirien, INSTRUCTORS.mahmoud],
+    leadInstructor: INSTRUCTORS.mahmoud,
     name: { ar: 'تطوير الألعاب', en: 'Game Development' },
     short: { ar: 'يصمم ألعابه الخاصة، ويفهم إزاي اللعبة بتتبني من جوه.', en: 'Designs their own games and learns how games work inside.' },
     about: {

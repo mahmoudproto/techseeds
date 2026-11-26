@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   if (!track) notFound();
   return (
     <>
-      <SiteHeader cta="test" lang="ar" />
+      <SiteHeader cta="test" lang="ar" otherHref={`/en/tracks/${track.slug}`} />
       <main className="main">
         <TrackPage track={track} lang="ar" />
       </main>

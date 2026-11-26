@@ -11,6 +11,7 @@ import AgeTabs from './AgeTabs';
 import { Sparkle, Squiggle } from './Doodles';
 import Faq from './Faq';
 import Icon from './LandingIcon';
+import Reveal from './Reveal';
 import WorkshopForm from './WorkshopForm';
 
 /** A section's heading and intro. (No small label above the heading: the heading carries itself.) */
@@ -37,6 +38,7 @@ export default function Landing({ lang }: { lang: Lang }) {
 
   return (
     <>
+      <Reveal />
       {/* 1. Hero: text first, photo on the other side, green and yellow shapes behind it */}
       <section className="hero-band" id="home">
         <span className="bg-shape bg-shape--blue hero-band__blue" aria-hidden="true" />
