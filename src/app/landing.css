@@ -98,13 +98,6 @@
   text-align: center;
 }
 
-.kicker {
-  display: inline-block;
-  margin: 0 0 6px;
-  color: var(--green);
-  font-weight: 600;
-  font-size: 15px;
-}
 
 .h2 {
   margin: 0;
@@ -496,12 +489,12 @@ html[dir='rtl'] .hero__doodle {
   gap: 32px;
 }
 
-/* Founder's words: a quiet quote with a green line at the side, under the main text */
+/* Founder's words: a quiet quote on a soft green panel, under the main text */
 .founder {
   margin: 22px 0 0;
-  padding: 2px 0;
-  padding-inline-start: 18px;
-  border-inline-start: 3px solid var(--green);
+  padding: 16px 20px;
+  border-radius: var(--r-md);
+  background: var(--green-tint);
 }
 
 .founder__label {
@@ -521,7 +514,7 @@ html[dir='rtl'] .hero__doodle {
   margin: 8px 0 0;
   font-family: var(--font-head);
   font-weight: 600;
-  color: var(--green);
+  color: var(--green-dark);
 }
 
 .why__side {
@@ -882,10 +875,6 @@ html[dir='rtl'] .hero__doodle {
   display: none;
 }
 
-.kicker--hand {
-  transform: rotate(-3deg);
-  font-size: 17px;
-}
 
 .btn--raised {
   box-shadow: 0 5px 0 var(--green-dark);
@@ -957,7 +946,7 @@ html[dir='rtl'] .hero__doodle {
 
 .workshop__done strong {
   font-size: 20px;
-  color: var(--green);
+  color: var(--green-dark);
 }
 
 .workshop__done p {
@@ -1347,7 +1336,7 @@ html[dir='ltr'] select.input {
 }
 
 .back:hover {
-  color: var(--green);
+  color: var(--green-dark);
 }
 
 .track-hero__ages {
@@ -1604,7 +1593,7 @@ html[dir='ltr'] select.input {
   box-shadow: var(--shadow-soft);
   color: var(--navy);
   text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
 }
 
 .other-track--programming { --tint: #e6eefc; --ink: #2456c4; }
@@ -1612,9 +1601,15 @@ html[dir='ltr'] select.input {
 .other-track--ai { --tint: #fef3d6; --ink: #8a5a00; }
 .other-track--cyber { --tint: #e1f5ee; --ink: #1b7a5f; }
 
-.other-track:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 28px rgba(18, 46, 79, 0.12);
+@media (hover: hover) and (pointer: fine) {
+  .other-track:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(18, 46, 79, 0.12);
+  }
+}
+
+.other-track:active {
+  transform: scale(0.98);
 }
 
 .other-track:focus-visible {
@@ -1797,21 +1792,6 @@ html[dir='ltr'] select.input {
   }
 }
 
-/* Cards appear once, as they scroll into view (see Reveal.tsx) */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 0.6s ease var(--reveal-delay, 0ms),
-    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms);
-}
-
-.reveal--in {
-  opacity: 1;
-  transform: none;
-}
-
 /* Workshop: map, address and the booking form */
 
 .map {
@@ -1834,11 +1814,15 @@ html[dir='ltr'] select.input {
   position: absolute;
   inset-inline-end: 10px;
   bottom: 10px;
-  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 0 16px;
   border-radius: var(--r-pill);
   background: var(--navy);
   color: #ffffff;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   text-decoration: none;
 }
@@ -2066,14 +2050,15 @@ html[dir='ltr'] select.input {
   }
 }
 
-/* Track page: three overlapping cards + the track instructor */
+/* Track page: three overlapping cards, then the track's instructors under them */
 
 .track-visual {
   position: relative;
   display: grid;
-  place-items: center;
+  justify-items: center;
+  align-content: center;
+  gap: 32px;
   min-height: 360px;
-  padding-bottom: 96px; /* room for the instructor badge, 16px under the arrows */
 }
 
 .track-visual__blue {
@@ -2131,7 +2116,7 @@ html[dir='ltr'] select.input {
   height: 81%;
   transform: rotate(var(--r, 0deg));
   box-shadow: 0 10px 26px rgba(18, 46, 79, 0.12);
-  transition: left 0.35s ease, top 0.35s ease, width 0.35s ease, height 0.35s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.35s ease;
+  transition: left 300ms var(--ease-in-out), top 300ms var(--ease-in-out), width 300ms var(--ease-in-out), height 300ms var(--ease-in-out), transform 450ms var(--ease-out), box-shadow 300ms var(--ease-out), translate 200ms var(--ease-out), scale 160ms var(--ease-out);
 }
 
 .stack__card--pos0 { z-index: 3; --r: -2deg; box-shadow: 0 22px 44px rgba(18, 46, 79, 0.24); }
@@ -2154,8 +2139,18 @@ html[dir='ltr'] select.input {
   --r: -10deg;
 }
 
-.stack__card:not(.stack__card--pos0):hover {
-  box-shadow: 0 16px 34px rgba(18, 46, 79, 0.2);
+@media (hover: hover) and (pointer: fine) {
+  .stack__card:hover {
+    translate: 0 -2px;
+  }
+
+  .stack__card:not(.stack__card--pos0):hover {
+    box-shadow: 0 16px 34px rgba(18, 46, 79, 0.2);
+  }
+}
+
+.stack__card:active {
+  scale: 0.98;
 }
 
 .stack__card:focus-visible {
@@ -2252,7 +2247,11 @@ html[dir='ltr'] select.input {
 
 .stack-nav__dot {
   display: flex;
-  padding: 10px 4px;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 44px;
+  padding: 0;
   border: 0;
   background: none;
   cursor: pointer;
@@ -2263,8 +2262,8 @@ html[dir='ltr'] select.input {
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  background: #c9d6e3;
-  transition: width 0.25s ease, background 0.25s ease;
+  background: #7a8da1;
+  transition: width 200ms var(--ease-out), background-color 200ms ease;
 }
 
 .stack-nav__dot[aria-current='true'] span {
@@ -2287,7 +2286,7 @@ html[dir='ltr'] select.input {
   inset: 0;
   border-radius: var(--r-lg);
   background: rgba(18, 46, 79, 0.4);
-  animation: stack-fade 0.25s ease;
+  animation: stack-fade 240ms var(--ease-out);
 }
 
 .stack-zoom__card {
@@ -2300,7 +2299,7 @@ html[dir='ltr'] select.input {
   border-radius: 22px;
   background: #ffffff;
   box-shadow: 0 22px 44px rgba(18, 46, 79, 0.3);
-  animation: stack-grow 0.3s ease;
+  animation: stack-grow 280ms var(--ease-out);
 }
 
 .stack-zoom__card .stack__media {
@@ -2328,7 +2327,7 @@ html[dir='ltr'] select.input {
 }
 
 @keyframes stack-grow {
-  from { opacity: 0; transform: scale(0.85); }
+  from { opacity: 0; transform: scale(0.95); }
 }
 
 @media (max-width: 719px) {
@@ -2340,67 +2339,155 @@ html[dir='ltr'] select.input {
   .stack__label { font-size: 13px; }
 }
 
-.instructors {
-  /* centred under the cards, as in the Figma design; two instructors sit side by side */
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
+/* "Design F": the instructors as photo buttons; the picked one's name and experience below */
+.trainers {
+  position: relative;
   z-index: 5;
-  width: max-content;
-  max-width: 100%;
+  box-sizing: border-box;
+  width: min(500px, 100%);
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-
-.instructor {
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 18px 10px 10px;
-  border-radius: var(--r-pill);
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border-radius: var(--r-lg);
   background: #ffffff;
-  box-shadow: 0 12px 28px rgba(18, 46, 79, 0.16);
+  box-shadow: 0 10px 30px rgba(18, 46, 79, 0.1);
 }
 
-html[dir='rtl'] .instructor {
-  padding: 10px 10px 10px 18px;
+.trainers__title {
+  margin: 0;
+  color: var(--navy);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: center;
+  text-wrap: balance;
 }
 
-.instructor__photo {
+.trainers__photos {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.trainers__pick {
+  position: relative;
   flex: none;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 4px solid #ffffff;
-  box-shadow: 0 0 0 2px var(--green-tint);
-  object-fit: cover;
+  width: 104px;
+  height: 104px;
+  padding: 4px;
+  border: 2px solid var(--line);
+  border-radius: 26px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: transform 160ms var(--ease-out), border-color 160ms ease;
 }
 
-.instructor__photo--empty {
-  display: grid;
-  place-items: center;
+.trainers__pick[aria-pressed='true'] {
+  border: 3px solid var(--green);
+  padding: 3px;
+}
+
+.trainers__pick:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .trainers__pick:not([aria-pressed='true']):hover {
+    border-color: var(--green-light, #89c148);
+  }
+}
+
+.trainers__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  object-fit: cover;
   background: #eef3f7;
 }
 
-.instructor__text {
+.trainers__photo--solo {
+  width: 104px;
+  height: 104px;
+  border-radius: 26px;
+}
+
+.trainers__photo--empty {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  flex: none;
+}
+
+.trainers__check {
+  position: absolute;
+  bottom: -8px;
+  inset-inline-end: -8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  background: var(--green);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  animation: trainer-check 180ms var(--ease-out);
+}
+
+.trainers__detail {
+  min-height: 70px;
+  box-sizing: border-box;
+  padding: 10px 16px;
+  border-radius: var(--r-md);
+  background: var(--green-tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.trainers__who {
   display: flex;
   flex-direction: column;
+  gap: 2px;
+  animation: trainer-in 200ms var(--ease-out);
+}
+
+.trainers__name {
+  color: var(--navy);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.trainers__role {
+  color: var(--body);
+  font-size: 15px;
   line-height: 1.5;
 }
 
-.instructor__text small {
-  color: var(--green-dark);
-  font-weight: 600;
-  font-size: 13px;
+.trainers--soon {
+  flex-direction: row;
+  align-items: center;
+  width: auto;
+  padding: 10px 22px 10px 10px;
+  border-radius: var(--r-pill);
 }
 
-.instructor__text strong {
-  color: var(--navy);
-  font-size: 15px;
+@keyframes trainer-in {
+  from { opacity: 0; transform: translateY(4px); filter: blur(2px); }
+}
+
+@keyframes trainer-check {
+  from { opacity: 0; transform: scale(0.9); }
+}
+
+@media (max-width: 420px) {
+  .trainers__photos { gap: 10px; }
+  .trainers__pick { width: 88px; height: 88px; border-radius: 22px; }
+  .trainers__photo { border-radius: 16px; }
 }
 
 @media (min-width: 720px) {
@@ -2416,8 +2503,22 @@ html[dir='rtl'] .instructor {
   }
 
   .stack-zoom__backdrop,
-  .stack-zoom__card {
+  .stack-zoom__card,
+  .trainers__who,
+  .trainers__check {
     animation: none;
+  }
+
+  .stack__card:hover,
+  .stack__card:active {
+    translate: none;
+    scale: none;
+  }
+
+  .trainers__pick:active,
+  .other-track:hover,
+  .other-track:active {
+    transform: none;
   }
 }
 
@@ -2437,14 +2538,14 @@ html[dir='rtl'] .instructor {
 
 /* Switching the age tab: the new cards rise and fade in one after another */
 .track-grid .track-card {
-  animation: card-in 0.45s cubic-bezier(0.2, 0.7, 0.3, 1) both;
-  animation-delay: calc(var(--i, 0) * 70ms);
+  animation: card-in 300ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 50ms);
 }
 
 @keyframes card-in {
   from {
     opacity: 0;
-    transform: translateY(18px) scale(0.97);
+    transform: translateY(8px) scale(0.98);
   }
   to {
     opacity: 1;
@@ -2456,60 +2557,6 @@ html[dir='rtl'] .instructor {
 .day__month {
   max-width: 100%;
   overflow-wrap: anywhere;
-}
-
-/* Two instructors (programming): the badges stack, so leave room for the second one */
-.track-visual--team {
-  padding-bottom: 164px; /* room for the instructors card, 16px under the arrows */
-}
-
-/* Two or three instructors: one card with a title and each person side by side */
-.instructors--team {
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 18px 14px;
-  border-radius: var(--r-lg);
-  background: #ffffff;
-  box-shadow: 0 12px 28px rgba(18, 46, 79, 0.16);
-}
-
-.instructors__label {
-  color: var(--green-dark);
-  font-weight: 600;
-  font-size: 13px;
-}
-
-.instructors__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 18px;
-}
-
-.instructors__person {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  white-space: nowrap;
-}
-
-.instructors__person strong {
-  color: var(--navy);
-  font-size: 14px;
-}
-
-@media (max-width: 420px) {
-  .instructors__list {
-    gap: 12px;
-  }
-
-  .instructors__person strong {
-    font-size: 13px;
-  }
 }
 
 /* Track page: screenshots of student work. Two to four in a row, sideways scroll on phones. */

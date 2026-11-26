@@ -42,7 +42,7 @@ export interface SiteContent {
     others: string; open: string; prev: string; next: string; close: string; hint: string;
     back: string; ages: string; tools: string; builds: string; projects: string; projectsNote: string; shots: string;
     how: string; howItems: string[]; cta: string; ctaText: string; test: string; whatsapp: string; notTaught: string;
-    instructor: string; instructorF: string; instructors: string; instructorSoon: string; cards: string;
+    instructor: string; instructorF: string; instructors: string; instructorSoon: string; cards: string; trainersTitle: string; trainersPick: string;
     gains: string; skills: string; skillItems: { title: string; text: string }[];
     journey: string; level: (n: number) => string; finalProject: string; prereq: string;
     guarantee: { title: string; text: string };
@@ -224,6 +224,8 @@ const ar: SiteContent = {
     instructorF: 'مدرّبة المسار',
     instructors: 'مدرّبين المسار',
     instructorSoon: 'الصورة والاسم قريبًا',
+    trainersTitle: 'تعرّف على مدرّبي المسار',
+    trainersPick: 'اختر مدرّبًا لتعرف خبرته',
     cards: 'صور من المسار، اضغط على أي صورة لتظهر في المقدمة',
     gains: 'طفلك هيطلع بإيه',
     skills: 'مهارات التفكير اللي بنبنيها',
@@ -417,6 +419,8 @@ const en: SiteContent = {
     instructorF: 'Track instructor',
     instructors: 'Track instructors',
     instructorSoon: 'Photo and name coming soon',
+    trainersTitle: 'Meet the track’s instructors',
+    trainersPick: 'Choose an instructor to see their experience',
     cards: 'Pictures from this track; click one to bring it to the front',
     gains: 'What your child gains',
     skills: 'Thinking skills we build',

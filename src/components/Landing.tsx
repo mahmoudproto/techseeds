@@ -10,14 +10,13 @@ import { LOCATION, NEXT_START_DATE, SEATS_LEFT } from '@/lib/site-config';
 import AgeTabs from './AgeTabs';
 import { Sparkle, Squiggle } from './Doodles';
 import Faq from './Faq';
-import Reveal from './Reveal';
 import Icon from './LandingIcon';
 import WorkshopForm from './WorkshopForm';
 
-function Head({ kicker, title, text, center = false }: { kicker: string; title: string; text?: string; center?: boolean }) {
+/** A section's heading and intro. (No small label above the heading: the heading carries itself.) */
+function Head({ title, text, center = false }: { title: string; text?: string; center?: boolean }) {
   return (
     <div className={`s-head${center ? ' s-head--center' : ''}`}>
-      <p className="kicker">{kicker}</p>
       <h2 className="h2">{title}</h2>
       {text && <p className="s-head__text">{text}</p>}
     </div>
@@ -38,7 +37,6 @@ export default function Landing({ lang }: { lang: Lang }) {
 
   return (
     <>
-      <Reveal />
       {/* 1. Hero: text first, photo on the other side, green and yellow shapes behind it */}
       <section className="hero-band" id="home">
         <span className="bg-shape bg-shape--blue hero-band__blue" aria-hidden="true" />
@@ -117,7 +115,7 @@ export default function Landing({ lang }: { lang: Lang }) {
         <div className="wrap">
           <div className="why">
             <div className="why__intro">
-              <Head kicker={t.why.kicker} title={t.why.title} text={t.why.text} />
+              <Head title={t.why.title} text={t.why.text} />
               <figure className="founder">
                 <figcaption className="founder__label">{t.why.founder.title}</figcaption>
                 <blockquote>{t.why.founder.quote}</blockquote>
@@ -149,7 +147,7 @@ export default function Landing({ lang }: { lang: Lang }) {
             <img className="team__photo" src={MEDIA.team.src} alt={MEDIA.team.alt[lang]} loading="lazy" width={1600} height={1067} />
           </div>
           <div>
-            <Head kicker={t.team.kicker} title={t.team.title} text={t.team.text} />
+            <Head title={t.team.title} text={t.team.text} />
             <div className="roles">
               {t.team.roles.map((r, i) => (
                 <div className="role" key={r.title}>
@@ -168,11 +166,11 @@ export default function Landing({ lang }: { lang: Lang }) {
       {/* 5. Tracks by age */}
       <section className="section" id="tracks">
         <div className="wrap">
-          <Head kicker={t.tracks.kicker} title={t.tracks.title} text={t.tracks.text} center />
+          <Head title={t.tracks.title} text={t.tracks.text} center />
           <AgeTabs lang={lang} />
 
           <div className="projects-block" id="projects">
-            <Head kicker={t.projects.kicker} title={t.projects.title} text={t.projects.text} center />
+            <Head title={t.projects.title} text={t.projects.text} center />
             <ProjectsScroller items={projectItems(lang)} label={t.projects.title} />
             <p className="soon-note">{t.projects.note}</p>
           </div>
@@ -184,7 +182,6 @@ export default function Landing({ lang }: { lang: Lang }) {
       <section className="section section--cream" id="how">
         <div className="wrap">
           <div className="s-head s-head--center">
-            <p className="kicker kicker--hand">{t.how.kicker}</p>
             <h2 className="h2">{t.how.title}</h2>
             <p className="s-head__text">{t.how.sub}</p>
           </div>
@@ -211,7 +208,6 @@ export default function Landing({ lang }: { lang: Lang }) {
         <div className="wrap">
           <div className="workshop">
             <div className="workshop__copy">
-              <p className="kicker">{t.workshop.kicker}</p>
               <h2 className="h2">{t.workshop.title}</h2>
               <p className="s-head__text">{t.workshop.text}</p>
               <ul className="workshop__points">
@@ -251,7 +247,7 @@ export default function Landing({ lang }: { lang: Lang }) {
       {/* 9. Testimonials */}
       <section className="section" id="reviews">
         <div className="wrap">
-          <Head kicker={t.reviews.kicker} title={t.reviews.title} text={t.reviews.sub} />
+          <Head title={t.reviews.title} text={t.reviews.sub} />
           <DragRow className="reviews" label={t.reviews.title}>
             {SITE.ar.reviews.items.map((r) => (
               <figure className="review" key={r.name} lang="ar" dir="rtl">
@@ -271,7 +267,7 @@ export default function Landing({ lang }: { lang: Lang }) {
       {/* 10. FAQ */}
       <section className="section section--green" id="faq">
         <div className="wrap wrap--narrow">
-          <Head kicker={t.faq.kicker} title={t.faq.title} center />
+          <Head title={t.faq.title} center />
           <Faq items={t.faq.items} />
         </div>
       </section>

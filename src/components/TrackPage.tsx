@@ -7,8 +7,8 @@ import { AGE_BANDS, TRACKS, type Track } from '@/lib/tracks';
 import { Squiggle } from './Doodles';
 import { ProjectArt, WaIcon } from './Landing';
 import ScrollToTop from './ScrollToTop';
+import InstructorPicker from './InstructorPicker';
 import TrackCards, { type StackCard } from './TrackCards';
-import Reveal from './Reveal';
 
 /** One track's own page: what it is, what each age learns, and how a month runs. */
 export default function TrackPage({ track, lang }: { track: Track; lang: Lang }) {
@@ -37,7 +37,6 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
   return (
     <>
       <ScrollToTop key={track.slug} />
-      <Reveal />
       <section className={`track-hero track-hero--${track.slug}`}>
         <div className="wrap track-hero__inner">
           <div>
@@ -57,7 +56,7 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
               ))}
             </p>
           </div>
-          <div className={`track-visual${(track.instructors?.length ?? 0) > 1 ? ' track-visual--team' : ''}`}>
+          <div className="track-visual">
             <span className="bg-shape bg-shape--blue track-visual__blue" aria-hidden="true" />
             <span className="bg-shape bg-shape--green track-visual__green" aria-hidden="true" />
             <TrackCards
@@ -66,41 +65,22 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
               dir={lang === 'ar' ? 'rtl' : 'ltr'}
               text={{ label: p.cards, open: p.open, prev: p.prev, next: p.next, close: p.close, card: p.hint }}
             />
-            {(track.instructors?.length ?? 0) > 1 ? (
-              <div className="instructors instructors--team">
-                <small className="instructors__label">{p.instructors}</small>
-                <ul className="instructors__list">
-                  {track.instructors!.map((ins) => (
-                    <li className="instructors__person" key={ins.photo}>
-                      <img className="instructor__photo" src={ins.photo} alt="" width={72} height={72} />
-                      <strong>{ins.name[lang]}</strong>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            {track.instructors?.length ? (
+              <InstructorPicker
+                key={`${track.slug}-trainers`}
+                people={track.instructors}
+                lang={lang}
+                text={{ title: p.trainersTitle, pick: p.trainersPick }}
+              />
             ) : (
-              <div className="instructors">
-                {track.instructors?.length ? (
-                  track.instructors.map((ins) => (
-                    <div className="instructor" key={ins.photo}>
-                      <img className="instructor__photo" src={ins.photo} alt="" width={72} height={72} />
-                      <span className="instructor__text">
-                        <small>{ins.female && lang === 'ar' ? p.instructorF : p.instructor}</small>
-                        <strong>{ins.name[lang]}</strong>
-                      </span>
-                    </div>
-                  ))
-                ) : (
-                  <div className="instructor">
-                    <span className="instructor__photo instructor__photo--empty" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" width="34" height="34" fill="#8fa3b7"><circle cx="12" cy="8.5" r="4.2" /><path d="M3.8 21c.8-4.4 4.2-6.6 8.2-6.6s7.4 2.2 8.2 6.6z" /></svg>
-                    </span>
-                    <span className="instructor__text">
-                      <small>{p.instructor}</small>
-                      <strong>{p.instructorSoon}</strong>
-                    </span>
-                  </div>
-                )}
+              <div className="trainers trainers--soon">
+                <span className="trainers__photo trainers__photo--empty" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="34" height="34" fill="#7a8da1"><circle cx="12" cy="8.5" r="4.2" /><path d="M3.8 21c.8-4.4 4.2-6.6 8.2-6.6s7.4 2.2 8.2 6.6z" /></svg>
+                </span>
+                <span className="trainers__who">
+                  <strong className="trainers__name">{p.instructor}</strong>
+                  <span className="trainers__role">{p.instructorSoon}</span>
+                </span>
               </div>
             )}
           </div>
@@ -110,7 +90,6 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
       <section className="section">
         <div className="wrap">
           <div className="s-head">
-            <p className="kicker">{p.ages}</p>
             <h2 className="h2">{track.short[lang]}</h2>
           </div>
           <div className="levels">
@@ -202,7 +181,6 @@ export default function TrackPage({ track, lang }: { track: Track; lang: Lang })
         <section className="section section--tint" aria-labelledby="shots-title">
           <div className="wrap">
             <div className="s-head">
-              <p className="kicker">{p.projects}</p>
               <h2 className="h2" id="shots-title">{p.shots}</h2>
             </div>
             <div className={`shots${track.shots.length === 1 ? ' shots--one' : ''}${track.shots.length > 4 ? ' shots--many' : ''}`}>

@@ -67,16 +67,18 @@ export interface Instructor {
   name: L;
   /** e.g. '/media/instructor-george.webp' */
   photo: string;
+  /** Where they work or what they do, shown under the name. */
+  role: L;
   /** For the Arabic label: مدرّبة instead of مدرّب. */
   female?: boolean;
 }
 
 const INSTRUCTORS = {
-  george: { name: { ar: 'جورج عدلي', en: 'George Adly' }, photo: '/media/instructor-george.webp' },
-  sarah: { name: { ar: 'سارة أشرف', en: 'Sarah Ashraf' }, photo: '/media/instructor-sarah.webp', female: true },
-  mahmoud: { name: { ar: 'محمود كمال', en: 'Mahmoud Kamal' }, photo: '/media/instructor-mahmoud.webp' },
-  shirien: { name: { ar: 'شيرين أشرف', en: 'Shirien Ashraf' }, photo: '/media/instructor-shirien.webp', female: true },
-  nourhan: { name: { ar: 'نورهان عادل', en: 'Nourhan Adel' }, photo: '/media/instructor-nourhan.webp', female: true },
+  george: { name: { ar: 'جورج عدلي', en: 'George Adly' }, role: { ar: 'مطوّر Full Stack', en: 'Full stack developer' }, photo: '/media/instructor-george.webp' },
+  sarah: { name: { ar: 'سارة أشرف', en: 'Sarah Ashraf' }, role: { ar: 'مساعدة تدريس في الأكاديمية العربية', en: 'Teaching assistant at the Arab Academy' }, photo: '/media/instructor-sarah.webp', female: true },
+  mahmoud: { name: { ar: 'محمود كمال', en: 'Mahmoud Kamal' }, role: { ar: 'مطوّر ألعاب في Sega UK', en: 'Game developer at Sega UK' }, photo: '/media/instructor-mahmoud.webp' },
+  shirien: { name: { ar: 'شيرين أشرف', en: 'Shirien Ashraf' }, role: { ar: 'مطوّرة برمجيات في ExpertX USA', en: 'Software developer at ExpertX USA' }, photo: '/media/instructor-shirien.webp', female: true },
+  nourhan: { name: { ar: 'نورهان عادل', en: 'Nourhan Adel' }, role: { ar: 'متخصصة في الأمن السيبراني', en: 'Cyber security specialist' }, photo: '/media/instructor-nourhan.webp', female: true },
 } satisfies Record<string, Instructor>;
 
 export interface Track {
