@@ -42,10 +42,10 @@ export const MEDIA = {
     src: local('team-standing-v2'),
     alt: { ar: 'فريق تدريس تك سيدز', en: 'The TechSeeds teaching team' },
   },
-  // Our students with their certificates: five photos as tilted prints in one 3:2 image.
+  // Our students with their certificates: six photos (certificates and two game-demo shots) as tilted prints in one 3:2 image.
   finalCta: {
     src: local('final-collage'),
-    alt: { ar: 'طلاب تك سيدز مع مدرّبيهم وأهاليهم وهم يستلمون شهادات إتمام المستوى', en: 'TechSeeds students receiving their level certificates with their instructors and parents' },
+    alt: { ar: 'طلاب تك سيدز وهم يستلمون شهادات إتمام المستوى ويعرضون الألعاب التي صمموها', en: 'TechSeeds students receiving their level certificates and showing the games they built' },
   },
   // One 3D style for all four tracks (Shirien's redesign): objects and characters,
   // not a particular child. The older flat pictures are still in /public/media.
